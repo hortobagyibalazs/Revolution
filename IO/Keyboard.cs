@@ -10,8 +10,8 @@ namespace Revolution.IO
     // TODO : Put cheat code processing into its own manager file  
     public class Keyboard : IKeyboard
     {
-        private HashSet<CheatCode> cheatCodes;
         private HashSet<Key> pressed;
+        private HashSet<CheatCode> cheatCodes;
 
         public Keyboard(Window window)
         {
@@ -69,7 +69,7 @@ namespace Revolution.IO
         {
             throw new NotImplementedException();
         }
-
+        
         public void RegisterCheatCode(CheatCode cheatCode)
         {
             cheatCodes.Add(cheatCode);
