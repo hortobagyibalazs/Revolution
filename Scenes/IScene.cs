@@ -16,6 +16,5 @@ namespace Revolution.Scenes
         void OnExit(EventHandler onFinish);
 
         void OnUpdate(int deltaMs);
-        void OnHandleInput();
     }
 }

@@ -27,8 +27,8 @@ namespace Revolution
             sceneManager.ScenePushed += ScenePushed;
             sceneManager.ScenePopped += ScenePopped;
             
-            sceneManager.Push(new MainMenuScene());
-            
+            sceneManager.Push(new GameScene());
+
             timer.Start();
         }
 

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Avalonia.Input;
 
 namespace Revolution.Scenes
 {
@@ -19,10 +18,8 @@ namespace Revolution.Scenes
                 {
                     return _scenes.Peek();
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
         }
 
