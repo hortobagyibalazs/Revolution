@@ -9,12 +9,11 @@ namespace Revolution.Scenes
 
         Canvas Canvas { get; }
         
-        
         void OnEnter();
         void OnPause();
         void OnResume();
+        
+        // Don't forget to manually destroy scene related entities here
         void OnExit(EventHandler onFinish);
-
-        void OnUpdate(int deltaMs);
     }
 }
