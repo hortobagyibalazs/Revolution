@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Threading;
+using Revolution.ECS.Systems;
 using Revolution.Scenes;
 
 namespace Revolution
@@ -10,34 +11,45 @@ namespace Revolution
     public partial class MainWindow : Window
     {
         private int fps = 60;
-        
+        private long lastUpdate;
         private DispatcherTimer timer;
+        
         private SceneManager sceneManager;
+        private SystemManager systemManager;
         
         public MainWindow()
         {
             InitializeComponent();
+            //WindowState = WindowState.FullScreen;
 
+            // Setup timer
             timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(1000 / fps);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / fps);
             timer.Tick += UpdateScenes;
 
+            // Setup scene management
             sceneManager = new SceneManager();
 
             sceneManager.ScenePushed += ScenePushed;
             sceneManager.ScenePopped += ScenePopped;
             
             sceneManager.Push(new GameScene());
+            
+            // Setup entity-component system
+            systemManager = new SystemManager();
+            systemManager.RegisterSystem(new RenderSystem(MainCanvas));
 
+            // Start timer
+            lastUpdate = Environment.TickCount;
             timer.Start();
         }
 
         private void UpdateScenes(object? sender, EventArgs args)
         {
-            foreach (var scene in sceneManager.Scenes)
-            {
-                scene.OnUpdate(0);
-            }
+            // Update every system
+            int deltaMs = (int) (Environment.TickCount - lastUpdate);
+            lastUpdate = Environment.TickCount;
+            systemManager.Update(deltaMs);
         }
 
         private void ScenePushed(object? sender, IScene e)

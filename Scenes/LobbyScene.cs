@@ -33,10 +33,5 @@ namespace Revolution.Scenes
         {
             
         }
-
-        public void OnUpdate(int deltaMs)
-        {
-            
-        }
     }
 }

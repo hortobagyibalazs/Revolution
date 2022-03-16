@@ -33,5 +33,9 @@
       <Content Include="Assets\game_bg.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Remove="Assets\grass.png" />
+      <Content Include="Assets\grass.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 </Project>

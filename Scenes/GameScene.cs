@@ -1,10 +1,7 @@
 using System;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Input;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
+using Revolution.ECS.Components;
+using Revolution.ECS.Entities;
 
 namespace Revolution.Scenes
 {
@@ -19,6 +16,7 @@ namespace Revolution.Scenes
         }
 
         public Canvas Canvas { get; }
+
         public void OnEnter()
         {
             
@@ -39,14 +37,20 @@ namespace Revolution.Scenes
             
         }
 
-        public void OnUpdate(int deltaMs)
-        {
-            
-        }
-
         public GameScene()
         {
             Canvas = new Canvas();
+            int tileSize = 32;
+
+            for (int x = 0; x < 640 / tileSize; x++)
+            {
+                for (int y = 0; y < 480 / tileSize; y++)
+                {
+                    var entity = EntityManager.CreateEntity<TestEntity>();
+                    entity.GetComponent<PositionComponent>().X = x * tileSize;
+                    entity.GetComponent<PositionComponent>().Y = y * tileSize;
+                }
+            }
         }
     }
 }

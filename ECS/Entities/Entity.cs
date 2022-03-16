@@ -14,14 +14,11 @@ namespace Revolution.ECS.Entities
 
         protected Entity()
         {
-            Console.WriteLine("New entity");
             Id = _idCounter++;
             components = new Dictionary<Type, Component>();
         }
-        
-        public abstract void Update(int deltaMs);
 
-        public virtual void Destroy()
+        public void Destroy()
         {
             DestroyEvent?.Invoke(this, this);
         }
