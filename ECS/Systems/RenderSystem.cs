@@ -1,5 +1,6 @@
 using System;
-using System.Security.Cryptography;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -13,16 +14,16 @@ namespace Revolution.ECS.Systems
     public class RenderSystem : ISystem
     {
         private Canvas canvas;
+        private HashSet<Entity> entities;
 
         public RenderSystem(Canvas canvas)
         {
             this.canvas = canvas;
+            this.entities = new HashSet<Entity>();
         }
 
         public void Update(int deltaMs)
         {
-            // TODO : Optimize
-            canvas.Children.Clear();
             foreach (var entity in EntityManager.GetEntities())
             {
                 var posComp = entity.GetComponent<PositionComponent>();
@@ -32,11 +33,12 @@ namespace Revolution.ECS.Systems
                 if (posComp != null && renderComp != null && sizeComp != null)
                 {
                     var renderable = renderComp.Renderable;
-                    renderable.Width = sizeComp.Width;
-                    renderable.Height = sizeComp.Height;
-                    canvas.Children.Add(renderable);
-                    Canvas.SetLeft(renderable, posComp.X);
-                    Canvas.SetTop(renderable, posComp.Y);
+
+                    if (!entities.Contains(entity))
+                    {
+                        canvas.Children.Add(renderable);
+                        entities.Add(entity);
+                    }
                 }
             }
         }
