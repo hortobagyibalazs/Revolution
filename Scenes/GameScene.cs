@@ -38,10 +38,15 @@ namespace Revolution.Scenes
             
         }
 
-        public GameScene()
+        public GameScene(Canvas canvas)
         {
             Canvas = new Canvas();
             
+            Canvas = canvas;
+            Canvas.Width = 1200;
+            Canvas.Height = 1000;
+
+            EntityManager.CreateEntity<Camera>();
             MapLoader.LoadFromFile("Assets/tileset.png", "Assets/test.tmx");
         }
     }
