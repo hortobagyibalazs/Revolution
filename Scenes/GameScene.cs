@@ -2,6 +2,7 @@ using System;
 using Avalonia.Controls;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
+using Revolution.IO;
 
 namespace Revolution.Scenes
 {
@@ -40,17 +41,8 @@ namespace Revolution.Scenes
         public GameScene()
         {
             Canvas = new Canvas();
-            int tileSize = 32;
-
-            for (int x = 0; x < 640 / tileSize; x++)
-            {
-                for (int y = 0; y < 480 / tileSize; y++)
-                {
-                    var entity = EntityManager.CreateEntity<TestEntity>();
-                    entity.GetComponent<PositionComponent>().X = x * tileSize;
-                    entity.GetComponent<PositionComponent>().Y = y * tileSize;
-                }
-            }
+            
+            MapLoader.LoadFromFile("Assets/tileset.png", "Assets/test.tmx");
         }
     }
 }
