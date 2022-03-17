@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Threading;
 using Revolution.ECS.Systems;
+using Revolution.IO;
 using Revolution.Scenes;
 
 namespace Revolution
@@ -32,12 +33,15 @@ namespace Revolution
 
             sceneManager.ScenePushed += ScenePushed;
             sceneManager.ScenePopped += ScenePopped;
-            
-            sceneManager.Push(new GameScene());
+
+            sceneManager.Push(new GameScene(MainCanvas));
             
             // Setup entity-component system
             systemManager = new SystemManager();
-            systemManager.RegisterSystem(new RenderSystem(MainCanvas));
+            //systemManager.RegisterSystem(new RenderSystem(MainCanvas));
+            systemManager.RegisterSystem(new CameraSystem(CanvasViewer, MainCanvas));
+            
+            Mouse.Init(this);
 
             // Start timer
             lastUpdate = Environment.TickCount;
@@ -54,12 +58,12 @@ namespace Revolution
 
         private void ScenePushed(object? sender, IScene e)
         {
-            MainCanvas.Children.Add(e.Canvas);
+            //MainCanvas.Children.Add(e.Canvas);
         }
 
         private void ScenePopped(object? sender, IScene e)
         {
-            MainCanvas.Children.Remove(e.Canvas);
+            //MainCanvas.Children.Remove(e.Canvas);
         }
     }
 }
