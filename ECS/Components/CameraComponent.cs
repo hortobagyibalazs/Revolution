@@ -12,7 +12,7 @@ namespace Revolution.ECS.Components
         public void LockInPlace(int x, int y)
         {
             X = x;
-            y = y;
+            Y = y;
             LockInPlace();
         }
 
@@ -27,6 +27,7 @@ namespace Revolution.ECS.Components
             Target = entity.GetComponent<PositionComponent>();
             if (Target == null)
             {
+                Locked = false;
                 return;
             }
             LockInPlace();
