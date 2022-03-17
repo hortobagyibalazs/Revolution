@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Avalonia.Input;
 using Component = Revolution.ECS.Components.Component;
+using Key = Avalonia.Remote.Protocol.Input.Key;
 
 namespace Revolution.ECS.Entities
 {

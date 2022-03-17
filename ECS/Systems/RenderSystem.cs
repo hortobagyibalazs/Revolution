@@ -6,6 +6,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
+using Revolution.IO;
 
 namespace Revolution.ECS.Systems
 {
@@ -18,7 +19,6 @@ namespace Revolution.ECS.Systems
             this.canvas = canvas;
         }
 
-        private bool did = false;
         public void Update(int deltaMs)
         {
             // TODO : Optimize

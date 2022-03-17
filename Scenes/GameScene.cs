@@ -37,11 +37,14 @@ namespace Revolution.Scenes
             
         }
 
-        public GameScene()
+        public GameScene(Canvas canvas)
         {
-            Canvas = new Canvas();
+            Canvas = canvas;
+            Canvas.Width = 1200;
+            Canvas.Height = 1000;
             int tileSize = 32;
 
+            EntityManager.CreateEntity<Camera>();
             for (int x = 0; x < 640 / tileSize; x++)
             {
                 for (int y = 0; y < 480 / tileSize; y++)
