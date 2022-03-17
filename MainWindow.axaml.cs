@@ -38,7 +38,7 @@ namespace Revolution
             
             // Setup entity-component system
             systemManager = new SystemManager();
-            //systemManager.RegisterSystem(new RenderSystem(MainCanvas));
+            systemManager.RegisterSystem(new RenderSystem(MainCanvas));
             systemManager.RegisterSystem(new CameraSystem(CanvasViewer, MainCanvas));
             
             Mouse.Init(this);
