@@ -13,6 +13,7 @@ namespace Revolution.ECS.Systems
         private Canvas canvas;
         
         public int CameraSpeed { get; set; }
+        public int BorderDistance { get; set; }
 
         public CameraSystem(ScrollViewer canvasViewer, Canvas mainCanvas)
         {
@@ -20,6 +21,7 @@ namespace Revolution.ECS.Systems
             canvas = mainCanvas;
 
             CameraSpeed = 10;
+            BorderDistance = 30;
         }
 
         public void Update(int deltaMs)
@@ -71,22 +73,22 @@ namespace Revolution.ECS.Systems
 
         private bool MouseInUpperSegment()
         {
-            return Mouse.Instance.CursorY < 30;
+            return Mouse.Instance.CursorY < BorderDistance;
         }
 
         private bool MouseInLowerSegment()
         {
-            return Mouse.Instance.CursorY > scrollViewer.Viewport.Height - 30;
+            return Mouse.Instance.CursorY > scrollViewer.Viewport.Height - BorderDistance;
         }
 
         private bool MouseInLeftSegment()
         {
-            return Mouse.Instance.CursorX < 30;
+            return Mouse.Instance.CursorX < BorderDistance;
         }
 
         private bool MouseInRightSegment()
         {
-            return Mouse.Instance.CursorX > scrollViewer.Viewport.Width - 30;
+            return Mouse.Instance.CursorX > scrollViewer.Viewport.Width - BorderDistance;
         }
     }
 }
