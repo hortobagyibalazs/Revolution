@@ -46,6 +46,10 @@
       <Content Include="Assets\tileset.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Remove="Assets\town_center.png" />
+      <Content Include="Assets\town_center.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
     <ItemGroup>
       <Content Include="Assets\Test.tsx">

@@ -2,6 +2,7 @@ using System.ComponentModel;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Revolution.ECS.Components;
+using Revolution.IO;
 
 namespace Revolution.ECS.Entities
 {
@@ -10,7 +11,7 @@ namespace Revolution.ECS.Entities
         public Tile()
         {
             var renderComp = new RenderComponent() {Renderable = new Image()};
-            var sizeComp = new SizeComponent() {Width = 48, Height = 48};
+            var sizeComp = new SizeComponent() {Width = GlobalConfig.TileSize, Height = GlobalConfig.TileSize};
             var posComp = new PositionComponent();
             
             sizeComp.PropertyChanged += delegate(object? sender, PropertyChangedEventArgs args)

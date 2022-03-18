@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 
@@ -23,6 +24,11 @@ namespace Revolution.ECS.Components
         {
             _src = src;
             img.Source = new Bitmap(src);
+        }
+
+        public override Type ComponentType()
+        {
+            return typeof(RenderComponent);
         }
     }
 }

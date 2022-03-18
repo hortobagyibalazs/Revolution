@@ -45,7 +45,7 @@ namespace Revolution.ECS.Entities
 
         protected void AddComponent(Component component)
         {
-            var type = component.GetType();
+            var type = component.ComponentType();
             if (!components.ContainsKey(type))
             {
                 components[type] = component;
@@ -58,7 +58,7 @@ namespace Revolution.ECS.Entities
 
         protected void RemoveComponent(Component component)
         {
-            var type = component.GetType();
+            var type = component.ComponentType();
             components.Remove(type);
         }
     }

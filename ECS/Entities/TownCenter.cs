@@ -10,7 +10,7 @@ namespace Revolution.ECS.Entities
     {
         public TownCenter()
         {
-            var renderComp = new RenderComponent() {Renderable = new Image() {Source = new Bitmap("Assets/town_center.png")}}; 
+            var renderComp = new SpriteComponent() {Source = "Assets/town_center.png"}; 
             var posComp = new PositionComponent() {};
             var sizeComp = new SizeComponent() {Width = 3 * GlobalConfig.TileSize, Height = 3 * GlobalConfig.TileSize};
             var buildingComponent = new BuildingComponent() {State = BuildingState.Built};
@@ -27,7 +27,7 @@ namespace Revolution.ECS.Entities
                 Canvas.SetTop(renderComp.Renderable, posComp.Y);
             };
             
-            AddComponent(renderComp);
+            AddComponent((RenderComponent) renderComp);
             AddComponent(posComp);
             AddComponent(sizeComp);
             AddComponent(buildingComponent);

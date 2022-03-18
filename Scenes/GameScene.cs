@@ -44,6 +44,7 @@ namespace Revolution.Scenes
 
             EntityManager.CreateEntity<Camera>();
             var mapDimension = MapLoader.LoadFromFile("Assets/tileset.png", "Assets/test.tmx");
+            EntityManager.CreateEntity<TownCenter>();
             canvas.Width = mapDimension.X;
             canvas.Height = mapDimension.Y;
         }
