@@ -12,14 +12,6 @@
                       VerticalScrollBarVisibility="Hidden">
                 <Canvas x:Name="MainCanvas"
                         IsHitTestVisible="False">
-                        <Canvas.Background>
-                                <RadialGradientBrush>
-                                        <GradientStop Offset="0"
-                                                      Color="Orange" />
-                                        <GradientStop Offset="1"
-                                                      Color="Blue" />
-                                </RadialGradientBrush>
-                        </Canvas.Background>
                 </Canvas>
         </ScrollViewer>
 </Window>
