@@ -7,42 +7,53 @@ using Key = Avalonia.Remote.Protocol.Input.Key;
 
 namespace Revolution.IO
 {
-    // TODO : Put cheat code processing into its own manager file  
     public class Keyboard : IKeyboard
     {
         private HashSet<Key> pressed;
-        private HashSet<CheatCode> cheatCodes;
+        private Window window;
 
-        public Keyboard(Window window)
+        public static readonly Keyboard Instance = new Keyboard();
+        private static bool _initialized;
+
+        public static void Init(Window window)
         {
-            pressed = new HashSet<Key>();
-            cheatCodes = new HashSet<CheatCode>();
+            if (_initialized) return;
 
             window.KeyUp += OnKeyUp;
             window.KeyDown += OnKeyDown;
+            Instance.window = window;
+            _initialized = true;
         }
 
-        private void OnKeyUp(object? sender, KeyEventArgs e)
+        public static void CleanUp()
+        {
+            Instance.window.KeyUp -= OnKeyUp;
+            Instance.window.KeyDown -= OnKeyDown;
+            Instance.window = null;
+            _initialized = false;
+        }
+
+        private Keyboard()
+        {
+            pressed = new HashSet<Key>();
+        }
+
+        private static void OnKeyUp(object? sender, KeyEventArgs e)
         {
             e.Handled = true;
             
             Key result;
             Enum.TryParse(e.Key.ToString(), out result);
-            pressed.Remove(result);
-
-            foreach (CheatCode code in cheatCodes)
-            {
-                code.ProcessKey(result);
-            }
+            Instance.pressed.Remove(result);
         }
 
-        private void OnKeyDown(object? sender, KeyEventArgs e)
+        private static void OnKeyDown(object? sender, KeyEventArgs e)
         {
             e.Handled = true;
             
             Key result;
             Enum.TryParse(e.Key.ToString(), out result);
-            pressed.Add(result);
+            Instance.pressed.Add(result);
         }
         
         public bool IsDown(Key key)
@@ -68,16 +79,6 @@ namespace Revolution.IO
         public bool IsShortcutPressed(Key key1, Key key2, Key key3)
         {
             throw new NotImplementedException();
-        }
-        
-        public void RegisterCheatCode(CheatCode cheatCode)
-        {
-            cheatCodes.Add(cheatCode);
-        }
-
-        public void UnregisterCheatCode(CheatCode cheatCode)
-        {
-            cheatCodes.Remove(cheatCode);
         }
     }
 }

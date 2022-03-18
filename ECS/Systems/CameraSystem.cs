@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Revolution.ECS.Components;
@@ -23,6 +24,7 @@ namespace Revolution.ECS.Systems
             CameraSpeed = 10;
             BorderDistance = 30;
         }
+
 
         public void Update(int deltaMs)
         {

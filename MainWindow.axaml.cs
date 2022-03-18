@@ -41,6 +41,7 @@ namespace Revolution
             systemManager.RegisterSystem(new RenderSystem(MainCanvas));
             systemManager.RegisterSystem(new CameraSystem(CanvasViewer, MainCanvas));
             
+            Keyboard.Init(this);
             Mouse.Init(this);
 
             // Start timer
