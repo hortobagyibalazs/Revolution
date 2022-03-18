@@ -33,10 +33,12 @@ namespace Revolution.IO
                                 map.TileWidth, map.TileHeight));
 
                     var tileEntity = EntityManager.CreateEntity<Tile>();
+                    int tileWidth = tileEntity.GetComponent<SizeComponent>().Width;
+                    int tileHeight = tileEntity.GetComponent<SizeComponent>().Height;
 
                     (tileEntity.GetComponent<RenderComponent>().Renderable as Image).Source = croppedBitmap;
-                    tileEntity.GetComponent<PositionComponent>().X = tile.X * map.TileWidth;
-                    tileEntity.GetComponent<PositionComponent>().Y = tile.Y * map.TileHeight;
+                    tileEntity.GetComponent<PositionComponent>().X = tile.X * tileWidth;
+                    tileEntity.GetComponent<PositionComponent>().Y = tile.Y * tileHeight;
 
                 }
             }

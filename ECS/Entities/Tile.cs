@@ -10,7 +10,7 @@ namespace Revolution.ECS.Entities
         public Tile()
         {
             var renderComp = new RenderComponent() {Renderable = new Image()};
-            var sizeComp = new SizeComponent() {Width = 16, Height = 16};
+            var sizeComp = new SizeComponent() {Width = 48, Height = 48};
             sizeComp.PropertyChanged += delegate(object? sender, PropertyChangedEventArgs args)
             {
                 (renderComp.Renderable).Width = sizeComp.Width;
