@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Numerics;
 using System.Xml;
 using Avalonia;
 using Avalonia.Controls;
@@ -17,11 +19,16 @@ namespace Revolution.IO
     {
         private static List<Entity> tiles = new List<Entity>();
 
-        public static void LoadFromFile(string tilesetPath, string tileMapPath)
+        /**
+         * @return Map dimension
+         */
+        public static Vector2 LoadFromFile(string tilesetPath, string tileMapPath)
         {
             var map = new TmxMap(tileMapPath);
             var bitmap = new Bitmap(tilesetPath);
 
+            int maxWidth = Int32.MinValue;
+            int maxHeight = Int32.MinValue;
             foreach (var layer in map.Layers)
             {
                 int tilesInRow = 16;
@@ -35,13 +42,26 @@ namespace Revolution.IO
                     var tileEntity = EntityManager.CreateEntity<Tile>();
                     int tileWidth = tileEntity.GetComponent<SizeComponent>().Width;
                     int tileHeight = tileEntity.GetComponent<SizeComponent>().Height;
-
+                    var xPos = tile.X * tileWidth;
+                    var yPos = tile.Y * tileHeight;
+                    
                     (tileEntity.GetComponent<RenderComponent>().Renderable as Image).Source = croppedBitmap;
-                    tileEntity.GetComponent<PositionComponent>().X = tile.X * tileWidth;
-                    tileEntity.GetComponent<PositionComponent>().Y = tile.Y * tileHeight;
+                    tileEntity.GetComponent<PositionComponent>().X = xPos;
+                    tileEntity.GetComponent<PositionComponent>().Y = yPos;
 
+                    if (xPos + tileWidth > maxWidth)
+                    {
+                        maxWidth = xPos + tileWidth;
+                    }
+
+                    if (yPos + tileHeight > maxHeight)
+                    {
+                        maxHeight = yPos + tileHeight;
+                    }
                 }
             }
+
+            return new Vector2(maxWidth, maxHeight);
         }
 
         public static void Unload()

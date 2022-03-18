@@ -36,9 +36,6 @@ namespace Revolution.IO
         private Keyboard()
         {
             pressed = new HashSet<Key>();
-
-            window.KeyUp += OnKeyUp;
-            window.KeyDown += OnKeyDown;
         }
 
         private static void OnKeyUp(object? sender, KeyEventArgs e)
