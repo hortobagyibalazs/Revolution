@@ -38,9 +38,11 @@ namespace Revolution.ECS.Systems
                     {
                         renderable.Width = sizeComp.Width;
                         renderable.Height = sizeComp.Height;
+                        
                         canvas.Children.Add(renderable);
                         Canvas.SetLeft(renderable, posComp.X);
                         Canvas.SetTop(renderable, posComp.Y);
+
                         entities.Add(entity);
                     }
                 }

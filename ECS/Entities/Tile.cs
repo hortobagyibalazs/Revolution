@@ -11,13 +11,14 @@ namespace Revolution.ECS.Entities
         {
             var renderComp = new RenderComponent() {Renderable = new Image()};
             var sizeComp = new SizeComponent() {Width = 48, Height = 48};
+            var posComp = new PositionComponent();
+            
             sizeComp.PropertyChanged += delegate(object? sender, PropertyChangedEventArgs args)
             {
                 (renderComp.Renderable).Width = sizeComp.Width;
                 (renderComp.Renderable).Height = sizeComp.Height;
             };
 
-            var posComp = new PositionComponent();
             posComp.PropertyChanged += delegate(object? sender, PropertyChangedEventArgs args)
             {
                 Canvas.SetLeft(renderComp.Renderable, posComp.X);
