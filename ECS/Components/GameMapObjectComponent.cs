@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
+using Revolution.IO;
 
 namespace Revolution.ECS.Components
 {
@@ -13,11 +14,19 @@ namespace Revolution.ECS.Components
         private int _width;
         private int _height;
 
+        // event handler util variables
+        private int _newvalue;
+        private int _oldvalue;
+
         public int X
         {
             get => _x;
             set
             {
+                if (_x == value) return;
+                
+                _oldvalue = _x;
+                _newvalue = value;
                 _x = value;
                 OnPropertyChanged();
             }
@@ -27,6 +36,10 @@ namespace Revolution.ECS.Components
             get => _y;
             set
             {
+                if (_y == value) return;
+
+                _oldvalue = _y;
+                _newvalue = value;
                 _y = value;
                 OnPropertyChanged();
             }
@@ -36,6 +49,10 @@ namespace Revolution.ECS.Components
             get => _width;
             set
             {
+                if (_width == value) return;
+
+                _oldvalue = _width;
+                _newvalue = value;
                 _width = value;
                 OnPropertyChanged();
             }
@@ -45,6 +62,10 @@ namespace Revolution.ECS.Components
             get => _height;
             set
             {
+                if (_height == value) return;
+
+                _oldvalue = _height;
+                _newvalue = value;
                 _height = value;
                 OnPropertyChanged();
             }
@@ -54,7 +75,7 @@ namespace Revolution.ECS.Components
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventExtendedArgs(propertyName, _oldvalue, _newvalue));
         }
     }
 }

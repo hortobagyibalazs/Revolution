@@ -44,9 +44,17 @@ namespace Revolution.ECS.Systems
                         Canvas.SetTop(renderable, posComp.Y);
 
                         entities.Add(entity);
+                        entity.DestroyEvent += OnEntityDestroyed;
                     }
                 }
             }
+        }
+
+        private void OnEntityDestroyed(object? sender, Entity e)
+        {
+            // Remove from local cache to save space
+            e.DestroyEvent -= OnEntityDestroyed;
+            entities.Remove(e);
         }
     }
 }
