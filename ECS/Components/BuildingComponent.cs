@@ -7,7 +7,19 @@ namespace Revolution.ECS.Components
 {
     public enum BuildingState
     {
+        /**
+         * Still looking for place on the map for building
+         */
+        Placing,
+        
+        /**
+         * Building hasn't been built yet
+         */
         UnderConstruction,
+        
+        /**
+         * Building is in its final form
+         */
         Built
     }
 

@@ -43,10 +43,10 @@ namespace Revolution.Scenes
             Canvas = canvas;
 
             EntityManager.CreateEntity<Camera>();
-            var mapDimension = MapLoader.LoadFromFile("Assets/tileset.png", "Assets/test.tmx");
+            var mapData = MapLoader.LoadFromFile("Assets/tileset.png", "Assets/test.tmx");
             EntityManager.CreateEntity<TownCenter>();
-            canvas.Width = mapDimension.X;
-            canvas.Height = mapDimension.Y;
+            canvas.Width = mapData.Dimension.X * GlobalConfig.TileSize;
+            canvas.Height = mapData.Dimension.Y * GlobalConfig.TileSize;
         }
     }
 }

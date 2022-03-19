@@ -22,46 +22,36 @@ namespace Revolution.IO
         /**
          * @return Map dimension
          */
-        public static Vector2 LoadFromFile(string tilesetPath, string tileMapPath)
+        public static MapData LoadFromFile(string tilesetPath, string tileMapPath)
         {
             var map = new TmxMap(tileMapPath);
             var bitmap = new Bitmap(tilesetPath);
 
-            int maxWidth = Int32.MinValue;
-            int maxHeight = Int32.MinValue;
+            var mapData = new MapData(new Vector2(map.Width, map.Height));
+
             foreach (var layer in map.Layers)
             {
                 int tilesInRow = 16;
                 foreach (var tile in layer.Tiles)
                 {
                     int gid = tile.Gid;
+                    // Crop sprite from spritesheet
                     var croppedBitmap = new CroppedBitmap(bitmap,
                             new PixelRect((gid % tilesInRow - 1) * map.TileWidth, (gid / tilesInRow) * map.TileHeight,
                                 map.TileWidth, map.TileHeight));
 
                     var tileEntity = EntityManager.CreateEntity<Tile>();
-                    int tileWidth = tileEntity.GetComponent<SizeComponent>().Width;
-                    int tileHeight = tileEntity.GetComponent<SizeComponent>().Height;
-                    var xPos = tile.X * tileWidth;
-                    var yPos = tile.Y * tileHeight;
-                    
+                    var mapObjectComp = tileEntity.GetComponent<GameMapObjectComponent>();
+
                     (tileEntity.GetComponent<RenderComponent>().Renderable as Image).Source = croppedBitmap;
-                    tileEntity.GetComponent<PositionComponent>().X = xPos;
-                    tileEntity.GetComponent<PositionComponent>().Y = yPos;
+                    mapObjectComp.X = tile.X;
+                    mapObjectComp.Y = tile.Y;
 
-                    if (xPos + tileWidth > maxWidth)
-                    {
-                        maxWidth = xPos + tileWidth;
-                    }
-
-                    if (yPos + tileHeight > maxHeight)
-                    {
-                        maxHeight = yPos + tileHeight;
-                    }
+                    mapData.Entities[tile.X, tile.Y] = tileEntity.Id;
                 }
             }
 
-            return new Vector2(maxWidth, maxHeight);
+            return mapData;
         }
 
         public static void Unload()

@@ -11,24 +11,37 @@ namespace Revolution.ECS.Entities
         public Tile()
         {
             var renderComp = new RenderComponent() {Renderable = new Image()};
-            var sizeComp = new SizeComponent() {Width = GlobalConfig.TileSize, Height = GlobalConfig.TileSize};
+            var sizeComp = new SizeComponent();
             var posComp = new PositionComponent();
+            var mapObjectComp = new GameMapObjectComponent();
             
-            sizeComp.PropertyChanged += delegate(object? sender, PropertyChangedEventArgs args)
+            sizeComp.PropertyChanged += delegate
             {
                 (renderComp.Renderable).Width = sizeComp.Width;
                 (renderComp.Renderable).Height = sizeComp.Height;
             };
 
-            posComp.PropertyChanged += delegate(object? sender, PropertyChangedEventArgs args)
+            posComp.PropertyChanged += delegate
             {
                 Canvas.SetLeft(renderComp.Renderable, posComp.X);
                 Canvas.SetTop(renderComp.Renderable, posComp.Y);
             };
+            
+            mapObjectComp.PropertyChanged += delegate
+            {
+                sizeComp.Width = mapObjectComp.Width * GlobalConfig.TileSize;
+                sizeComp.Height = mapObjectComp.Height * GlobalConfig.TileSize;
+                posComp.X = mapObjectComp.X * GlobalConfig.TileSize;
+                posComp.Y = mapObjectComp.Y * GlobalConfig.TileSize;
+            };
+
+            mapObjectComp.Width = 1;
+            mapObjectComp.Height = 1;
 
             AddComponent(posComp);
             AddComponent(sizeComp);
             AddComponent(renderComp);
+            AddComponent(mapObjectComp);
         }
     }
 }

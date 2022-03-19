@@ -1,18 +1,16 @@
-using System.ComponentModel;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
 using Revolution.ECS.Components;
 using Revolution.IO;
 
 namespace Revolution.ECS.Entities
 {
-    public class TownCenter : Entity
+    public class House : Entity
     {
-        public TownCenter()
+        public House()
         {
-            var renderComp = new SpriteComponent() {Source = "Assets/town_center.png"}; 
-            var posComp = new PositionComponent() {};
-            var sizeComp = new SizeComponent() {Width = 3 * GlobalConfig.TileSize, Height = 3 * GlobalConfig.TileSize};
+            var renderComp = new SpriteComponent() {Source = "Assets/house.png"}; 
+            var posComp = new PositionComponent() {X = GlobalConfig.TileSize * 3, Y = GlobalConfig.TileSize * 4};
+            var sizeComp = new SizeComponent() {Width = 2 * GlobalConfig.TileSize, Height = 2 * GlobalConfig.TileSize};
             var mapObjectComp = new GameMapObjectComponent();
             var buildingComponent = new BuildingComponent() {State = BuildingState.Built};
             
