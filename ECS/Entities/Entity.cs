@@ -20,7 +20,7 @@ namespace Revolution.ECS.Entities
             components = new Dictionary<Type, Component>();
         }
 
-        public void Destroy()
+        public virtual void Destroy()
         {
             DestroyEvent?.Invoke(this, this);
         }

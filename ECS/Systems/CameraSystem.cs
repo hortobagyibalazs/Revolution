@@ -2,9 +2,11 @@ using System;
 using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
+using Key = Avalonia.Remote.Protocol.Input.Key;
 
 namespace Revolution.ECS.Systems
 {
@@ -15,14 +17,16 @@ namespace Revolution.ECS.Systems
         
         public int CameraSpeed { get; set; }
         public int BorderDistance { get; set; }
+        public bool KeyboardControlsEnabled { get; set; }
 
         public CameraSystem(ScrollViewer canvasViewer, Canvas mainCanvas)
         {
             scrollViewer = canvasViewer;
             canvas = mainCanvas;
 
-            CameraSpeed = 10;
+            CameraSpeed = GlobalConfig.TileSize / 4;
             BorderDistance = 30;
+            KeyboardControlsEnabled = false;
         }
 
 
@@ -36,20 +40,20 @@ namespace Revolution.ECS.Systems
                     var offsetX = 0;
                     var offsetY = 0;
 
-                    if (MouseInUpperSegment())
+                    if (MouseInUpperSegment() || (Keyboard.Instance.IsDown(Key.W) && KeyboardControlsEnabled))
                     {
                         offsetY = -CameraSpeed;
                     }
-                    else if (MouseInLowerSegment())
+                    else if (MouseInLowerSegment()|| (Keyboard.Instance.IsDown(Key.S) && KeyboardControlsEnabled))
                     {
                         offsetY = CameraSpeed;
                     }
 
-                    if (MouseInLeftSegment())
+                    if (MouseInLeftSegment() || (Keyboard.Instance.IsDown(Key.A) && KeyboardControlsEnabled))
                     {
                         offsetX = -CameraSpeed;
                     }
-                    else if (MouseInRightSegment())
+                    else if (MouseInRightSegment() || (Keyboard.Instance.IsDown(Key.D) && KeyboardControlsEnabled))
                     {
                         offsetX = CameraSpeed;
                     }

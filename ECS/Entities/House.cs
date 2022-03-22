@@ -8,11 +8,11 @@ namespace Revolution.ECS.Entities
     {
         public House()
         {
-            var renderComp = new SpriteComponent() {Source = "Assets/house.png"}; 
-            var posComp = new PositionComponent() {X = GlobalConfig.TileSize * 3, Y = GlobalConfig.TileSize * 4};
-            var sizeComp = new SizeComponent() {Width = 2 * GlobalConfig.TileSize, Height = 2 * GlobalConfig.TileSize};
+            var renderComp = new SpriteComponent() {Source = "Assets/house.png"};
+            var posComp = new PositionComponent();
+            var sizeComp = new SizeComponent();
             var mapObjectComp = new GameMapObjectComponent();
-            var buildingComponent = new BuildingComponent() {State = BuildingState.Built};
+            var buildingComponent = new BuildingComponent() {State = BuildingState.Placing};
             
             sizeComp.PropertyChanged += delegate
             {
@@ -33,6 +33,11 @@ namespace Revolution.ECS.Entities
                 posComp.X = mapObjectComp.X * GlobalConfig.TileSize;
                 posComp.Y = mapObjectComp.Y * GlobalConfig.TileSize;
             };
+            
+            mapObjectComp.X = 1;
+            mapObjectComp.Y = 1;
+            mapObjectComp.Width = 2;
+            mapObjectComp.Height = 2;
             
             AddComponent(renderComp);
             AddComponent(posComp);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Input;
 
@@ -11,14 +12,16 @@ namespace Revolution.IO
 
         private int initialClickX;
         private int initialClickY;
+        private HashSet<MouseButton> ButtonsPressed;
 
         public static readonly Mouse Instance = new Mouse();
         private static bool _initialized;
         private Window? window;
+        
 
         private Mouse()
         {
-            
+            ButtonsPressed = new HashSet<MouseButton>();
         }
 
         public static void Init(Window window)
@@ -45,12 +48,14 @@ namespace Revolution.IO
         {
             Instance.OnMouseButtonRelease(e.InitialPressMouseButton, Instance.initialClickX, Instance.initialClickY,
                 (int) e.GetPosition(Instance.window).X, (int) e.GetPosition(Instance.window).Y);
+            Instance.ButtonsPressed.Remove(e.InitialPressMouseButton);
         }
 
         private static void WindowOnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
             Instance.initialClickX = (int) e.GetPosition(Instance.window).X;
             Instance.initialClickY = (int) e.GetPosition(Instance.window).Y;
+            Instance.ButtonsPressed.Add(e.MouseButton);
         }
 
         private static void WindowOnPointerMoved(object? sender, PointerEventArgs e)
@@ -61,18 +66,23 @@ namespace Revolution.IO
 
         public void OnMouseButtonPress(MouseButton button, int x, int y)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void OnMouseButtonRelease(MouseButton button, int initialClickX, int initialClickY, int releaseX,
             int releaseY)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void OnMouseMove(int x, int y)
         {
-            throw new System.NotImplementedException();
+            
+        }
+
+        public bool IsDown(MouseButton button)
+        {
+            return ButtonsPressed.Contains(button);
         }
     }
 }

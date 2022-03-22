@@ -10,5 +10,6 @@ namespace Revolution.IO
         void OnMouseButtonPress(MouseButton button, int x, int y);
         void OnMouseButtonRelease(MouseButton button, int initialClickX, int initialClickY, int releaseX, int releaseY);
         void OnMouseMove(int x, int y);
+        bool IsDown(MouseButton button);
     }
 }
