@@ -33,6 +33,17 @@ namespace Revolution.ECS.Systems
 
                     if (Mouse.Instance.IsDown(Avalonia.Input.MouseButton.Left))
                     {
+                        foreach (var entity2 in EntityManager.GetEntities())
+                        {
+                            if (entity != entity2)
+                            {
+                                var collisionComp = entity2.GetComponent<CollisionComponent>();
+                                if (collisionComp != null && collisionComp.CollidesWith(entity.GetComponent<CollisionComponent>()))
+                                {
+                                    return;
+                                }
+                            }
+                        }
                         buildingComponent.State = BuildingState.UnderConstruction;
                     }
 
