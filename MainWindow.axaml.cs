@@ -41,6 +41,7 @@ namespace Revolution
             systemManager.RegisterSystem(new RenderSystem(MainCanvas));
             systemManager.RegisterSystem(new CameraSystem(CanvasViewer, MainCanvas));
             systemManager.RegisterSystem(new BuildingSystem(CanvasViewer));
+            systemManager.RegisterSystem(new MovementSystem());
             
             Keyboard.Init(this);
             Mouse.Init(this);
