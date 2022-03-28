@@ -1,6 +1,6 @@
 using System;
-using Avalonia.Controls;
-using Avalonia.Remote.Protocol.Input;
+using System.Windows.Controls;
+using System.Windows.Input;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
@@ -31,7 +31,7 @@ namespace Revolution.ECS.Systems
                     mapObjectComponent.X = Math.Max(tileX - 1, 0);
                     mapObjectComponent.Y = Math.Max(tileY - 1, 0);
 
-                    if (Mouse.Instance.IsDown(Avalonia.Input.MouseButton.Left))
+                    if (Mouse.LeftButton == MouseButtonState.Pressed)
                     {
                         foreach (var entity2 in EntityManager.GetEntities())
                         {
@@ -52,14 +52,14 @@ namespace Revolution.ECS.Systems
             }
             
             // This is for testing
-            if (Keyboard.Instance.IsDown(Key.B))
+            if (Keyboard.IsKeyDown(Key.B))
             {
                 var entity = EntityManager.CreateEntity<House>();
                 entity.GetComponent<BuildingComponent>().State = BuildingState.Placing;
                 entity.GetComponent<GameMapObjectComponent>().X = GetGameObjectPosBasedOnCursorX();
                 entity.GetComponent<GameMapObjectComponent>().Y = GetGameObjectPosBasedOnCursorY();
             } 
-            else if (Keyboard.Instance.IsDown(Key.N))
+            else if (Keyboard.IsKeyDown(Key.N))
             {
                 var entity = EntityManager.CreateEntity<TownCenter>();
                 entity.GetComponent<BuildingComponent>().State = BuildingState.Placing;
@@ -70,12 +70,12 @@ namespace Revolution.ECS.Systems
 
         private int GetGameObjectPosBasedOnCursorX()
         {
-            return (int) (Mouse.Instance.CursorX + ScrollViewer.Offset.X) / GlobalConfig.TileSize;
+            return (int) (Mouse.GetPosition(ScrollViewer).X + ScrollViewer.HorizontalOffset) / GlobalConfig.TileSize;
         }
 
         private int GetGameObjectPosBasedOnCursorY()
         {
-            return (int) (Mouse.Instance.CursorY + ScrollViewer.Offset.Y) / GlobalConfig.TileSize;
+            return (int) (Mouse.GetPosition(ScrollViewer).Y + ScrollViewer.VerticalOffset) / GlobalConfig.TileSize;
         }
     }
 }

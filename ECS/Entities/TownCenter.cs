@@ -1,6 +1,5 @@
 using System.ComponentModel;
-using Avalonia.Controls;
-using Avalonia.Media.Imaging;
+using System.Windows.Controls;
 using Revolution.ECS.Components;
 using Revolution.IO;
 

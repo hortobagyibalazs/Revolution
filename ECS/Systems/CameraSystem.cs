@@ -1,19 +1,17 @@
 using System;
 using System.Diagnostics;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Input;
+using System.Windows.Controls;
+using System.Windows.Input;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
-using Key = Avalonia.Remote.Protocol.Input.Key;
 
 namespace Revolution.ECS.Systems
 {
     public class CameraSystem : ISystem
     {
         private ScrollViewer scrollViewer;
-        private Canvas canvas;
+        private readonly Canvas canvas;
         
         public int CameraSpeed { get; set; }
         public int BorderDistance { get; set; }
@@ -40,20 +38,20 @@ namespace Revolution.ECS.Systems
                     var offsetX = 0;
                     var offsetY = 0;
 
-                    if (MouseInUpperSegment() || (Keyboard.Instance.IsDown(Key.W) && KeyboardControlsEnabled))
+                    if (MouseInUpperSegment() || (Keyboard.IsKeyDown(Key.W) && KeyboardControlsEnabled))
                     {
                         offsetY = -CameraSpeed;
                     }
-                    else if (MouseInLowerSegment()|| (Keyboard.Instance.IsDown(Key.S) && KeyboardControlsEnabled))
+                    else if (MouseInLowerSegment()|| (Keyboard.IsKeyDown(Key.S) && KeyboardControlsEnabled))
                     {
                         offsetY = CameraSpeed;
                     }
 
-                    if (MouseInLeftSegment() || (Keyboard.Instance.IsDown(Key.A) && KeyboardControlsEnabled))
+                    if (MouseInLeftSegment() || (Keyboard.IsKeyDown(Key.A) && KeyboardControlsEnabled))
                     {
                         offsetX = -CameraSpeed;
                     }
-                    else if (MouseInRightSegment() || (Keyboard.Instance.IsDown(Key.D) && KeyboardControlsEnabled))
+                    else if (MouseInRightSegment() || (Keyboard.IsKeyDown(Key.D) && KeyboardControlsEnabled))
                     {
                         offsetX = CameraSpeed;
                     }
@@ -61,17 +59,19 @@ namespace Revolution.ECS.Systems
                     var newX = cameraComp.X + offsetX;
                     var newY = cameraComp.Y + offsetY;
 
-                    if (newX >= 0 && newX <= canvas.Width - scrollViewer.Viewport.Width)
+                    if (newX >= 0 && newX <= canvas.Width - scrollViewer.ViewportWidth)
                     {
                         cameraComp.SnapTo(newX, cameraComp.Y);
                     }
 
-                    if (newY >= 0 && newY <= canvas.Height - scrollViewer.Viewport.Height)
+                    if (newY >= 0 && newY <= canvas.Height - scrollViewer.ViewportHeight)
                     {
                         cameraComp.SnapTo(cameraComp.X, newY);
                     }
 
-                    scrollViewer.Offset = new Vector(cameraComp.X, cameraComp.Y);
+                    scrollViewer.ScrollToHorizontalOffset(cameraComp.X);
+                    scrollViewer.ScrollToVerticalOffset(cameraComp.Y);
+
                     return;
                 }
             }
@@ -79,22 +79,22 @@ namespace Revolution.ECS.Systems
 
         private bool MouseInUpperSegment()
         {
-            return Mouse.Instance.CursorY < BorderDistance;
+            return Mouse.GetPosition(scrollViewer).Y < BorderDistance;
         }
 
         private bool MouseInLowerSegment()
         {
-            return Mouse.Instance.CursorY > scrollViewer.Viewport.Height - BorderDistance;
+            return Mouse.GetPosition(scrollViewer).Y > scrollViewer.ViewportHeight - BorderDistance;
         }
 
         private bool MouseInLeftSegment()
         {
-            return Mouse.Instance.CursorX < BorderDistance;
+            return Mouse.GetPosition(scrollViewer).X < BorderDistance;
         }
 
         private bool MouseInRightSegment()
         {
-            return Mouse.Instance.CursorX > scrollViewer.Viewport.Width - BorderDistance;
+            return Mouse.GetPosition(scrollViewer).X > scrollViewer.ViewportWidth - BorderDistance;
         }
     }
 }
