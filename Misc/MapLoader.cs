@@ -2,25 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Numerics;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using System.Xml;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
-using Avalonia.OpenGL.Imaging;
-using Avalonia.Platform;
-using Avalonia.Rendering;
-using Avalonia.Visuals.Media.Imaging;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using TiledSharp;
-using Bitmap = Avalonia.Media.Imaging.Bitmap;
-using Image = Avalonia.Controls.Image;
-using PixelFormat = Avalonia.Platform.PixelFormat;
-using Size = Avalonia.Size;
+using Image = System.Windows.Controls.Image;
 
 namespace Revolution.IO
 {
@@ -34,17 +25,9 @@ namespace Revolution.IO
         public static MapData LoadFromFile(string tilesetPath, string tileMapPath)
         {
             var map = new TmxMap(tileMapPath);
-            var bitmap = new Bitmap(tilesetPath);
+            var bitmap = new BitmapImage(new Uri(tilesetPath, UriKind.Relative));
 
             var mapData = new MapData(new Vector2(map.Width, map.Height));
-
-            /*var mapBitmap = new Bitmap("Assets/test.png");
-            var t = EntityManager.CreateEntity<Tile>();
-            (t.GetComponent<RenderComponent>().Renderable as Image).Source = mapBitmap;
-            t.GetComponent<GameMapObjectComponent>().Width = 100;
-            t.GetComponent<GameMapObjectComponent>().Height = 100;
-            return mapData;*/
-            
             
             foreach (var layer in map.Layers)
             {
@@ -54,7 +37,7 @@ namespace Revolution.IO
                     int gid = tile.Gid;
                     // Crop sprite from spritesheet
                     var croppedBitmap = new CroppedBitmap(bitmap,
-                        new PixelRect((gid % tilesInRow - 1) * map.TileWidth, (gid / tilesInRow) * map.TileHeight,
+                        new Int32Rect((gid % tilesInRow - 1) * map.TileWidth, (gid / tilesInRow) * map.TileHeight,
                             map.TileWidth, map.TileHeight));
                     
                     var tileEntity = EntityManager.CreateEntity<Tile>();

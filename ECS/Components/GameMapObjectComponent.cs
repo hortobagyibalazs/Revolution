@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 using Revolution.IO;
 
 namespace Revolution.ECS.Components
@@ -72,7 +71,6 @@ namespace Revolution.ECS.Components
         }
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventExtendedArgs(propertyName, _oldvalue, _newvalue));

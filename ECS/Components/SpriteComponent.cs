@@ -1,12 +1,14 @@
 using System;
-using Avalonia.Controls;
-using Avalonia.Media.Imaging;
+using System.Drawing;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Revolution.ECS.Components
 {
     public class SpriteComponent : RenderComponent
     {
-        private Image img = new Image();
+        private System.Windows.Controls.Image img = new System.Windows.Controls.Image();
 
         private string _src;
         public string Source
@@ -15,7 +17,7 @@ namespace Revolution.ECS.Components
             set => SetSource(value);
         }
 
-        public override Control Renderable
+        public override FrameworkElement Renderable
         {
             get => img;
         }
@@ -23,7 +25,7 @@ namespace Revolution.ECS.Components
         private void SetSource(string src)
         {
             _src = src;
-            img.Source = new Bitmap(src);
+            img.Source = new BitmapImage(new Uri(src, UriKind.Relative));
         }
 
         public override Type ComponentType()

@@ -1,4 +1,5 @@
-using Avalonia;
+
+using System.Windows;
 
 namespace Revolution.ECS.Components
 {
@@ -17,7 +18,7 @@ namespace Revolution.ECS.Components
         {
             return 
                 new Rect(_positionComponent.X, _positionComponent.Y, _sizeComponent.Width, _sizeComponent.Height)
-                .Intersects(
+                .IntersectsWith(
                     new Rect(component._positionComponent.X, component._positionComponent.Y,
                         component._sizeComponent.Width, component._sizeComponent.Height)
                 );

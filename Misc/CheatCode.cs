@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Avalonia.Remote.Protocol.Input;
+using System.Windows.Input;
 
 namespace Revolution.IO
 {

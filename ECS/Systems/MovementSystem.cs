@@ -1,7 +1,7 @@
-using Avalonia.Remote.Protocol.Input;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
+using System.Windows.Input;
 
 namespace Revolution.ECS.Systems
 {
@@ -9,7 +9,7 @@ namespace Revolution.ECS.Systems
     {
         public void Update(int deltaMs)
         {
-            if (Keyboard.Instance.IsDown(Key.V))
+            if (Keyboard.IsKeyDown(Key.V))
             {
                 var villager = EntityManager.CreateEntity<Villager>();
             }

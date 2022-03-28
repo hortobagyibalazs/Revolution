@@ -1,23 +1,35 @@
-using System;
-using System.ComponentModel;
-using Avalonia.Controls;
-using Avalonia.Input;
-using Avalonia.Threading;
-using Revolution.ECS.Systems;
-using Revolution.IO;
+﻿using Revolution.ECS.Systems;
 using Revolution.Scenes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Threading;
 
-namespace Revolution
+namespace WpfApp
 {
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
     public partial class MainWindow : Window
     {
         private int fps = 60;
         private long lastUpdate;
         private DispatcherTimer timer;
-        
+
         private SceneManager sceneManager;
         private SystemManager systemManager;
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,16 +47,13 @@ namespace Revolution
             sceneManager.ScenePopped += ScenePopped;
 
             sceneManager.Push(new GameScene(MainCanvas));
-            
+
             // Setup entity-component system
             systemManager = new SystemManager();
             systemManager.RegisterSystem(new RenderSystem(MainCanvas));
             systemManager.RegisterSystem(new CameraSystem(CanvasViewer, MainCanvas));
             systemManager.RegisterSystem(new BuildingSystem(CanvasViewer));
             systemManager.RegisterSystem(new MovementSystem());
-            
-            Keyboard.Init(this);
-            Mouse.Init(this);
 
             // Start timer
             lastUpdate = Environment.TickCount;
@@ -54,7 +63,7 @@ namespace Revolution
         private void UpdateScenes(object? sender, EventArgs args)
         {
             // Update every system
-            int deltaMs = (int) (Environment.TickCount - lastUpdate);
+            int deltaMs = (int)(Environment.TickCount - lastUpdate);
             lastUpdate = Environment.TickCount;
             systemManager.Update(deltaMs);
         }

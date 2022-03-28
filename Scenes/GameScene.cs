@@ -1,5 +1,5 @@
 using System;
-using Avalonia.Controls;
+using System.Windows.Controls;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
@@ -43,7 +43,7 @@ namespace Revolution.Scenes
             Canvas = canvas;
 
             EntityManager.CreateEntity<Camera>();
-            var mapData = MapLoader.LoadFromFile("Assets/tileset.png", "Assets/test.tmx");
+            var mapData = MapLoader.LoadFromFile(@"Assets\tileset.png", @"Assets\test.tmx");
             EntityManager.CreateEntity<TownCenter>();
             canvas.Width = mapData.Dimension.X * GlobalConfig.TileSize;
             canvas.Height = mapData.Dimension.Y * GlobalConfig.TileSize;
