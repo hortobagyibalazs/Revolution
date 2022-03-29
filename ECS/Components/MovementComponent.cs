@@ -7,7 +7,13 @@ namespace Revolution.ECS.Components
         public int VelocityX { get; set; }
         public int VelocityY { get; set; }
         
-        public int TargetTileDeltaX { get; set; }
-        public int TargetTileDeltaY { get; set; }
+        public int DestinationTileX { get; set; }
+        public int DestinationTileY { get; set; }
+
+        public void Stop()
+        {
+            VelocityX = 0;
+            VelocityY = 0;
+        }
     }
 }

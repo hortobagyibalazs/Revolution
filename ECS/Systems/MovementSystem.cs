@@ -14,11 +14,77 @@ namespace Revolution.ECS.Systems
                 var villager = EntityManager.CreateEntity<Villager>();
             }
             
+            // Movement
+            if (Keyboard.IsKeyDown(Key.D))
+            {
+                foreach (var entity in EntityManager.GetEntities())
+                {
+                    var movementComp = entity.GetComponent<MovementComponent>();
+                    var gameMapObjectComp = entity.GetComponent<GameMapObjectComponent>();
+                    if (movementComp != null)
+                    {
+                        movementComp.VelocityX = 4;
+                        movementComp.DestinationTileX = gameMapObjectComp.X + 1;
+                        movementComp.DestinationTileY = gameMapObjectComp.Y;    
+                    }
+                }
+            } 
+            else if (Keyboard.IsKeyDown(Key.A))
+            {
+                foreach (var entity in EntityManager.GetEntities())
+                {
+                    var movementComp = entity.GetComponent<MovementComponent>();
+                    var gameMapObjectComp = entity.GetComponent<GameMapObjectComponent>();
+                    if (movementComp != null)
+                    {
+                        movementComp.VelocityX = -4;
+                        movementComp.DestinationTileX = gameMapObjectComp.X - 1;
+                        movementComp.DestinationTileY = gameMapObjectComp.Y;
+                    }
+                }
+            }
+            else if (Keyboard.IsKeyDown(Key.W))
+            {
+                foreach (var entity in EntityManager.GetEntities())
+                {
+                    var movementComp = entity.GetComponent<MovementComponent>();
+                    var gameMapObjectComp = entity.GetComponent<GameMapObjectComponent>();
+                    if (movementComp != null)
+                    {
+                        movementComp.VelocityY = -4;
+                        movementComp.DestinationTileX = gameMapObjectComp.X;
+                        movementComp.DestinationTileY = gameMapObjectComp.Y - 1;
+                    }
+                }
+            }
+            else if (Keyboard.IsKeyDown(Key.S))
+            {
+                foreach (var entity in EntityManager.GetEntities())
+                {
+                    var movementComp = entity.GetComponent<MovementComponent>();
+                    var gameMapObjectComp = entity.GetComponent<GameMapObjectComponent>();
+                    if (movementComp != null)
+                    {
+                        movementComp.VelocityY = 4;
+                        movementComp.DestinationTileX = gameMapObjectComp.X;
+                        movementComp.DestinationTileY = gameMapObjectComp.Y + 1;
+                    }
+                }
+            }
+
             foreach (var entity in EntityManager.GetEntities())
             {
                 var movementComp = entity.GetComponent<MovementComponent>();
-                if (movementComp != null && (movementComp.TargetTileDeltaX != 0 || movementComp.TargetTileDeltaY != 0))
+                var gameObjectComp = entity.GetComponent<GameMapObjectComponent>();
+                if (movementComp != null && gameObjectComp != null)
                 {
+                    if ((movementComp.DestinationTileX == gameObjectComp.X &&
+                    movementComp.DestinationTileY == gameObjectComp.Y))
+                    {
+                        movementComp.Stop();
+                        return;
+                    }
+
                     var collisionComp = entity.GetComponent<CollisionComponent>();
                     bool collides = false;
                     if (collisionComp != null)
@@ -31,6 +97,10 @@ namespace Revolution.ECS.Systems
                         var posComp = entity.GetComponent<PositionComponent>();
                         posComp.X += movementComp.VelocityX;
                         posComp.Y += movementComp.VelocityY;
+                    } 
+                    else
+                    {
+                        movementComp.Stop();
                     }
                 }
             }

@@ -10,11 +10,11 @@ namespace Revolution.ECS.Entities
         public Villager()
         {
             var sizeComp = new SizeComponent();
-            var posComp = new PositionComponent();
+            var posComp = new PositionComponent() { X = 512, Y = 576 };  
             var spriteComp = new SpriteComponent() {Source = "Assets/villager.png"};
             var gameMapObjectComp = new GameMapObjectComponent();
             var collisionComp = new CollisionComponent(sizeComp, posComp);
-            var movementComp = new MovementComponent() { MaxVelocity = 2, VelocityX = 2, TargetTileDeltaX = 1};
+            var movementComp = new MovementComponent() { MaxVelocity = 2 };
             
             gameMapObjectComp.PropertyChanged += delegate
             {
@@ -39,9 +39,10 @@ namespace Revolution.ECS.Entities
 
             gameMapObjectComp.Width = 1;
             gameMapObjectComp.Height = 1;
-            gameMapObjectComp.X = 0;
-            gameMapObjectComp.Y = 1;
-            
+
+            gameMapObjectComp.X = posComp.X / GlobalConfig.TileSize;
+            gameMapObjectComp.Y = posComp.Y / GlobalConfig.TileSize;
+
             AddComponent(sizeComp);
             AddComponent(posComp);
             AddComponent(spriteComp);

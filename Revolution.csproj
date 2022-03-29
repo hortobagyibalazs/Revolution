@@ -10,6 +10,8 @@
 		<None Remove="Assets\game_bg.jpg" />
 		<None Remove="Assets\grass.png" />
 		<None Remove="Assets\house.png" />
+		<None Remove="Assets\Images\35.png" />
+		<None Remove="Assets\Images\94.png" />
 		<None Remove="Assets\menu_bg.png" />
 		<None Remove="Assets\test.png" />
 		<None Remove="Assets\test.tmx" />
@@ -28,6 +30,12 @@
 		</Content>
 		<Content Include="Assets\house.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\35.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\94.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\menu_bg.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>

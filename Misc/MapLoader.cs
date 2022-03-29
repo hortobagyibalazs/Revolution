@@ -25,7 +25,7 @@ namespace Revolution.IO
         public static MapData LoadFromFile(string tilesetPath, string tileMapPath)
         {
             var map = new TmxMap(tileMapPath);
-            var bitmap = new BitmapImage(new Uri(tilesetPath, UriKind.Relative));
+            //var bitmap = new BitmapImage(new Uri(tilesetPath, UriKind.Relative));
 
             var mapData = new MapData(new Vector2(map.Width, map.Height));
             
@@ -35,15 +35,16 @@ namespace Revolution.IO
                 foreach (var tile in layer.Tiles)
                 {
                     int gid = tile.Gid;
+                    var bitmap = new BitmapImage(new Uri(@"Assets\Images\" + gid + ".png", UriKind.Relative));
                     // Crop sprite from spritesheet
-                    var croppedBitmap = new CroppedBitmap(bitmap,
+                    /*var croppedBitmap = new CroppedBitmap(bitmap,
                         new Int32Rect((gid % tilesInRow - 1) * map.TileWidth, (gid / tilesInRow) * map.TileHeight,
-                            map.TileWidth, map.TileHeight));
+                            map.TileWidth, map.TileHeight));*/
                     
                     var tileEntity = EntityManager.CreateEntity<Tile>();
                     var mapObjectComp = tileEntity.GetComponent<GameMapObjectComponent>();
                     
-                    (tileEntity.GetComponent<RenderComponent>().Renderable as Image).Source = croppedBitmap;
+                    (tileEntity.GetComponent<RenderComponent>().Renderable as Image).Source = bitmap;
                     mapObjectComp.X = tile.X;
                     mapObjectComp.Y = tile.Y;
 

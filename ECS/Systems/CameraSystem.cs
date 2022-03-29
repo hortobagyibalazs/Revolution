@@ -33,7 +33,7 @@ namespace Revolution.ECS.Systems
             foreach (var entity in EntityManager.GetEntities())
             {
                 var cameraComp = entity.GetComponent<CameraComponent>();
-                if (cameraComp != null)
+                if (cameraComp != null && MouseInsideBounds())
                 {
                     var offsetX = 0;
                     var offsetY = 0;
@@ -75,6 +75,12 @@ namespace Revolution.ECS.Systems
                     return;
                 }
             }
+        }
+
+        private bool MouseInsideBounds()
+        {
+            // NOTE : Doesn't work for some reason
+            return scrollViewer.IsMouseOver;
         }
 
         private bool MouseInUpperSegment()
