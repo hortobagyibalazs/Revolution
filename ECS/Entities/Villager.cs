@@ -15,6 +15,7 @@ namespace Revolution.ECS.Entities
             var gameMapObjectComp = new GameMapObjectComponent();
             var collisionComp = new CollisionComponent(sizeComp, posComp);
             var movementComp = new MovementComponent() { MaxVelocity = 2 };
+            var selectionComp = new SelectionComponent();
             
             gameMapObjectComp.PropertyChanged += delegate
             {
@@ -49,6 +50,7 @@ namespace Revolution.ECS.Entities
             AddComponent(gameMapObjectComp);
             AddComponent(collisionComp);
             AddComponent(movementComp);
+            AddComponent(selectionComp);
         }
     }
 }

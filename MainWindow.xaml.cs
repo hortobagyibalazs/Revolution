@@ -54,6 +54,7 @@ namespace WpfApp
             systemManager.RegisterSystem(new CameraSystem(CanvasViewer, MainCanvas));
             systemManager.RegisterSystem(new BuildingSystem(CanvasViewer));
             systemManager.RegisterSystem(new MovementSystem());
+            systemManager.RegisterSystem(new SelectionSystem(MainCanvas, CanvasViewer));
 
             // Start timer
             lastUpdate = Environment.TickCount;
