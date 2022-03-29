@@ -13,7 +13,7 @@ namespace Revolution.ECS.Entities
             var posComp = new PositionComponent();
             var sizeComp = new SizeComponent();
             var mapObjectComp = new GameMapObjectComponent();
-            var buildingComponent = new BuildingComponent() {State = BuildingState.Placing};
+            var buildingComponent = new BuildingComponent() { State = BuildingState.Placing};
             var collisionComp = new CollisionComponent(sizeComp, posComp);
             
             sizeComp.PropertyChanged += delegate

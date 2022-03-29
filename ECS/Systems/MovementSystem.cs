@@ -1,6 +1,8 @@
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
+using System;
+using System.Numerics;
 using System.Windows.Input;
 
 namespace Revolution.ECS.Systems
@@ -12,64 +14,16 @@ namespace Revolution.ECS.Systems
             if (Keyboard.IsKeyDown(Key.V))
             {
                 var villager = EntityManager.CreateEntity<Villager>();
-            }
-            
-            // Movement
-            if (Keyboard.IsKeyDown(Key.D))
-            {
-                foreach (var entity in EntityManager.GetEntities())
-                {
-                    var movementComp = entity.GetComponent<MovementComponent>();
-                    var gameMapObjectComp = entity.GetComponent<GameMapObjectComponent>();
-                    if (movementComp != null)
-                    {
-                        movementComp.VelocityX = 4;
-                        movementComp.DestinationTileX = gameMapObjectComp.X + 1;
-                        movementComp.DestinationTileY = gameMapObjectComp.Y;    
-                    }
-                }
-            } 
-            else if (Keyboard.IsKeyDown(Key.A))
-            {
-                foreach (var entity in EntityManager.GetEntities())
-                {
-                    var movementComp = entity.GetComponent<MovementComponent>();
-                    var gameMapObjectComp = entity.GetComponent<GameMapObjectComponent>();
-                    if (movementComp != null)
-                    {
-                        movementComp.VelocityX = -4;
-                        movementComp.DestinationTileX = gameMapObjectComp.X - 1;
-                        movementComp.DestinationTileY = gameMapObjectComp.Y;
-                    }
-                }
-            }
-            else if (Keyboard.IsKeyDown(Key.W))
-            {
-                foreach (var entity in EntityManager.GetEntities())
-                {
-                    var movementComp = entity.GetComponent<MovementComponent>();
-                    var gameMapObjectComp = entity.GetComponent<GameMapObjectComponent>();
-                    if (movementComp != null)
-                    {
-                        movementComp.VelocityY = -4;
-                        movementComp.DestinationTileX = gameMapObjectComp.X;
-                        movementComp.DestinationTileY = gameMapObjectComp.Y - 1;
-                    }
-                }
-            }
-            else if (Keyboard.IsKeyDown(Key.S))
-            {
-                foreach (var entity in EntityManager.GetEntities())
-                {
-                    var movementComp = entity.GetComponent<MovementComponent>();
-                    var gameMapObjectComp = entity.GetComponent<GameMapObjectComponent>();
-                    if (movementComp != null)
-                    {
-                        movementComp.VelocityY = 4;
-                        movementComp.DestinationTileX = gameMapObjectComp.X;
-                        movementComp.DestinationTileY = gameMapObjectComp.Y + 1;
-                    }
-                }
+                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(9, 9));
+                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(9, 10));
+                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(10, 10));
+                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(11, 10));
+                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(10, 10));
+                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(9, 10));
+                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(8, 10));
+                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(9, 10));
+                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(9, 9));
+                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(8, 9));
             }
 
             foreach (var entity in EntityManager.GetEntities())
@@ -78,11 +32,17 @@ namespace Revolution.ECS.Systems
                 var gameObjectComp = entity.GetComponent<GameMapObjectComponent>();
                 if (movementComp != null && gameObjectComp != null)
                 {
-                    if ((movementComp.DestinationTileX == gameObjectComp.X &&
-                    movementComp.DestinationTileY == gameObjectComp.Y))
+                    if (movementComp.CurrentTarget != null)
                     {
-                        movementComp.Stop();
-                        return;
+                        if (((int) movementComp.CurrentTarget?.X == gameObjectComp.X) 
+                            && ((int) movementComp.CurrentTarget?.Y == gameObjectComp.Y))
+                        {
+                            SetNextDestination(movementComp, gameObjectComp);
+                        }
+                    }
+                    else
+                    {
+                        SetNextDestination(movementComp, gameObjectComp);
                     }
 
                     var collisionComp = entity.GetComponent<CollisionComponent>();
@@ -102,6 +62,58 @@ namespace Revolution.ECS.Systems
                     {
                         movementComp.Stop();
                     }
+                }
+            }
+        }
+
+        private void SetNextDestination(MovementComponent movementComp, GameMapObjectComponent gameObjectComp)
+        {
+            Vector2 nextDest;
+            if (movementComp.Path.TryDequeue(out nextDest))
+            {
+                movementComp.CurrentTarget = nextDest;
+                SetVelocity(nextDest, movementComp, gameObjectComp);
+            }
+            else
+            {
+                movementComp.Stop();
+            }
+        }
+
+        private void SetVelocity(Vector2 nextDest, MovementComponent movementComp, GameMapObjectComponent gameObjectComp)
+        {
+            if (nextDest != null)
+            {
+                var currentX = gameObjectComp.X;
+                var currentY = gameObjectComp.Y;
+
+                var targetX = nextDest.X;
+                var targetY = nextDest.Y;
+
+                if (currentX < targetX)
+                {
+                    movementComp.VelocityX = movementComp.MaxVelocity;
+                } 
+                else if (currentX > targetX)
+                {
+                    movementComp.VelocityX = -movementComp.MaxVelocity;
+                }
+                else
+                {
+                    movementComp.VelocityX = 0;
+                }
+
+                if (currentY < targetY)
+                {
+                    movementComp.VelocityY = movementComp.MaxVelocity;
+                }
+                else if (currentY > targetY)
+                {
+                    movementComp.VelocityY = -movementComp.MaxVelocity;
+                }
+                else
+                {
+                    movementComp.VelocityY = 0;
                 }
             }
         }
