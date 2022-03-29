@@ -27,10 +27,5 @@ namespace Revolution.ECS.Components
             _src = src;
             img.Source = new BitmapImage(new Uri(src, UriKind.Relative));
         }
-
-        public override Type ComponentType()
-        {
-            return typeof(RenderComponent);
-        }
     }
 }

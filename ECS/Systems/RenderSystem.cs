@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
@@ -11,12 +13,12 @@ namespace Revolution.ECS.Systems
     public class RenderSystem : ISystem
     {
         private Canvas canvas;
-        private HashSet<Entity> entities;
+        private HashSet<FrameworkElement> entities;
 
         public RenderSystem(Canvas canvas)
         {
             this.canvas = canvas;
-            this.entities = new HashSet<Entity>();
+            this.entities = new HashSet<FrameworkElement>();
         }
 
         public void Update(int deltaMs)
@@ -24,24 +26,38 @@ namespace Revolution.ECS.Systems
             foreach (var entity in EntityManager.GetEntities())
             {
                 var posComp = entity.GetComponent<PositionComponent>();
-                var renderComp = entity.GetComponent<RenderComponent>();
                 var sizeComp = entity.GetComponent<SizeComponent>();
 
-                if (posComp != null && renderComp != null && sizeComp != null)
+                if (entity is Villager)
                 {
-                    var renderable = renderComp.Renderable;
-
-                    if (!entities.Contains(entity))
+                    Console.WriteLine("asd");
+                }
+            
+                if (posComp != null && sizeComp != null)
+                {
+                    foreach (var component in entity.GetComponents())
                     {
-                        renderable.Width = sizeComp.Width;
-                        renderable.Height = sizeComp.Height;
-                        
-                        canvas.Children.Add(renderable);
-                        Canvas.SetLeft(renderable, posComp.X);
-                        Canvas.SetTop(renderable, posComp.Y);
+                        Type componentType = component.GetType();
+                        if (componentType == typeof(RenderComponent) || 
+                            componentType.IsSubclassOf(typeof(RenderComponent)))
+                        {
+                            var renderComp = (RenderComponent)component;
+                            var renderable = renderComp.Renderable;
 
-                        entities.Add(entity);
-                        entity.DestroyEvent += OnEntityDestroyed;
+                            if (!entities.Contains(renderable))
+                            {
+                                renderable.Width = sizeComp.Width;
+                                renderable.Height = sizeComp.Height;
+
+                                canvas.Children.Add(renderable);
+                                Canvas.SetLeft(renderable, posComp.X);
+                                Canvas.SetTop(renderable, posComp.Y);
+                                Panel.SetZIndex(renderable, renderComp.ZIndex);
+
+                                entities.Add(renderable);
+                                entity.DestroyEvent += OnEntityDestroyed;
+                            }
+                        }
                     }
                 }
             }
@@ -51,7 +67,16 @@ namespace Revolution.ECS.Systems
         {
             // Remove from local cache to save space
             e.DestroyEvent -= OnEntityDestroyed;
-            entities.Remove(e);
+            foreach (var comp in e.GetComponents())
+            {
+                Type componentType = comp.GetType();
+                if (componentType == typeof(RenderComponent) ||
+                            componentType.IsSubclassOf(typeof(RenderComponent)))
+                {
+                    var renderComp = (RenderComponent)(comp);
+                    entities.Remove(renderComp.Renderable);
+                }
+            }
         }
     }
 }

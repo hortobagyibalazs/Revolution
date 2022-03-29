@@ -6,5 +6,6 @@ namespace Revolution.ECS.Components
     public class RenderComponent : Component
     {
         public virtual FrameworkElement Renderable { get; set; }
+        public virtual int ZIndex { get; set; } = int.MinValue;
     }
 }
