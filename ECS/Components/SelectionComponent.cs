@@ -38,7 +38,7 @@ namespace Revolution.ECS.Components
             Renderable = new Border()
             {
                 BorderBrush = new SolidColorBrush(System.Windows.Media.Brushes.Yellow.Color),
-                BorderThickness = new System.Windows.Thickness(2),
+                BorderThickness = new System.Windows.Thickness(1),
             };
             ZIndex = 0;
             OnPropertyChanged();
