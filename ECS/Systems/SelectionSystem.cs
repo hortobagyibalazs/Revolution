@@ -3,10 +3,13 @@ using Revolution.ECS.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Revolution.ECS.Systems
 {
@@ -15,38 +18,113 @@ namespace Revolution.ECS.Systems
         private Canvas Canvas;
         private ScrollViewer ScrollViewer;
 
+        private Border SelectionRect;
+        private bool Dragging;
+        private Point? DragStart;
+
         public SelectionSystem(Canvas canvas, ScrollViewer scrollViewer)
         {
             Canvas = canvas;
             ScrollViewer = scrollViewer;
+
+            SelectionRect = new Border()
+            {
+                BorderThickness = new System.Windows.Thickness(1),
+                BorderBrush = new SolidColorBrush(Brushes.WhiteSmoke.Color),
+                Visibility = Visibility.Hidden
+            };
+            canvas.Children.Add(SelectionRect);
         }
 
         public void Update(int deltaMs)
         {
-            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            if (!Dragging && Mouse.LeftButton == MouseButtonState.Pressed)
             {
-                var mousePos = Mouse.GetPosition(ScrollViewer);
-                var cursorX = (int)(mousePos.X + ScrollViewer.HorizontalOffset);
-                var cursorY = (int)(mousePos.Y + ScrollViewer.VerticalOffset);
-
-                // TODO : Make it so that only one entity can be selected at a time
-                foreach (var entity in EntityManager.GetEntities())
+                Dragging = true;
+                DragStart = Mouse.GetPosition(Canvas);
+                SelectionRect.Visibility = System.Windows.Visibility.Visible;
+            } 
+            else if (Dragging && Mouse.LeftButton == MouseButtonState.Released)
+            {
+                if (Dragging)
                 {
-                    var selectionComp = entity.GetComponent<SelectionComponent>();
-                    var posComp = entity.GetComponent<PositionComponent>();
-                    var sizeComp = entity.GetComponent<SizeComponent>();
-                    if (selectionComp != null && posComp != null && sizeComp != null)
+                    SelectEntities((Point)DragStart, Mouse.GetPosition(Canvas));
+                }
+                Dragging = false;
+                DragStart = null;
+                SelectionRect.Visibility = System.Windows.Visibility.Hidden;
+            }
+
+            if (Dragging)
+            {
+                var startX = DragStart.Value.X;
+                var startY = DragStart.Value.Y;
+
+                var cursorPos = Mouse.GetPosition(Canvas);
+                var endX = cursorPos.X;
+                var endY = cursorPos.Y;
+
+                if (startX > endX)
+                {
+                    double tmp = startX;
+                    startX = endX;
+                    endX = tmp;
+                }
+
+                if (startY > endY)
+                {
+                    double tmp = startY;
+                    startY = endY;
+                    endY = tmp;
+                }
+
+                Canvas.SetLeft(SelectionRect, startX);
+                Canvas.SetTop(SelectionRect, startY);
+                SelectionRect.Width = endX - startX;
+                SelectionRect.Height = endY - startY;
+            }
+        }
+
+        private void SelectEntities(Point dragStart, Point dragEnd)
+        {
+            var startX = dragStart.X;
+            var startY = dragStart.Y;
+
+            var endX = dragEnd.X;
+            var endY = dragEnd.Y;
+
+            if (startX > endX)
+            {
+                double tmp = startX;
+                startX = endX;
+                endX = tmp;
+            }
+
+            if (startY > endY)
+            {
+                double tmp = startY;
+                startY = endY;
+                endY = tmp;
+            }
+
+            Rect selectionRect = new Rect((int) startX, (int) startY, (int) (endX - startX), (int) (endY - startY));
+
+            foreach (var entity in EntityManager.GetEntities())
+            {
+                var selectionComp = entity.GetComponent<SelectionComponent>();
+                var posComp = entity.GetComponent<PositionComponent>();
+                var sizeComp = entity.GetComponent<SizeComponent>();
+                if (selectionComp != null && posComp != null && sizeComp != null)
+                {
+
+                    Rect entityRect = new Rect(posComp.X, posComp.Y, sizeComp.Width, sizeComp.Height);
+                    if (selectionRect.IntersectsWith(entityRect))
                     {
-                        if (posComp.X <= cursorX && posComp.X + sizeComp.Width >= cursorX 
-                            && posComp.Y <= cursorY && posComp.Y + sizeComp.Height >= cursorY)
-                        {
-                            // Clicked on entity
-                            selectionComp.Selected = true;
-                        }
-                        else
-                        {
-                            selectionComp.Selected = false;
-                        }
+                        selectionComp.Selected = true;
+                    }
+                    else
+                    {
+                        selectionComp.Selected = false;
                     }
                 }
             }
