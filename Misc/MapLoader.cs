@@ -25,30 +25,58 @@ namespace Revolution.IO
         public static MapData LoadFromFile(string tilesetPath, string tileMapPath)
         {
             var map = new TmxMap(tileMapPath);
-            //var bitmap = new BitmapImage(new Uri(tilesetPath, UriKind.Relative));
+
+            //GlobalConfig.TileSize = map.TileWidth;
+
+            IDictionary<TmxTileset, BitmapImage> bitmaps = new Dictionary<TmxTileset, BitmapImage>();
+            foreach (var tileset in map.Tilesets)
+            {
+                bitmaps[tileset] = new BitmapImage(new Uri(@tilesetPath + tileset.Image.Source, UriKind.Relative));
+            }
 
             var mapData = new MapData(new Vector2(map.Width, map.Height));
-            
+            int tilesInRow = 8;
+
             foreach (var layer in map.Layers)
             {
-                int tilesInRow = 16;
                 foreach (var tile in layer.Tiles)
                 {
+                    
                     int gid = tile.Gid;
-                    var bitmap = new BitmapImage(new Uri(@"Assets\Images\" + gid + ".png", UriKind.Relative));
-                    // Crop sprite from spritesheet
-                    /*var croppedBitmap = new CroppedBitmap(bitmap,
-                        new Int32Rect((gid % tilesInRow - 1) * map.TileWidth, (gid / tilesInRow) * map.TileHeight,
-                            map.TileWidth, map.TileHeight));*/
-                    
-                    var tileEntity = EntityManager.CreateEntity<Tile>();
-                    var mapObjectComp = tileEntity.GetComponent<GameMapObjectComponent>();
-                    
-                    (tileEntity.GetComponent<RenderComponent>().Renderable as Image).Source = bitmap;
-                    mapObjectComp.X = tile.X;
-                    mapObjectComp.Y = tile.Y;
+                    // Find tileset for tile
+                    var tileset = GetTilesetForGid(map.Tilesets, tile.Gid);
+                    if (tileset == null) continue;
+                    int actualGid = gid - tileset.FirstGid + 1;
+                    Debug.WriteLine($"{actualGid} GID from {tileset.Name}");
 
-                    mapData.Entities[tile.X, tile.Y] = tileEntity.Id;
+                    try
+                    {
+                        int startX = (actualGid % tilesInRow - 1) * map.TileWidth;
+                        int startY = (actualGid / tilesInRow) * map.TileHeight;
+                        if (actualGid % tilesInRow == 0)
+                        {
+                            startX = (tilesInRow - 1) * map.TileWidth;
+                            startY -= map.TileHeight;
+                            ;
+                        }
+
+                        var cropRect = new Int32Rect(startX, startY, map.TileWidth, map.TileHeight);
+                        var croppedBitmap = new CroppedBitmap(bitmaps[tileset], cropRect);
+
+                        var tileEntity = EntityManager.CreateEntity<Tile>();
+                        var mapObjectComp = tileEntity.GetComponent<GameMapObjectComponent>();
+
+                        (tileEntity.GetComponent<RenderComponent>().Renderable as Image).Source = croppedBitmap;
+                        mapObjectComp.X = tile.X;
+                        mapObjectComp.Y = tile.Y;
+
+                        mapData.Entities[tile.X, tile.Y] = tileEntity.Id;
+
+                    } 
+                    catch 
+                    {
+                         
+                    }
                 }
             }
 
@@ -63,6 +91,30 @@ namespace Revolution.IO
             }
 
             tiles.Clear();
+        }
+
+        private static TmxTileset GetTilesetForGid(TmxList<TmxTileset> tilesets, int gid)
+        {
+            int lastFirstGid = -1;
+            TmxTileset lastTileset = null;
+            foreach(var tileset in tilesets)
+            {
+                if (tileset.FirstGid == gid)
+                {
+                    return tileset;
+                }
+                else if (tileset.FirstGid > gid)
+                {
+                    return lastTileset;
+                }
+                else
+                {
+                    lastFirstGid = tileset.FirstGid;
+                    lastTileset = tileset;
+                }
+            }
+
+            return null;
         }
     }
 }

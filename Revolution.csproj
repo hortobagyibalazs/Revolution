@@ -7,11 +7,19 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="Assets\bgd_dirt.tsx" />
+		<None Remove="Assets\bgd_grass.tsx" />
+		<None Remove="Assets\bgd_trees.tsx" />
+		<None Remove="Assets\bgd_water.tsx" />
 		<None Remove="Assets\game_bg.jpg" />
 		<None Remove="Assets\grass.png" />
 		<None Remove="Assets\house.png" />
 		<None Remove="Assets\Images\35.png" />
 		<None Remove="Assets\Images\94.png" />
+		<None Remove="Assets\Images\bgd_dirt.png" />
+		<None Remove="Assets\Images\bgd_grass.png" />
+		<None Remove="Assets\Images\bgd_trees.png" />
+		<None Remove="Assets\Images\bgd_water.png" />
 		<None Remove="Assets\menu_bg.png" />
 		<None Remove="Assets\test.png" />
 		<None Remove="Assets\test.tmx" />
@@ -22,6 +30,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Content Include="Assets\bgd_dirt.tsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\bgd_grass.tsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\bgd_trees.tsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\bgd_water.tsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Assets\game_bg.jpg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
@@ -37,19 +57,22 @@
 		<Content Include="Assets\Images\94.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Assets\Images\bgd_grass.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\bgd_dirt.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\bgd_trees.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\bgd_water.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Assets\menu_bg.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Assets\test.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 		<Content Include="Assets\test.tmx">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Assets\Test.tsx">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Assets\tileset.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\town_center.png">
