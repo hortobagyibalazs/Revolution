@@ -19,6 +19,7 @@
 		<None Remove="Assets\Images\bgd_trees.png" />
 		<None Remove="Assets\Images\bgd_water.png" />
 		<None Remove="Assets\menu_bg.png" />
+		<None Remove="Assets\spr_gui_bar.png" />
 		<None Remove="Assets\test.png" />
 		<None Remove="Assets\test.tmx" />
 		<None Remove="Assets\Test.tsx" />
@@ -63,6 +64,9 @@
 		</Content>
 		<Content Include="Assets\menu_bg.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\spr_gui_bar.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\test.tmx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>

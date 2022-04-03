@@ -5,15 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Revolution" Height="600" Width="920">
     
-    <ScrollViewer 
-        x:Name="CanvasViewer" 
-        HorizontalScrollBarVisibility="Hidden"
-        VerticalScrollBarVisibility="Hidden">
-        
-        <Canvas x:Name="MainCanvas"
-                IsHitTestVisible="False">
-        </Canvas>
-    </ScrollViewer>
+    <Grid x:Name="Root"
+            IsHitTestVisible="False">
+    </Grid>
 </Window>

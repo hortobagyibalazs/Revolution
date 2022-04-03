@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Revolution.ECS.Components;
@@ -10,14 +11,16 @@ namespace Revolution.ECS.Systems
 {
     public class CameraSystem : ISystem
     {
-        private ScrollViewer scrollViewer;
+        private readonly ScrollViewer scrollViewer;
         private readonly Canvas canvas;
+
+        private FrameworkElement root;
         
         public int CameraSpeed { get; set; }
         public int BorderDistance { get; set; }
         public bool KeyboardControlsEnabled { get; set; }
 
-        public CameraSystem(ScrollViewer canvasViewer, Canvas mainCanvas)
+        public CameraSystem(ScrollViewer canvasViewer, Canvas mainCanvas, FrameworkElement root)
         {
             scrollViewer = canvasViewer;
             canvas = mainCanvas;
@@ -25,6 +28,8 @@ namespace Revolution.ECS.Systems
             CameraSpeed = GlobalConfig.TileSize / 4;
             BorderDistance = 30;
             KeyboardControlsEnabled = false;
+
+            this.root = root;
         }
 
 
@@ -69,6 +74,8 @@ namespace Revolution.ECS.Systems
                         cameraComp.SnapTo(cameraComp.X, newY);
                     }
 
+                    Debug.WriteLine($"X: {newX}  Y: {newY}");
+
                     scrollViewer.ScrollToHorizontalOffset(cameraComp.X);
                     scrollViewer.ScrollToVerticalOffset(cameraComp.Y);
 
@@ -80,7 +87,8 @@ namespace Revolution.ECS.Systems
         private bool MouseInsideBounds()
         {
             // NOTE : Doesn't work for some reason
-            return scrollViewer.IsMouseOver;
+            //return root.IsMouseDirectlyOver;
+            return true;
         }
 
         private bool MouseInUpperSegment()

@@ -7,7 +7,7 @@ namespace Revolution.Scenes
     {
         SceneManager? Manager { get; protected internal set; }
 
-        Canvas Canvas { get; }
+        Control Content { get; }
         
         void OnEnter();
         void OnPause();
