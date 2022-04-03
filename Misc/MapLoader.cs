@@ -58,6 +58,7 @@ namespace Revolution.IO
 
                         var cropRect = new Int32Rect(startX, startY, map.TileWidth, map.TileHeight);
                         var croppedBitmap = new CroppedBitmap(bitmaps[tileset], cropRect);
+                        croppedBitmap.Freeze();
 
                         var tileEntity = EntityManager.CreateEntity<Tile>();
                         var mapObjectComp = tileEntity.GetComponent<GameMapObjectComponent>();
