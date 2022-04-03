@@ -26,8 +26,6 @@ namespace Revolution.IO
         {
             var map = new TmxMap(tileMapPath);
 
-            //GlobalConfig.TileSize = map.TileWidth;
-
             IDictionary<TmxTileset, BitmapImage> bitmaps = new Dictionary<TmxTileset, BitmapImage>();
             foreach (var tileset in map.Tilesets)
             {
@@ -47,7 +45,6 @@ namespace Revolution.IO
                     var tileset = GetTilesetForGid(map.Tilesets, tile.Gid);
                     if (tileset == null) continue;
                     int actualGid = gid - tileset.FirstGid + 1;
-                    Debug.WriteLine($"{actualGid} GID from {tileset.Name}");
 
                     try
                     {
@@ -57,7 +54,6 @@ namespace Revolution.IO
                         {
                             startX = (tilesInRow - 1) * map.TileWidth;
                             startY -= map.TileHeight;
-                            ;
                         }
 
                         var cropRect = new Int32Rect(startX, startY, map.TileWidth, map.TileHeight);
