@@ -60,6 +60,8 @@ namespace Revolution.Scenes
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / fps);
             timer.Tick += UpdateSystems;
 
+            var mapData = MapLoader.LoadFromFile(@"", @"Assets\test.tmx");
+
             // Setup entity-component system
             systemManager = new SystemManager();
             systemManager.RegisterSystem(new RenderSystem(canvas));
@@ -67,13 +69,13 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new BuildingSystem(scrollViewer));
             systemManager.RegisterSystem(new MovementSystem());
             systemManager.RegisterSystem(new SelectionSystem(canvas, scrollViewer));
+            systemManager.RegisterSystem(new MinimapSystem(contentHolder.Minimap, mapData));
 
             // Start timer
             lastUpdate = Environment.TickCount;
             timer.Start();
 
             EntityManager.CreateEntity<Camera>();
-            var mapData = MapLoader.LoadFromFile(@"", @"Assets\test.tmx");
             canvas.Width = mapData.Dimension.X * GlobalConfig.TileSize;
             canvas.Height = mapData.Dimension.Y * GlobalConfig.TileSize;
         }

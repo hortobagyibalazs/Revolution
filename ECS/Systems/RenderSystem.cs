@@ -13,12 +13,12 @@ namespace Revolution.ECS.Systems
     public class RenderSystem : ISystem
     {
         private Canvas canvas;
-        private HashSet<FrameworkElement> entities;
+        private HashSet<FrameworkElement> renderables; // FrameworkElements currently added to the canvas
 
         public RenderSystem(Canvas canvas)
         {
             this.canvas = canvas;
-            this.entities = new HashSet<FrameworkElement>();
+            this.renderables = new HashSet<FrameworkElement>();
         }
 
         public void Update(int deltaMs)
@@ -27,11 +27,6 @@ namespace Revolution.ECS.Systems
             {
                 var posComp = entity.GetComponent<PositionComponent>();
                 var sizeComp = entity.GetComponent<SizeComponent>();
-
-                if (entity is Villager)
-                {
-                    Console.WriteLine("asd");
-                }
             
                 if (posComp != null && sizeComp != null)
                 {
@@ -44,7 +39,7 @@ namespace Revolution.ECS.Systems
                             var renderComp = (RenderComponent)component;
                             var renderable = renderComp.Renderable;
 
-                            if (!entities.Contains(renderable))
+                            if (!renderables.Contains(renderable))
                             {
                                 renderable.Width = sizeComp.Width;
                                 renderable.Height = sizeComp.Height;
@@ -54,7 +49,7 @@ namespace Revolution.ECS.Systems
                                 Canvas.SetTop(renderable, posComp.Y);
                                 Panel.SetZIndex(renderable, renderComp.ZIndex);
 
-                                entities.Add(renderable);
+                                renderables.Add(renderable);
                                 entity.DestroyEvent += OnEntityDestroyed;
                             }
                         }
@@ -74,7 +69,8 @@ namespace Revolution.ECS.Systems
                             componentType.IsSubclassOf(typeof(RenderComponent)))
                 {
                     var renderComp = (RenderComponent)(comp);
-                    entities.Remove(renderComp.Renderable);
+                    renderables.Remove(renderComp.Renderable);
+                    canvas.Children.Remove(renderComp.Renderable);
                 }
             }
         }

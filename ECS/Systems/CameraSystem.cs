@@ -25,7 +25,7 @@ namespace Revolution.ECS.Systems
             scrollViewer = canvasViewer;
             canvas = mainCanvas;
 
-            CameraSpeed = GlobalConfig.TileSize / 4;
+            CameraSpeed = GlobalConfig.TileSize / 2;
             BorderDistance = 30;
             KeyboardControlsEnabled = false;
 

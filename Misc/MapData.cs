@@ -1,3 +1,5 @@
+using Revolution.ECS.Entities;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace Revolution.IO
@@ -9,12 +11,12 @@ namespace Revolution.IO
         /**
          * Stores entities based on X, Y coordinates
          */
-        public int[,] Entities { get; }
+        public LinkedList<Entity>[,] Entities { get; }
 
         public MapData(Vector2 size)
         {
             Dimension = size;
-            Entities = new int[(int) size.X, (int) size.Y];
+            Entities = new LinkedList<Entity>[(int) size.X, (int) size.Y];
         }
     }
 }

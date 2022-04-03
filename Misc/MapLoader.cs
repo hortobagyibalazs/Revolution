@@ -67,8 +67,24 @@ namespace Revolution.IO
                         mapObjectComp.X = tile.X;
                         mapObjectComp.Y = tile.Y;
 
-                        mapData.Entities[tile.X, tile.Y] = tileEntity.Id;
-
+                        System.Windows.Media.SolidColorBrush brush = System.Windows.Media.Brushes.Yellow;
+                        if (tileset.Name == "bgd_dirt")
+                        {
+                            brush = System.Windows.Media.Brushes.Brown;
+                        }
+                        else if (tileset.Name == "bgd_water")
+                        {
+                            brush = System.Windows.Media.Brushes.MediumBlue;
+                        }
+                        else if (tileset.Name == "bgd_grass")
+                        {
+                            brush = System.Windows.Media.Brushes.ForestGreen;
+                        }
+                        else if (tileset.Name == "bgd_trees")
+                        {
+                            brush = System.Windows.Media.Brushes.DarkGreen;
+                        }
+                        (tileEntity.GetComponent<MinimapComponent>()).Background = brush;
                     } 
                     catch 
                     {

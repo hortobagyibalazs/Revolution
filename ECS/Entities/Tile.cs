@@ -13,6 +13,7 @@ namespace Revolution.ECS.Entities
             var sizeComp = new SizeComponent();
             var posComp = new PositionComponent();
             var mapObjectComp = new GameMapObjectComponent();
+            var minimapComp = new MinimapComponent();
             
             sizeComp.PropertyChanged += delegate
             {
@@ -41,6 +42,7 @@ namespace Revolution.ECS.Entities
             AddComponent(sizeComp);
             AddComponent(renderComp);
             AddComponent(mapObjectComp);
+            AddComponent(minimapComp);
         }
     }
 }

@@ -7,14 +7,36 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ScrollViewer x:Name="CanvasViewer" DockPanel.Dock="Top" Panel.ZIndex="0"
-            Grid.Row="0" HorizontalScrollBarVisibility="Hidden" 
+        <ScrollViewer x:Name="CanvasViewer"
+            HorizontalScrollBarVisibility="Hidden" 
             VerticalScrollBarVisibility="Hidden">
             <Canvas x:Name="MainCanvas"/>
         </ScrollViewer>
 
         <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center">
-            <Image Source="/Assets/spr_gui_bar.png" Panel.ZIndex="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="30,0,30,0"/>            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="1"
+                Source="/Assets/spr_gui_bar.png"/>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="17*"/>
+                    <ColumnDefinition Width="59*"/>
+                    <ColumnDefinition Width="452*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="59*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <Canvas x:Name="Minimap" Grid.Column="1" Grid.Row="1"/>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>
