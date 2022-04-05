@@ -5,22 +5,20 @@ namespace Revolution.ECS.Components
 {
     public class CollisionComponent : Component
     {
-        private SizeComponent _sizeComponent;
-        private PositionComponent _positionComponent;
+        private GameMapObjectComponent _mapObjectComp;
 
-        public CollisionComponent(SizeComponent sizeComponent, PositionComponent positionComponent)
+        public CollisionComponent(GameMapObjectComponent mapObjectComponent)
         {
-            _sizeComponent = sizeComponent;
-            _positionComponent = positionComponent;
+            _mapObjectComp = mapObjectComponent;
         }
 
         public bool CollidesWith(CollisionComponent component)
         {
             return 
-                new Rect(_positionComponent.X, _positionComponent.Y, _sizeComponent.Width, _sizeComponent.Height)
+                new Rect(_mapObjectComp.X, _mapObjectComp.Y, _mapObjectComp.Width, _mapObjectComp.Height)
                 .IntersectsWith(
-                    new Rect(component._positionComponent.X, component._positionComponent.Y,
-                        component._sizeComponent.Width, component._sizeComponent.Height)
+                    new Rect(component._mapObjectComp.X, component._mapObjectComp.Y,
+                        component._mapObjectComp.Width, component._mapObjectComp.Height)
                 );
         }
     }
