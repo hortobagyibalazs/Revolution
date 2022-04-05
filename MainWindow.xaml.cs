@@ -29,6 +29,10 @@ namespace WpfApp
         {
             InitializeComponent();
 
+            // Start in full screen
+            WindowState = WindowState.Maximized;
+            WindowStyle = WindowStyle.None;
+
             // Setup scene management
             sceneManager = new SceneManager();
 
