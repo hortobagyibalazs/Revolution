@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Revolution.ECS.Systems
@@ -15,13 +16,14 @@ namespace Revolution.ECS.Systems
     public class MinimapSystem : ISystem
     {
         private Canvas minimapCanvas;
-        private IDictionary<Entity, FrameworkElement> renderables; // FrameworkElements currently added to the canvas
         private MapData mapData;
+
+        private RenderTargetBitmap bitmap = null;
+        private Image tileMapImage = null;
 
         public MinimapSystem(Canvas minimap, MapData mapData)
         {
             minimapCanvas = minimap;
-            renderables = new Dictionary<Entity, FrameworkElement>();
             this.mapData = mapData;
 
             minimap.SizeChanged += Minimap_SizeChanged;
@@ -29,12 +31,32 @@ namespace Revolution.ECS.Systems
 
         private void Minimap_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            renderables.Clear();
+            bitmap = null;
             minimapCanvas.Children.Clear();
         }
 
         public void Update(int deltaMs)
         {
+            DrawingVisual visual = null;
+            DrawingContext drawingContext = null;
+
+            if (bitmap == null && minimapCanvas.ActualWidth != double.NaN)
+            {
+                bitmap = new RenderTargetBitmap(
+                    (int) minimapCanvas.ActualWidth, (int)minimapCanvas.ActualHeight, 96, 96, PixelFormats.Pbgra32
+                );
+                var img = new Image();
+                img.Source = bitmap;
+                img.Width = minimapCanvas.ActualWidth;
+                img.Height = minimapCanvas.ActualHeight;
+                minimapCanvas.Children.Add(img);
+                Canvas.SetLeft(img, 0);
+                Canvas.SetTop(img, 0);
+
+                visual = new DrawingVisual();
+                drawingContext = visual.RenderOpen();
+            }
+
             foreach (var entity in EntityManager.GetEntities())
             {
                 var gameMapObjectComp = entity.GetComponent<GameMapObjectComponent>();
@@ -42,22 +64,22 @@ namespace Revolution.ECS.Systems
 
                 if (gameMapObjectComp != null && minimapComp != null)
                 {
-                    if (!renderables.ContainsKey(entity) && minimapCanvas.ActualWidth != double.NaN)
+                    if (drawingContext != null && minimapCanvas.ActualWidth != double.NaN)
                     {
-                        var lbl = new Label();  // blocks * (70px / 75bl)
-                        lbl.Width = gameMapObjectComp.Width * (minimapCanvas.ActualWidth / mapData.Dimension.X);
-                        lbl.Height = gameMapObjectComp.Height * (minimapCanvas.ActualHeight / mapData.Dimension.Y);
-                        lbl.Background = minimapComp.Background;
+                        double x = gameMapObjectComp.X * (minimapCanvas.ActualWidth / mapData.Dimension.X);
+                        double y = gameMapObjectComp.Y * (minimapCanvas.ActualHeight / mapData.Dimension.Y);
+                        double width = gameMapObjectComp.Width * (minimapCanvas.ActualWidth / mapData.Dimension.X);
+                        double height = gameMapObjectComp.Height * (minimapCanvas.ActualHeight / mapData.Dimension.Y);
 
-                        minimapCanvas.Children.Add(lbl);
-                        renderables.Add(entity, lbl);
-
-                        var x = gameMapObjectComp.X * (minimapCanvas.ActualWidth / mapData.Dimension.X);
-                        var y = gameMapObjectComp.Y * (minimapCanvas.ActualHeight / mapData.Dimension.Y);
-                        Canvas.SetLeft(lbl, x);
-                        Canvas.SetTop(lbl, y);
+                        drawingContext.DrawRectangle(minimapComp.Background, null, new Rect(x, y, width, height));
                     }
                 }
+            }
+
+            if (bitmap != null && visual != null && drawingContext != null)
+            {
+                drawingContext.Close();
+                bitmap.Render(visual);
             }
         }
 
@@ -65,9 +87,7 @@ namespace Revolution.ECS.Systems
         {
             // Remove from local cache to save space
             e.DestroyEvent -= OnEntityDestroyed;
-            var renderable = renderables[e];
-            renderables.Remove(e);
-            minimapCanvas.Children.Remove(renderable);
+            minimapCanvas.Children.Clear();
         }
     }
 }

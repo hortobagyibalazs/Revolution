@@ -67,6 +67,7 @@ namespace Revolution.IO
                         mapObjectComp.X = tile.X;
                         mapObjectComp.Y = tile.Y;
 
+                        // TODO : Clean up this part
                         System.Windows.Media.SolidColorBrush brush = System.Windows.Media.Brushes.Yellow;
                         if (tileset.Name == "bgd_dirt")
                         {
