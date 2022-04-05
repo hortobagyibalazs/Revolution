@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace Revolution.ECS.Systems
 {
@@ -18,15 +19,29 @@ namespace Revolution.ECS.Systems
         private Canvas minimapCanvas;
         private MapData mapData;
 
-        private RenderTargetBitmap bitmap = null;
-        private Image tileMapImage = null;
+        private Canvas gameCanvas;
+        private ScrollViewer scrollViewer;
 
-        public MinimapSystem(Canvas minimap, MapData mapData)
+        private RenderTargetBitmap bitmap = null;
+        private System.Windows.Controls.Image tileMapImage = null;
+
+        private Rectangle minimapRect;
+
+        public MinimapSystem(Canvas minimap, MapData mapData, Canvas gameCanvas, ScrollViewer canvasViewer)
         {
             minimapCanvas = minimap;
             this.mapData = mapData;
 
+            this.gameCanvas = gameCanvas;
+            this.scrollViewer = canvasViewer;
+
             minimap.SizeChanged += Minimap_SizeChanged;
+
+            minimapRect = new Rectangle()
+            {
+                Stroke = Brushes.Yellow,
+                StrokeThickness = 1
+            };
         }
 
         private void Minimap_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -42,16 +57,23 @@ namespace Revolution.ECS.Systems
 
             if (bitmap == null && minimapCanvas.ActualWidth != double.NaN)
             {
+                minimapRect.Width = (int) minimapCanvas.ActualWidth * (scrollViewer.ActualWidth / gameCanvas.ActualWidth);
+                minimapRect.Height = (int) minimapCanvas.ActualHeight * (scrollViewer.ActualHeight / gameCanvas.ActualHeight);
+
                 bitmap = new RenderTargetBitmap(
                     (int) minimapCanvas.ActualWidth, (int)minimapCanvas.ActualHeight, 96, 96, PixelFormats.Pbgra32
                 );
-                var img = new Image();
+                var img = new System.Windows.Controls.Image();
                 img.Source = bitmap;
                 img.Width = minimapCanvas.ActualWidth;
                 img.Height = minimapCanvas.ActualHeight;
+
                 minimapCanvas.Children.Add(img);
+                minimapCanvas.Children.Add(minimapRect);
+
                 Canvas.SetLeft(img, 0);
                 Canvas.SetTop(img, 0);
+                Canvas.SetZIndex(minimapRect, 1);
 
                 visual = new DrawingVisual();
                 drawingContext = visual.RenderOpen();
@@ -61,6 +83,8 @@ namespace Revolution.ECS.Systems
             {
                 var gameMapObjectComp = entity.GetComponent<GameMapObjectComponent>();
                 var minimapComp = entity.GetComponent<MinimapComponent>();
+
+                var cameraComp = entity.GetComponent<CameraComponent>();
 
                 if (gameMapObjectComp != null && minimapComp != null)
                 {
@@ -73,6 +97,13 @@ namespace Revolution.ECS.Systems
 
                         drawingContext.DrawRectangle(minimapComp.Background, null, new Rect(x, y, width, height));
                     }
+                }
+                else if (cameraComp != null)
+                {
+                    int x = (int)((cameraComp.X / gameCanvas.ActualWidth) * minimapCanvas.ActualWidth);
+                    int y = (int)((cameraComp.Y / gameCanvas.ActualHeight) * minimapCanvas.ActualHeight);
+                    Canvas.SetLeft(minimapRect, x);
+                    Canvas.SetTop(minimapRect, y);
                 }
             }
 

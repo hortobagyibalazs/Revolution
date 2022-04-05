@@ -14,7 +14,7 @@ namespace Revolution.ECS.Entities
             var posComp = new PositionComponent() { X = 512, Y = 576 };
             var spriteComp = new SpriteComponent() {Source = "Assets/villager.png"};
             var gameMapObjectComp = new GameMapObjectComponent();
-            var collisionComp = new CollisionComponent(sizeComp, posComp);
+            var collisionComp = new CollisionComponent(gameMapObjectComp);
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
             var selectionComp = new SelectionComponent();
 

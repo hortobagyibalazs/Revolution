@@ -69,7 +69,7 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new BuildingSystem(scrollViewer));
             systemManager.RegisterSystem(new MovementSystem());
             systemManager.RegisterSystem(new SelectionSystem(canvas, scrollViewer));
-            systemManager.RegisterSystem(new MinimapSystem(contentHolder.Minimap, mapData));
+            systemManager.RegisterSystem(new MinimapSystem(contentHolder.Minimap, mapData, canvas, scrollViewer));
 
             // Start timer
             lastUpdate = Environment.TickCount;
