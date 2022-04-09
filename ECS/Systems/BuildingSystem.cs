@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Revolution.ECS.Components;
@@ -65,6 +66,25 @@ namespace Revolution.ECS.Systems
                 entity.GetComponent<BuildingComponent>().State = BuildingState.Placing;
                 entity.GetComponent<GameMapObjectComponent>().X = GetGameObjectPosBasedOnCursorX();
                 entity.GetComponent<GameMapObjectComponent>().Y = GetGameObjectPosBasedOnCursorY();
+            }
+            else if (Keyboard.IsKeyDown (Key.V))
+            {
+                    var villager = EntityManager.CreateEntity<Villager>();
+                    var posComp = villager.GetComponent<PositionComponent>();
+                    var gmoComp = villager.GetComponent<GameMapObjectComponent>();
+
+                    posComp.X = (int)(Mouse.GetPosition(ScrollViewer).X + ScrollViewer.HorizontalOffset);
+                    posComp.Y = (int)(Mouse.GetPosition(ScrollViewer).Y + ScrollViewer.VerticalOffset);
+                    int startX = gmoComp.X - 1;
+                    int startY = gmoComp.Y - 1;
+
+
+                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 1, startY));
+                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 2, startY));
+                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 3, startY));
+                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 3, startY + 1));
+                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 3, startY + 2));
+                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 2, startY + 2));
             }
         }
 

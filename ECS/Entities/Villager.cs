@@ -12,8 +12,8 @@ namespace Revolution.ECS.Entities
         public Villager()
         {
             var sizeComp = new SizeComponent();
-            var posComp = new PositionComponent() { X = 512, Y = 576 };
-            var spriteComp = new SpriteComponent() {Source = new Uri(@"\Assets\villager.png", UriKind.Relative)};
+            var posComp = new PositionComponent();
+            var spriteComp = new SpriteComponent() {Source = new Uri(@"\Assets\villager.png", UriKind.Relative), ZIndex = 2};
             var gameMapObjectComp = new GameMapObjectComponent();
             var collisionComp = new CollisionComponent(gameMapObjectComp);
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
