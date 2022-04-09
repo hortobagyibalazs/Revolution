@@ -1,22 +1,28 @@
-using System;
-using System.ComponentModel;
-using System.Windows.Controls;
-using Revolution.ECS.Components;
+﻿using Revolution.ECS.Components;
 using Revolution.IO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Revolution.ECS.Entities
 {
-    public class TownCenter : Entity
+    public class Goldmine : Entity
     {
-        public TownCenter()
+        public Goldmine()
         {
-            var renderComp = new SpriteComponent() {Source = new Uri(@"\Assets\town_center.png", UriKind.Relative)};
+            var resourceComp = new ResourceComponent() { Gold = GlobalConfig.GOLD_MINE_SIZE };
+            var renderComp = new SpriteComponent() { Source = new Uri(@"\Assets\Images\spr_gold_mine.png", UriKind.Relative) };
             var posComp = new PositionComponent();
             var sizeComp = new SizeComponent();
             var mapObjectComp = new GameMapObjectComponent();
-            var buildingComponent = new BuildingComponent() { State = BuildingState.Placing};
             var collisionComp = new CollisionComponent(mapObjectComp);
-            
+            var minimapComp = new MinimapComponent() { Background = Brushes.Gray };
+
             sizeComp.PropertyChanged += delegate
             {
                 (renderComp.Renderable).Width = sizeComp.Width;
@@ -28,7 +34,7 @@ namespace Revolution.ECS.Entities
                 Canvas.SetLeft(renderComp.Renderable, posComp.X);
                 Canvas.SetTop(renderComp.Renderable, posComp.Y);
             };
-            
+
             mapObjectComp.PropertyChanged += delegate
             {
                 sizeComp.Width = mapObjectComp.Width * GlobalConfig.TileSize;
@@ -41,13 +47,14 @@ namespace Revolution.ECS.Entities
             mapObjectComp.Y = 1;
             mapObjectComp.Width = 3;
             mapObjectComp.Height = 3;
-            
+
             AddComponent(renderComp);
             AddComponent(posComp);
             AddComponent(sizeComp);
             AddComponent(mapObjectComp);
-            AddComponent(buildingComponent);
+            AddComponent(resourceComp);
             AddComponent(collisionComp);
+            AddComponent(minimapComp);
         }
     }
 }

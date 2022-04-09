@@ -3,15 +3,15 @@ using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Image = System.Windows.Controls.Image;
 
 namespace Revolution.ECS.Components
 {
     public class SpriteComponent : RenderComponent
     {
-        private System.Windows.Controls.Image img = new System.Windows.Controls.Image();
-
-        private string _src;
-        public string Source
+        private Image img;
+        private Uri _src;
+        public Uri Source
         {
             get => _src;
             set => SetSource(value);
@@ -19,13 +19,27 @@ namespace Revolution.ECS.Components
 
         public override FrameworkElement Renderable
         {
-            get => img;
+            get
+            {
+                return img;
+            }
         }
 
-        private void SetSource(string src)
+        public SpriteComponent()
+        {
+            img = new Image();
+        }
+
+        private void SetSource(Uri src)
         {
             _src = src;
-            img.Source = new BitmapImage(new Uri(src, UriKind.Relative));
+            var bitmap = new BitmapImage(src);
+            ((Image)Renderable).Source = bitmap;
+        }
+
+        public override Type ComponentType()
+        {
+            return typeof(RenderComponent);
         }
     }
 }

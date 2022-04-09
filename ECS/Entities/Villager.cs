@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -12,7 +13,7 @@ namespace Revolution.ECS.Entities
         {
             var sizeComp = new SizeComponent();
             var posComp = new PositionComponent() { X = 512, Y = 576 };
-            var spriteComp = new SpriteComponent() {Source = "Assets/villager.png"};
+            var spriteComp = new SpriteComponent() {Source = new Uri(@"\Assets\villager.png", UriKind.Relative)};
             var gameMapObjectComp = new GameMapObjectComponent();
             var collisionComp = new CollisionComponent(gameMapObjectComp);
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
