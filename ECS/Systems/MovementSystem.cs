@@ -11,21 +11,6 @@ namespace Revolution.ECS.Systems
     {
         public void Update(int deltaMs)
         {
-            if (Keyboard.IsKeyDown(Key.V))
-            {
-                var villager = EntityManager.CreateEntity<Villager>();
-                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(9, 9));
-                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(9, 10));
-                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(10, 10));
-                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(11, 10));
-                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(10, 10));
-                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(9, 10));
-                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(8, 10));
-                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(9, 10));
-                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(9, 9));
-                villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(8, 9));
-            }
-
             foreach (var entity in EntityManager.GetEntities())
             {
                 var movementComp = entity.GetComponent<MovementComponent>();
