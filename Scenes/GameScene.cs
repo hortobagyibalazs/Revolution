@@ -60,7 +60,7 @@ namespace Revolution.Scenes
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / fps);
             timer.Tick += UpdateSystems;
 
-            var mapData = MapLoader.LoadFromFile(@"", @"Assets\test.tmx");
+            var mapData = MapLoader.LoadFromFile(@"", @"Assets\map1.tmx");
 
             // Setup entity-component system
             systemManager = new SystemManager();

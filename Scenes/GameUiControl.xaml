@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
 
             <Image Grid.Row="1"
-                Source="/Assets/spr_gui_bar.png"/>
+                Source="/Assets/Images/spr_gui_bar.png"/>
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

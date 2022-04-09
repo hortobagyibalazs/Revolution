@@ -18,10 +18,152 @@
 		<None Remove="Assets\Images\bgd_grass.png" />
 		<None Remove="Assets\Images\bgd_trees.png" />
 		<None Remove="Assets\Images\bgd_water.png" />
+		<None Remove="Assets\Images\spr_archer_attacking\spr_archer_attacking_0.png" />
+		<None Remove="Assets\Images\spr_archer_attacking\spr_archer_attacking_1.png" />
+		<None Remove="Assets\Images\spr_archer_attacking\spr_archer_attacking_2.png" />
+		<None Remove="Assets\Images\spr_archer_attacking\spr_archer_attacking_3.png" />
+		<None Remove="Assets\Images\spr_archer_attacking_color\spr_archer_attacking_color_0.png" />
+		<None Remove="Assets\Images\spr_archer_attacking_color\spr_archer_attacking_color_1.png" />
+		<None Remove="Assets\Images\spr_archer_attacking_color\spr_archer_attacking_color_2.png" />
+		<None Remove="Assets\Images\spr_archer_attacking_color\spr_archer_attacking_color_3.png" />
+		<None Remove="Assets\Images\spr_archer_button.png" />
+		<None Remove="Assets\Images\spr_archer_death\spr_archer_death_0.png" />
+		<None Remove="Assets\Images\spr_archer_death\spr_archer_death_1.png" />
+		<None Remove="Assets\Images\spr_archer_death_color\spr_archer_death_color_0.png" />
+		<None Remove="Assets\Images\spr_archer_death_color\spr_archer_death_color_1.png" />
+		<None Remove="Assets\Images\spr_archer_portrait.png" />
+		<None Remove="Assets\Images\spr_archer_running\spr_archer_running_0.png" />
+		<None Remove="Assets\Images\spr_archer_running\spr_archer_running_1.png" />
+		<None Remove="Assets\Images\spr_archer_running\spr_archer_running_2.png" />
+		<None Remove="Assets\Images\spr_archer_running\spr_archer_running_3.png" />
+		<None Remove="Assets\Images\spr_archer_running_color\spr_archer_running_color_0.png" />
+		<None Remove="Assets\Images\spr_archer_running_color\spr_archer_running_color_1.png" />
+		<None Remove="Assets\Images\spr_archer_running_color\spr_archer_running_color_2.png" />
+		<None Remove="Assets\Images\spr_archer_running_color\spr_archer_running_color_3.png" />
+		<None Remove="Assets\Images\spr_archer_standing.png" />
+		<None Remove="Assets\Images\spr_archer_standing_color.png" />
+		<None Remove="Assets\Images\spr_arrow.png" />
+		<None Remove="Assets\Images\spr_attack_button.png" />
+		<None Remove="Assets\Images\spr_barracks.png" />
+		<None Remove="Assets\Images\spr_barracks_button.png" />
+		<None Remove="Assets\Images\spr_barracks_color.png" />
+		<None Remove="Assets\Images\spr_blacksmith_white.png" />
+		<None Remove="Assets\Images\spr_black_smith.png" />
+		<None Remove="Assets\Images\spr_black_smith_button.png" />
+		<None Remove="Assets\Images\spr_build_button.png" />
+		<None Remove="Assets\Images\spr_button\spr_button_0.png" />
+		<None Remove="Assets\Images\spr_button\spr_button_1.png" />
+		<None Remove="Assets\Images\spr_button_small\spr_button_small_0.png" />
+		<None Remove="Assets\Images\spr_button_small\spr_button_small_1.png" />
+		<None Remove="Assets\Images\spr_construction_site_GRIDx2.png" />
+		<None Remove="Assets\Images\spr_construction_site_GRIDx3.png" />
+		<None Remove="Assets\Images\spr_construction_site_GRIDx4.png" />
+		<None Remove="Assets\Images\spr_cursor.png" />
+		<None Remove="Assets\Images\spr_destroyed_building.png" />
+		<None Remove="Assets\Images\spr_farm.png" />
+		<None Remove="Assets\Images\spr_farm_button.png" />
+		<None Remove="Assets\Images\spr_farm_white.png" />
+		<None Remove="Assets\Images\spr_food_gui.png" />
+		<None Remove="Assets\Images\spr_footman_attacking\spr_footman_attacking_0.png" />
+		<None Remove="Assets\Images\spr_footman_attacking\spr_footman_attacking_1.png" />
+		<None Remove="Assets\Images\spr_footman_attacking\spr_footman_attacking_2.png" />
+		<None Remove="Assets\Images\spr_footman_attacking\spr_footman_attacking_3.png" />
+		<None Remove="Assets\Images\spr_footman_attacking_color\spr_footman_attacking_color_0.png" />
+		<None Remove="Assets\Images\spr_footman_attacking_color\spr_footman_attacking_color_1.png" />
+		<None Remove="Assets\Images\spr_footman_attacking_color\spr_footman_attacking_color_2.png" />
+		<None Remove="Assets\Images\spr_footman_attacking_color\spr_footman_attacking_color_3.png" />
+		<None Remove="Assets\Images\spr_footman_button.png" />
+		<None Remove="Assets\Images\spr_footman_death\spr_footman_death_0.png" />
+		<None Remove="Assets\Images\spr_footman_death\spr_footman_death_1.png" />
+		<None Remove="Assets\Images\spr_footman_death_color\spr_footman_death_color_0.png" />
+		<None Remove="Assets\Images\spr_footman_death_color\spr_footman_death_color_1.png" />
+		<None Remove="Assets\Images\spr_footman_portrait.png" />
+		<None Remove="Assets\Images\spr_footman_running\spr_footman_running_0.png" />
+		<None Remove="Assets\Images\spr_footman_running\spr_footman_running_1.png" />
+		<None Remove="Assets\Images\spr_footman_running\spr_footman_running_2.png" />
+		<None Remove="Assets\Images\spr_footman_running\spr_footman_running_3.png" />
+		<None Remove="Assets\Images\spr_footman_running_color\spr_footman_running_color_0.png" />
+		<None Remove="Assets\Images\spr_footman_running_color\spr_footman_running_color_1.png" />
+		<None Remove="Assets\Images\spr_footman_running_color\spr_footman_running_color_2.png" />
+		<None Remove="Assets\Images\spr_footman_running_color\spr_footman_running_color_3.png" />
+		<None Remove="Assets\Images\spr_footman_standing.png" />
+		<None Remove="Assets\Images\spr_footman_standing_color.png" />
+		<None Remove="Assets\Images\spr_gold_coin_gui.png" />
+		<None Remove="Assets\Images\spr_gold_mine.png" />
+		<None Remove="Assets\Images\spr_gui_bar.png" />
+		<None Remove="Assets\Images\spr_horizontal_bridge.png" />
+		<None Remove="Assets\Images\spr_inventory_slot.png" />
+		<None Remove="Assets\Images\spr_knight_attacking\spr_knight_attacking_0.png" />
+		<None Remove="Assets\Images\spr_knight_attacking\spr_knight_attacking_1.png" />
+		<None Remove="Assets\Images\spr_knight_attacking\spr_knight_attacking_2.png" />
+		<None Remove="Assets\Images\spr_knight_attacking\spr_knight_attacking_3.png" />
+		<None Remove="Assets\Images\spr_knight_attacking_color\spr_knight_attacking_color_0.png" />
+		<None Remove="Assets\Images\spr_knight_attacking_color\spr_knight_attacking_color_1.png" />
+		<None Remove="Assets\Images\spr_knight_attacking_color\spr_knight_attacking_color_2.png" />
+		<None Remove="Assets\Images\spr_knight_attacking_color\spr_knight_attacking_color_3.png" />
+		<None Remove="Assets\Images\spr_knight_button.png" />
+		<None Remove="Assets\Images\spr_knight_death\spr_knight_death_0.png" />
+		<None Remove="Assets\Images\spr_knight_death\spr_knight_death_1.png" />
+		<None Remove="Assets\Images\spr_knight_death\spr_knight_death_2.png" />
+		<None Remove="Assets\Images\spr_knight_death_color\spr_knight_death_color_0.png" />
+		<None Remove="Assets\Images\spr_knight_death_color\spr_knight_death_color_1.png" />
+		<None Remove="Assets\Images\spr_knight_death_color\spr_knight_death_color_2.png" />
+		<None Remove="Assets\Images\spr_knight_portrait.png" />
+		<None Remove="Assets\Images\spr_knight_running\spr_knight_running_0.png" />
+		<None Remove="Assets\Images\spr_knight_running\spr_knight_running_1.png" />
+		<None Remove="Assets\Images\spr_knight_running_color\spr_knight_running_color_0.png" />
+		<None Remove="Assets\Images\spr_knight_running_color\spr_knight_running_color_1.png" />
+		<None Remove="Assets\Images\spr_knight_standing.png" />
+		<None Remove="Assets\Images\spr_knight_standing_color.png" />
+		<None Remove="Assets\Images\spr_medium_horizontal_bridge.png" />
+		<None Remove="Assets\Images\spr_medium_vertical_bridge.png" />
+		<None Remove="Assets\Images\spr_move_button.png" />
+		<None Remove="Assets\Images\spr_parchment.png" />
+		<None Remove="Assets\Images\spr_peasant_button.png" />
+		<None Remove="Assets\Images\spr_peasant_death\spr_peasant_death_0.png" />
+		<None Remove="Assets\Images\spr_peasant_death\spr_peasant_death_1.png" />
+		<None Remove="Assets\Images\spr_peasant_death_color\spr_peasant_death_color_0.png" />
+		<None Remove="Assets\Images\spr_peasant_death_color\spr_peasant_death_color_1.png" />
+		<None Remove="Assets\Images\spr_peasant_portrait.png" />
+		<None Remove="Assets\Images\spr_peasant_running\spr_peasant_running_0.png" />
+		<None Remove="Assets\Images\spr_peasant_running\spr_peasant_running_1.png" />
+		<None Remove="Assets\Images\spr_peasant_running\spr_peasant_running_2.png" />
+		<None Remove="Assets\Images\spr_peasant_running\spr_peasant_running_3.png" />
+		<None Remove="Assets\Images\spr_peasant_running_color\spr_peasant_running_color_0.png" />
+		<None Remove="Assets\Images\spr_peasant_running_color\spr_peasant_running_color_1.png" />
+		<None Remove="Assets\Images\spr_peasant_running_color\spr_peasant_running_color_2.png" />
+		<None Remove="Assets\Images\spr_peasant_running_color\spr_peasant_running_color_3.png" />
+		<None Remove="Assets\Images\spr_peasant_standing.png" />
+		<None Remove="Assets\Images\spr_peasant_standing_color.png" />
+		<None Remove="Assets\Images\spr_rally_flag.png" />
+		<None Remove="Assets\Images\spr_rally_flag_white.png" />
+		<None Remove="Assets\Images\spr_small_button\spr_small_button_0.png" />
+		<None Remove="Assets\Images\spr_small_button\spr_small_button_1.png" />
+		<None Remove="Assets\Images\spr_small_vertical_bridge.png" />
+		<None Remove="Assets\Images\spr_stable.png" />
+		<None Remove="Assets\Images\spr_stable_button.png" />
+		<None Remove="Assets\Images\spr_stable_white.png" />
+		<None Remove="Assets\Images\spr_stop_button.png" />
+		<None Remove="Assets\Images\spr_target.png" />
+		<None Remove="Assets\Images\spr_tower.png" />
+		<None Remove="Assets\Images\spr_tower_button.png" />
+		<None Remove="Assets\Images\spr_tower_color.png" />
+		<None Remove="Assets\Images\spr_town_hall.png" />
+		<None Remove="Assets\Images\spr_town_hall_button.png" />
+		<None Remove="Assets\Images\spr_town_hall_white.png" />
+		<None Remove="Assets\Images\spr_train_archer_button.png" />
+		<None Remove="Assets\Images\spr_train_footman_button.png" />
+		<None Remove="Assets\Images\spr_tree_gui.png" />
+		<None Remove="Assets\Images\spr_upgrade_town_hall_button.png" />
+		<None Remove="Assets\Images\spr_vertical_bridge.png" />
+		<None Remove="Assets\Images\spr_x\spr_x_0.png" />
+		<None Remove="Assets\Images\spr_x\spr_x_1.png" />
+		<None Remove="Assets\Images\spr_x\spr_x_2.png" />
+		<None Remove="Assets\Images\spr_x\spr_x_3.png" />
+		<None Remove="Assets\map1.tmx" />
 		<None Remove="Assets\menu_bg.png" />
 		<None Remove="Assets\spr_gui_bar.png" />
 		<None Remove="Assets\test.png" />
-		<None Remove="Assets\test.tmx" />
 		<None Remove="Assets\Test.tsx" />
 		<None Remove="Assets\tileset.png" />
 		<None Remove="Assets\town_center.png" />
@@ -62,13 +204,436 @@
 		<Content Include="Assets\Images\bgd_water.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Assets\Images\spr_archer_attacking\spr_archer_attacking_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_attacking\spr_archer_attacking_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_attacking\spr_archer_attacking_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_attacking\spr_archer_attacking_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_attacking_color\spr_archer_attacking_color_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_attacking_color\spr_archer_attacking_color_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_attacking_color\spr_archer_attacking_color_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_attacking_color\spr_archer_attacking_color_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_death\spr_archer_death_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_death\spr_archer_death_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_death_color\spr_archer_death_color_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_death_color\spr_archer_death_color_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_portrait.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_running\spr_archer_running_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_running\spr_archer_running_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_running\spr_archer_running_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_running\spr_archer_running_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_running_color\spr_archer_running_color_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_running_color\spr_archer_running_color_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_running_color\spr_archer_running_color_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_running_color\spr_archer_running_color_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_standing.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_archer_standing_color.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_arrow.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_attack_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_barracks.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_barracks_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_barracks_color.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_blacksmith_white.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_black_smith.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_black_smith_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_build_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_button\spr_button_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_button\spr_button_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_button_small\spr_button_small_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_button_small\spr_button_small_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_construction_site_GRIDx2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_construction_site_GRIDx3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_construction_site_GRIDx4.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_cursor.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_destroyed_building.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_farm.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_farm_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_farm_white.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_food_gui.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_attacking\spr_footman_attacking_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_attacking\spr_footman_attacking_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_attacking\spr_footman_attacking_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_attacking\spr_footman_attacking_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_attacking_color\spr_footman_attacking_color_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_attacking_color\spr_footman_attacking_color_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_attacking_color\spr_footman_attacking_color_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_attacking_color\spr_footman_attacking_color_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_death\spr_footman_death_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_death\spr_footman_death_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_death_color\spr_footman_death_color_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_death_color\spr_footman_death_color_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_portrait.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_running\spr_footman_running_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_running\spr_footman_running_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_running\spr_footman_running_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_running\spr_footman_running_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_running_color\spr_footman_running_color_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_running_color\spr_footman_running_color_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_running_color\spr_footman_running_color_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_running_color\spr_footman_running_color_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_standing.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_footman_standing_color.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_gold_coin_gui.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_gold_mine.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_gui_bar.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_horizontal_bridge.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_inventory_slot.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_attacking\spr_knight_attacking_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_attacking\spr_knight_attacking_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_attacking\spr_knight_attacking_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_attacking\spr_knight_attacking_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_attacking_color\spr_knight_attacking_color_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_attacking_color\spr_knight_attacking_color_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_attacking_color\spr_knight_attacking_color_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_attacking_color\spr_knight_attacking_color_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_death\spr_knight_death_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_death\spr_knight_death_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_death\spr_knight_death_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_death_color\spr_knight_death_color_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_death_color\spr_knight_death_color_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_death_color\spr_knight_death_color_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_portrait.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_running\spr_knight_running_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_running\spr_knight_running_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_running_color\spr_knight_running_color_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_running_color\spr_knight_running_color_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_standing.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_knight_standing_color.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_medium_horizontal_bridge.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_medium_vertical_bridge.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_move_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_parchment.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_death\spr_peasant_death_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_death\spr_peasant_death_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_death_color\spr_peasant_death_color_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_death_color\spr_peasant_death_color_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_portrait.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_running\spr_peasant_running_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_running\spr_peasant_running_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_running\spr_peasant_running_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_running\spr_peasant_running_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_running_color\spr_peasant_running_color_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_running_color\spr_peasant_running_color_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_running_color\spr_peasant_running_color_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_running_color\spr_peasant_running_color_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_standing.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_standing_color.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_rally_flag.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_rally_flag_white.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_small_button\spr_small_button_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_small_button\spr_small_button_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_small_vertical_bridge.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_stable.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_stable_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_stable_white.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_stop_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_target.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_tower.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_tower_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_tower_color.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_town_hall.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_town_hall_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_town_hall_white.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_train_archer_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_train_footman_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_tree_gui.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_upgrade_town_hall_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_vertical_bridge.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_x\spr_x_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_x\spr_x_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_x\spr_x_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_x\spr_x_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Assets\menu_bg.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Assets\spr_gui_bar.png">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Assets\test.tmx">
+		<Content Include="Assets\map1.tmx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\town_center.png">

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -57,26 +58,7 @@ namespace Revolution.ECS.Systems
 
             if (bitmap == null && minimapCanvas.ActualWidth != double.NaN)
             {
-                minimapRect.Width = (int) minimapCanvas.ActualWidth * (scrollViewer.ActualWidth / gameCanvas.ActualWidth);
-                minimapRect.Height = (int) minimapCanvas.ActualHeight * (scrollViewer.ActualHeight / gameCanvas.ActualHeight);
-
-                bitmap = new RenderTargetBitmap(
-                    (int) minimapCanvas.ActualWidth, (int)minimapCanvas.ActualHeight, 96, 96, PixelFormats.Pbgra32
-                );
-                var img = new System.Windows.Controls.Image();
-                img.Source = bitmap;
-                img.Width = minimapCanvas.ActualWidth;
-                img.Height = minimapCanvas.ActualHeight;
-
-                minimapCanvas.Children.Add(img);
-                minimapCanvas.Children.Add(minimapRect);
-
-                Canvas.SetLeft(img, 0);
-                Canvas.SetTop(img, 0);
-                Canvas.SetZIndex(minimapRect, 1);
-
-                visual = new DrawingVisual();
-                drawingContext = visual.RenderOpen();
+                CreateMinimap(ref visual, ref drawingContext);
             }
 
             foreach (var entity in EntityManager.GetEntities())
@@ -100,10 +82,8 @@ namespace Revolution.ECS.Systems
                 }
                 else if (cameraComp != null)
                 {
-                    int x = (int)((cameraComp.X / gameCanvas.ActualWidth) * minimapCanvas.ActualWidth);
-                    int y = (int)((cameraComp.Y / gameCanvas.ActualHeight) * minimapCanvas.ActualHeight);
-                    Canvas.SetLeft(minimapRect, x);
-                    Canvas.SetTop(minimapRect, y);
+                    UpdateCameraPos(cameraComp);
+                    UpdateViewPortMarkerPos(cameraComp);
                 }
             }
 
@@ -114,11 +94,71 @@ namespace Revolution.ECS.Systems
             }
         }
 
-        private void OnEntityDestroyed(object? sender, Entity e)
+        private void CreateMinimap(ref DrawingVisual visual, ref DrawingContext drawingContext)
         {
-            // Remove from local cache to save space
-            e.DestroyEvent -= OnEntityDestroyed;
-            minimapCanvas.Children.Clear();
+            minimapRect.Width = (int)minimapCanvas.ActualWidth * (scrollViewer.ActualWidth / gameCanvas.ActualWidth);
+            minimapRect.Height = (int)minimapCanvas.ActualHeight * (scrollViewer.ActualHeight / gameCanvas.ActualHeight);
+
+            bitmap = new RenderTargetBitmap(
+                (int)minimapCanvas.ActualWidth, (int)minimapCanvas.ActualHeight, 96, 96, PixelFormats.Pbgra32
+            );
+            tileMapImage = new System.Windows.Controls.Image();
+            tileMapImage.Source = bitmap;
+            tileMapImage.Width = minimapCanvas.ActualWidth;
+            tileMapImage.Height = minimapCanvas.ActualHeight;
+
+            minimapCanvas.Children.Add(tileMapImage);
+            minimapCanvas.Children.Add(minimapRect);
+
+            Canvas.SetLeft(tileMapImage, 0);
+            Canvas.SetTop(tileMapImage, 0);
+            Canvas.SetZIndex(minimapRect, 1);
+
+            visual = new DrawingVisual();
+            drawingContext = visual.RenderOpen();
+        }
+
+        private void UpdateViewPortMarkerPos(CameraComponent cameraComp)
+        {
+            int x = (int)((cameraComp.X / gameCanvas.ActualWidth) * minimapCanvas.ActualWidth);
+            int y = (int)((cameraComp.Y / gameCanvas.ActualHeight) * minimapCanvas.ActualHeight);
+            Canvas.SetLeft(minimapRect, x);
+            Canvas.SetTop(minimapRect, y);
+        }
+
+        private void UpdateCameraPos(CameraComponent cameraComp)
+        {
+            // This is very buggy, should be rewritten with event handlers
+            return;
+
+            if (Mouse.LeftButton != MouseButtonState.Pressed) return;
+
+            var mousePos = Mouse.GetPosition(minimapCanvas);
+            int mouseX = (int) (mousePos.X - (minimapRect.ActualWidth / 2));
+            int mouseY = (int) (mousePos.Y - (minimapRect.ActualHeight / 2));
+
+            if (mouseX < 0)
+            {
+                mouseX = 0;
+            }
+            else if (mouseX > minimapCanvas.ActualWidth - minimapRect.ActualWidth)
+            {
+                mouseX = (int) (minimapCanvas.ActualWidth - minimapRect.ActualWidth);
+            }
+
+            if (mouseY < 0)
+            {
+                mouseY = 0;
+            }
+            else if (mouseY > minimapCanvas.ActualHeight - minimapRect.ActualHeight)
+            {
+                mouseY = (int) (minimapCanvas.ActualHeight - minimapRect.ActualHeight);
+            }
+
+            int cameraX = (int) ((mouseX / minimapCanvas.ActualWidth) * gameCanvas.ActualWidth);
+            int cameraY = (int) ((mouseY / minimapCanvas.ActualHeight) * gameCanvas.ActualHeight);
+
+            cameraComp.SnapTo(cameraX, cameraY);
         }
     }
 }
