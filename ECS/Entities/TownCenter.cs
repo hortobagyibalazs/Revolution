@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Windows.Controls;
 using Revolution.ECS.Components;
@@ -9,7 +10,7 @@ namespace Revolution.ECS.Entities
     {
         public TownCenter()
         {
-            var renderComp = new SpriteComponent() {Source = "Assets/town_center.png"};
+            var renderComp = new SpriteComponent() {Source = new Uri(@"\Assets\town_center.png", UriKind.Relative)};
             var posComp = new PositionComponent();
             var sizeComp = new SizeComponent();
             var mapObjectComp = new GameMapObjectComponent();

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml;
 using Revolution.ECS.Components;
@@ -35,8 +36,10 @@ namespace Revolution.IO
             var mapData = new MapData(new Vector2(map.Width, map.Height));
             int tilesInRow = 8;
 
+            int zIndex = -1;
             foreach (var layer in map.Layers)
             {
+                zIndex++;
                 foreach (var tile in layer.Tiles)
                 {
                     
@@ -56,36 +59,29 @@ namespace Revolution.IO
                             startY -= map.TileHeight;
                         }
 
-                        var cropRect = new Int32Rect(startX, startY, map.TileWidth, map.TileHeight);
+                        // TODO : Clean up this part ASAP
+                        var cropRect = new Int32Rect(startX, startY, tileset.TileWidth, tileset.TileHeight);
                         var croppedBitmap = new CroppedBitmap(bitmaps[tileset], cropRect);
                         croppedBitmap.Freeze();
 
-                        var tileEntity = EntityManager.CreateEntity<Tile>();
-                        var mapObjectComp = tileEntity.GetComponent<GameMapObjectComponent>();
+                        var entity = CreateEntity(tileset, gid);
+                        if (entity == null) continue;
+                        var mapObjectComp = entity.GetComponent<GameMapObjectComponent>();
 
-                        (tileEntity.GetComponent<RenderComponent>().Renderable as Image).Source = croppedBitmap;
+                        var renderComp = entity.GetComponent<RenderComponent>();
+                        if (renderComp != null)
+                        {
+                            (renderComp.Renderable as Image).Source = croppedBitmap;
+                            renderComp.ZIndex = zIndex;
+                        }
                         mapObjectComp.X = tile.X;
                         mapObjectComp.Y = tile.Y;
 
-                        // TODO : Clean up this part
-                        System.Windows.Media.SolidColorBrush brush = System.Windows.Media.Brushes.Yellow;
-                        if (tileset.Name == "bgd_dirt")
+                        if (entity is Tile)
                         {
-                            brush = System.Windows.Media.Brushes.Brown;
+                            System.Windows.Media.SolidColorBrush brush = GetMinimapColorForTile(tileset);
+                            entity.GetComponent<MinimapComponent>().Background = brush;
                         }
-                        else if (tileset.Name == "bgd_water")
-                        {
-                            brush = System.Windows.Media.Brushes.MediumBlue;
-                        }
-                        else if (tileset.Name == "bgd_grass")
-                        {
-                            brush = System.Windows.Media.Brushes.ForestGreen;
-                        }
-                        else if (tileset.Name == "bgd_trees")
-                        {
-                            brush = System.Windows.Media.Brushes.DarkGreen;
-                        }
-                        (tileEntity.GetComponent<MinimapComponent>()).Background = brush;
                     } 
                     catch 
                     {
@@ -129,6 +125,48 @@ namespace Revolution.IO
             }
 
             return null;
+        }
+
+        private static Entity CreateEntity(TmxTileset tileset, int gid)
+        {
+            Entity entity = null;
+            if (tileset.Name == "gold_mine")
+            {
+                entity = EntityManager.CreateEntity<Goldmine>();
+            }
+            else
+            {
+                entity = EntityManager.CreateEntity<Tile>();
+            }
+
+            return entity;
+        }
+
+        private static SolidColorBrush GetMinimapColorForTile(TmxTileset tileset)
+        {
+            var brush = System.Windows.Media.Brushes.Yellow;
+            if (tileset.Name == "bgd_dirt")
+            {
+                brush = System.Windows.Media.Brushes.Brown;
+            }
+            else if (tileset.Name == "bgd_water")
+            {
+                brush = System.Windows.Media.Brushes.MediumBlue;
+            }
+            else if (tileset.Name == "bgd_grass")
+            {
+                brush = System.Windows.Media.Brushes.ForestGreen;
+            }
+            else if (tileset.Name == "bgd_trees")
+            {
+                brush = System.Windows.Media.Brushes.DarkGreen;
+            }
+            else if (tileset.Name == "gold_mine")
+            {
+                brush = System.Windows.Media.Brushes.Yellow;
+            }
+
+            return brush;
         }
     }
 }

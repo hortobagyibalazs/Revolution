@@ -12,6 +12,7 @@
 		<None Remove="Assets\bgd_trees.tsx" />
 		<None Remove="Assets\bgd_water.tsx" />
 		<None Remove="Assets\game_bg.jpg" />
+		<None Remove="Assets\gold_mine.tsx" />
 		<None Remove="Assets\grass.png" />
 		<None Remove="Assets\house.png" />
 		<None Remove="Assets\Images\bgd_dirt.png" />
@@ -185,6 +186,9 @@
 		</Content>
 		<Content Include="Assets\game_bg.jpg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\gold_mine.tsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\grass.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>

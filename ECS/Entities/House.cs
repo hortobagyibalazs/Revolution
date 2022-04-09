@@ -1,5 +1,6 @@
 using Revolution.ECS.Components;
 using Revolution.IO;
+using System;
 using System.Windows.Controls;
 
 namespace Revolution.ECS.Entities
@@ -8,7 +9,7 @@ namespace Revolution.ECS.Entities
     {
         public House()
         {
-            var renderComp = new SpriteComponent() {Source = "Assets/house.png"};
+            var renderComp = new SpriteComponent() {Source = new Uri(@"\Assets\house.png", UriKind.Relative)};
             var posComp = new PositionComponent();
             var sizeComp = new SizeComponent();
             var mapObjectComp = new GameMapObjectComponent();
