@@ -9,12 +9,13 @@ namespace Revolution.ECS.Entities
     {
         public House()
         {
-            var renderComp = new SpriteComponent() {Source = new Uri(@"\Assets\house.png", UriKind.Relative)};
+            var renderComp = new SpriteComponent() {Source = new Uri(@"\Assets\Images\spr_farm.png", UriKind.Relative)};
             var posComp = new PositionComponent();
             var sizeComp = new SizeComponent();
             var mapObjectComp = new GameMapObjectComponent();
             var buildingComponent = new BuildingComponent() {State = BuildingState.Placing};
             var collisionComp = new CollisionComponent(mapObjectComp);
+            var selectionComp = new SelectionComponent(posComp, sizeComp);
             
             sizeComp.PropertyChanged += delegate
             {
@@ -47,6 +48,7 @@ namespace Revolution.ECS.Entities
             AddComponent(mapObjectComp);
             AddComponent(buildingComponent);
             AddComponent(collisionComp);
+            AddComponent(selectionComp);
         }
     }
 }

@@ -13,37 +13,31 @@ namespace Revolution.ECS.Entities
         {
             var sizeComp = new SizeComponent();
             var posComp = new PositionComponent();
-            var spriteComp = new SpriteComponent() {Source = new Uri(@"\Assets\villager.png", UriKind.Relative), ZIndex = 2};
+            var spriteComp = new SpriteComponent() { Source = new Uri(@"\Assets\villager.png", UriKind.Relative), ZIndex = 2 };
             var gameMapObjectComp = new GameMapObjectComponent();
             var collisionComp = new CollisionComponent(gameMapObjectComp);
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
-            var selectionComp = new SelectionComponent();
+            var selectionComp = new SelectionComponent(posComp, sizeComp);
 
             gameMapObjectComp.PropertyChanged += delegate
             {
                 sizeComp.Width = gameMapObjectComp.Width * GlobalConfig.TileSize;
                 sizeComp.Height = gameMapObjectComp.Height * GlobalConfig.TileSize;
             };
-            
+
             sizeComp.PropertyChanged += delegate
             {
                 (spriteComp.Renderable).Width = sizeComp.Width;
                 (spriteComp.Renderable).Height = sizeComp.Height;
-
-                selectionComp.Renderable.Width = sizeComp.Width;
-                selectionComp.Renderable.Height = sizeComp.Height;
             };
 
             posComp.PropertyChanged += delegate
             {
                 gameMapObjectComp.X = posComp.X / GlobalConfig.TileSize;
                 gameMapObjectComp.Y = posComp.Y / GlobalConfig.TileSize;
-                
+
                 Canvas.SetLeft(spriteComp.Renderable, posComp.X);
                 Canvas.SetTop(spriteComp.Renderable, posComp.Y);
-
-                Canvas.SetLeft(selectionComp.Renderable, posComp.X);
-                Canvas.SetTop(selectionComp.Renderable, posComp.Y);
             };
 
             gameMapObjectComp.Width = 1;

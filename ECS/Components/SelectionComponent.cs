@@ -33,8 +33,17 @@ namespace Revolution.ECS.Components
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public SelectionComponent()
+        private PositionComponent posComp;
+        private SizeComponent sizeComp;
+
+        public SelectionComponent(PositionComponent posComp, SizeComponent sizeComp)
         {
+            this.posComp = posComp;
+            this.sizeComp = sizeComp;
+
+            posComp.PropertyChanged += PosComp_PropertyChanged;
+            sizeComp.PropertyChanged += SizeComp_PropertyChanged;
+
             Renderable = new Border()
             {
                 BorderBrush = new SolidColorBrush(System.Windows.Media.Brushes.Yellow.Color),
@@ -42,6 +51,18 @@ namespace Revolution.ECS.Components
             };
             ZIndex = 0;
             OnPropertyChanged();
+        }
+
+        private void SizeComp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            Renderable.Width = sizeComp.Width;
+            Renderable.Height = sizeComp.Height;
+        }
+
+        private void PosComp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            Canvas.SetLeft(Renderable, posComp.X);
+            Canvas.SetTop(Renderable, posComp.Y);
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
