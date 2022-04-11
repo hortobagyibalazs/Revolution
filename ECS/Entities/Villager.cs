@@ -24,6 +24,7 @@ namespace Revolution.ECS.Entities
             var collisionComp = new CollisionComponent(gameMapObjectComp);
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
             var selectionComp = new SelectionComponent(posComp, sizeComp);
+            var directionComp = new DirectionComponent();
 
             spriteComp.CurrentFrame = VillagerSpriteFrame.Moving;
 
@@ -61,6 +62,7 @@ namespace Revolution.ECS.Entities
             AddComponent(collisionComp);
             AddComponent(movementComp);
             AddComponent(selectionComp);
+            AddComponent(directionComp);
         }
     }
 }

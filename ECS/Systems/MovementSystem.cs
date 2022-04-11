@@ -15,6 +15,8 @@ namespace Revolution.ECS.Systems
             {
                 var movementComp = entity.GetComponent<MovementComponent>();
                 var gameObjectComp = entity.GetComponent<GameMapObjectComponent>();
+                var directionComp = entity.GetComponent<DirectionComponent>();
+
                 if (movementComp != null && gameObjectComp != null)
                 {
                     if (movementComp.CurrentTarget != null)
@@ -22,12 +24,12 @@ namespace Revolution.ECS.Systems
                         if (((int) movementComp.CurrentTarget?.X == gameObjectComp.X) 
                             && ((int) movementComp.CurrentTarget?.Y == gameObjectComp.Y))
                         {
-                            SetNextDestination(movementComp, gameObjectComp);
+                            SetNextDestination(movementComp, gameObjectComp, directionComp);
                         }
                     }
                     else
                     {
-                        SetNextDestination(movementComp, gameObjectComp);
+                        SetNextDestination(movementComp, gameObjectComp, directionComp);
                     }
 
                     var collisionComp = entity.GetComponent<CollisionComponent>();
@@ -51,13 +53,13 @@ namespace Revolution.ECS.Systems
             }
         }
 
-        private void SetNextDestination(MovementComponent movementComp, GameMapObjectComponent gameObjectComp)
+        private void SetNextDestination(MovementComponent movementComp, GameMapObjectComponent gameObjectComp, DirectionComponent directionComp)
         {
             Vector2 nextDest;
             if (movementComp.Path.TryDequeue(out nextDest))
             {
                 movementComp.CurrentTarget = nextDest;
-                SetVelocity(nextDest, movementComp, gameObjectComp);
+                SetVelocity(nextDest, movementComp, gameObjectComp, directionComp);
             }
             else
             {
@@ -65,7 +67,7 @@ namespace Revolution.ECS.Systems
             }
         }
 
-        private void SetVelocity(Vector2 nextDest, MovementComponent movementComp, GameMapObjectComponent gameObjectComp)
+        private void SetVelocity(Vector2 nextDest, MovementComponent movementComp, GameMapObjectComponent gameObjectComp, DirectionComponent directionComp)
         {
             if (nextDest != null)
             {
@@ -99,6 +101,18 @@ namespace Revolution.ECS.Systems
                 else
                 {
                     movementComp.VelocityY = 0;
+                }
+
+                if (directionComp != null)
+                {
+                    if (movementComp.VelocityX > 0)
+                    {
+                        directionComp.Direction = Direction.Right;
+                    }
+                    else if (movementComp.VelocityX < 0)
+                    {
+                        directionComp.Direction = Direction.Left;
+                    }
                 }
             }
         }

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
@@ -27,6 +28,7 @@ namespace Revolution.ECS.Systems
             {
                 var posComp = entity.GetComponent<PositionComponent>();
                 var sizeComp = entity.GetComponent<SizeComponent>();
+                var directionComp = entity.GetComponent<DirectionComponent>();
             
                 if (posComp != null && sizeComp != null)
                 {
@@ -41,6 +43,14 @@ namespace Revolution.ECS.Systems
 
                             if (!renderables.Contains(renderable))
                             {
+                                if (directionComp != null)
+                                {
+                                    directionComp.PropertyChanged += delegate
+                                    {
+                                        ApplyRenderTransform(directionComp, renderable);
+                                    };
+                                }
+
                                 renderable.Width = sizeComp.Width;
                                 renderable.Height = sizeComp.Height;
 
@@ -50,12 +60,26 @@ namespace Revolution.ECS.Systems
                                 Panel.SetZIndex(renderable, renderComp.ZIndex);
 
                                 renderables.Add(renderable);
+                                ApplyRenderTransform(directionComp, renderable);
                                 entity.DestroyEvent += OnEntityDestroyed;
                             }
                         }
                     }
                 }
             }
+        }
+
+        private void ApplyRenderTransform(DirectionComponent directionComp, FrameworkElement renderable)
+        {
+            if (directionComp == null) return;
+
+            int scale = -1;
+            if (directionComp.Direction == Direction.Right)
+            {
+                scale = 1;
+            }
+
+            renderable.RenderTransform = new ScaleTransform() { ScaleX = scale, CenterX = renderable.ActualWidth / 2 };
         }
 
         private void OnEntityDestroyed(object? sender, Entity e)
