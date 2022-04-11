@@ -33,6 +33,7 @@ namespace Revolution.ECS.Systems
                 BorderBrush = new SolidColorBrush(Brushes.WhiteSmoke.Color),
                 Visibility = Visibility.Hidden
             };
+            Panel.SetZIndex(SelectionRect, int.MaxValue);
             canvas.Children.Add(SelectionRect);
         }
 

@@ -70,6 +70,7 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new MovementSystem());
             systemManager.RegisterSystem(new SelectionSystem(canvas, scrollViewer));
             systemManager.RegisterSystem(new MinimapSystem(contentHolder.Minimap, mapData, canvas, scrollViewer));
+            systemManager.RegisterSystem(new SpriteAnimationSystem());
 
             // Start timer
             lastUpdate = Environment.TickCount;
@@ -82,7 +83,6 @@ namespace Revolution.Scenes
 
         private void UpdateSystems(object? sender, EventArgs e)
         {
-            Debug.WriteLine("Update systems");
             // Update every system
             int deltaMs = (int)(Environment.TickCount - lastUpdate);
             lastUpdate = Environment.TickCount;

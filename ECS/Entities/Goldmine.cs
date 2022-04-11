@@ -22,6 +22,7 @@ namespace Revolution.ECS.Entities
             var mapObjectComp = new GameMapObjectComponent();
             var collisionComp = new CollisionComponent(mapObjectComp);
             var minimapComp = new MinimapComponent() { Background = Brushes.Gray };
+            var selectionComp = new SelectionComponent(posComp, sizeComp);
 
             sizeComp.PropertyChanged += delegate
             {
@@ -55,6 +56,7 @@ namespace Revolution.ECS.Entities
             AddComponent(resourceComp);
             AddComponent(collisionComp);
             AddComponent(minimapComp);
+            AddComponent(selectionComp);
         }
     }
 }

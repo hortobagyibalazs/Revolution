@@ -21,6 +21,11 @@ namespace Revolution.ECS.Entities
         public virtual void Destroy()
         {
             DestroyEvent?.Invoke(this, this);
+
+            foreach(var component in components.Values)
+            {
+                component.CleanUp();
+            }
         }
 
         public T? GetComponent<T>() where T : Component

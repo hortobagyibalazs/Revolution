@@ -9,5 +9,10 @@ namespace Revolution.ECS.Components
             var type = GetType();
             return type;
         }
+
+        public virtual void CleanUp()
+        {
+
+        }
     }
 }

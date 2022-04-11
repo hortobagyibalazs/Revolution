@@ -11,7 +11,7 @@ namespace Revolution.ECS.Components
     {
         private Image img;
         private Uri _src;
-        public Uri Source
+        public virtual Uri Source
         {
             get => _src;
             set => SetSource(value);
@@ -35,11 +35,6 @@ namespace Revolution.ECS.Components
             _src = src;
             var bitmap = new BitmapImage(src);
             ((Image)Renderable).Source = bitmap;
-        }
-
-        public override Type ComponentType()
-        {
-            return typeof(RenderComponent);
         }
     }
 }
