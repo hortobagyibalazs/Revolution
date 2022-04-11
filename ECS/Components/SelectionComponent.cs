@@ -77,5 +77,11 @@ namespace Revolution.ECS.Components
             }
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public override void CleanUp()
+        {
+            posComp.PropertyChanged -= PosComp_PropertyChanged;
+            sizeComp.PropertyChanged -= SizeComp_PropertyChanged;
+        }
     }
 }
