@@ -19,7 +19,12 @@ namespace Revolution.ECS.Components
         /**
          * Building is in its final form
          */
-        Built
+        Built,
+
+        /*
+         * This is a temporary state for displaying destroyed building sprite
+         */
+        Destroyed
     }
 
     public class BuildingComponent : Component, INotifyPropertyChanged
