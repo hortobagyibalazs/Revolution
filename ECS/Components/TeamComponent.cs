@@ -7,9 +7,9 @@ using System.Windows.Media;
 
 namespace Revolution.ECS.Components
 {
-    public class TeamComponent
+    public class TeamComponent : Component
     {
         public int TeamId { get; set; }
-        public Brushes TeamColor { get; set; }
+        public SolidColorBrush TeamColor { get; set; }
     }
 }

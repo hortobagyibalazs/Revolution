@@ -79,7 +79,11 @@ namespace Revolution.ECS.Systems
                 scale = 1;
             }
 
-            renderable.RenderTransform = new ScaleTransform() { ScaleX = scale, CenterX = renderable.ActualWidth / 2 };
+            renderable.RenderTransform = new ScaleTransform() 
+            { 
+                ScaleX = scale, 
+                CenterX = renderable.ActualWidth / 2 
+            };
         }
 
         private void OnEntityDestroyed(object? sender, Entity e)

@@ -2,6 +2,7 @@ using Revolution.ECS.Components;
 using Revolution.IO;
 using System;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Revolution.ECS.Entities
 {
@@ -16,6 +17,8 @@ namespace Revolution.ECS.Entities
             var buildingComponent = new BuildingComponent() {State = BuildingState.Placing};
             var collisionComp = new CollisionComponent(mapObjectComp);
             var selectionComp = new SelectionComponent(posComp, sizeComp);
+            var teamComp = new TeamComponent() { TeamColor = Brushes.DarkBlue };
+            var minimapComp = new MinimapComponent() { Background = teamComp.TeamColor };
             
             sizeComp.PropertyChanged += delegate
             {
@@ -49,6 +52,8 @@ namespace Revolution.ECS.Entities
             AddComponent(buildingComponent);
             AddComponent(collisionComp);
             AddComponent(selectionComp);
+            AddComponent(teamComp);
+            AddComponent(minimapComp);
         }
     }
 }

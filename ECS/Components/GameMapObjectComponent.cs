@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Revolution.IO;
@@ -13,9 +14,10 @@ namespace Revolution.ECS.Components
         private int _width;
         private int _height;
 
-        // event handler util variables
-        private int _newvalue;
-        private int _oldvalue;
+        private int _oldx;
+        private int _oldy;
+        private int _oldwidth;
+        private int _oldheight;
 
         public int X
         {
@@ -23,13 +25,13 @@ namespace Revolution.ECS.Components
             set
             {
                 if (_x == value) return;
-                
-                _oldvalue = _x;
-                _newvalue = value;
+
+                SetOldVariables();
                 _x = value;
                 OnPropertyChanged();
             }
         }
+
         public int Y 
         {
             get => _y;
@@ -37,8 +39,7 @@ namespace Revolution.ECS.Components
             {
                 if (_y == value) return;
 
-                _oldvalue = _y;
-                _newvalue = value;
+                SetOldVariables();
                 _y = value;
                 OnPropertyChanged();
             }
@@ -50,8 +51,7 @@ namespace Revolution.ECS.Components
             {
                 if (_width == value) return;
 
-                _oldvalue = _width;
-                _newvalue = value;
+                SetOldVariables();
                 _width = value;
                 OnPropertyChanged();
             }
@@ -63,17 +63,50 @@ namespace Revolution.ECS.Components
             {
                 if (_height == value) return;
 
-                _oldvalue = _height;
-                _newvalue = value;
+                SetOldVariables();
                 _height = value;
                 OnPropertyChanged();
             }
         }
+        private void SetOldVariables()
+        {
+            _oldx = _x;
+            _oldy = _y;
+            _oldwidth = _width;
+            _oldheight = _height;
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventExtendedArgs(propertyName, _oldvalue, _newvalue));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventGameMapObjectArgs(propertyName, _oldx, _x, _oldy, _y, _oldwidth, _width, _oldheight, _height));
+        }
+    }
+
+    public class PropertyChangedEventGameMapObjectArgs : PropertyChangedEventArgs
+    {
+        public virtual int OldX { get; private set; }
+        public virtual int NewX { get; private set; }
+        public virtual int OldY { get; private set; }
+        public virtual int NewY { get; private set; }
+        public virtual int OldWidth { get; private set; }
+        public virtual int NewWidth { get; private set; }
+        public virtual int OldHeight { get; private set; }
+        public virtual int NewHeight { get; private set; }
+
+        public PropertyChangedEventGameMapObjectArgs(string propertyName, int oldx, int newx, int oldy, int newy, int oldwidth, int newwidth, int oldheight, int newheight)
+            : base(propertyName)
+        {
+            OldX = oldx;
+            OldY = oldy;
+            OldWidth = oldwidth;
+            OldHeight = oldheight;
+
+            NewX = newx;
+            NewY = newy;
+            NewWidth = newwidth;
+            NewHeight = newheight;
         }
     }
 }
