@@ -13,8 +13,5 @@
     <Page Update="Scenes\GameUiControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Scenes\MainMenuScene.xaml">
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
 </Project>

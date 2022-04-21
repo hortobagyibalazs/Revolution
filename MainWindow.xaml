@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="Revolution" Height="600" Width="920">
     
-    <Grid x:Name="Root"
-            IsHitTestVisible="False">
+    <Grid x:Name="Root">
     </Grid>
 </Window>

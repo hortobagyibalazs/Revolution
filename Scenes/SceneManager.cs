@@ -48,8 +48,11 @@ namespace Revolution.Scenes
                 {
                     var popped = _scenes.Pop();
                     ScenePopped?.Invoke(this, popped);
-                    Scene?.OnResume();
                     popped.Manager = null;
+                    if (_scenes.Count != 0)
+                    {
+                        Scene?.OnResume();
+                    }
                 });
 
                 return null;
