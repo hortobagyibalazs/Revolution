@@ -44,7 +44,7 @@ namespace Revolution.Scenes
 
         void IScene.OnExit(EventHandler onFinish)
         {
-            throw new NotImplementedException();
+            onFinish.Invoke(null,null);
         }
 
         void IScene.OnPause()
