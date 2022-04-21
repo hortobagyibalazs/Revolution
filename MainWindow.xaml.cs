@@ -39,7 +39,8 @@ namespace WpfApp
             sceneManager.ScenePushed += ScenePushed;
             sceneManager.ScenePopped += ScenePopped;
 
-            sceneManager.Push(new GameScene(Root));
+            sceneManager.Push(new MainMenuScene());
+            //sceneManager.Push(new GameScene(Root));
         }
 
 
