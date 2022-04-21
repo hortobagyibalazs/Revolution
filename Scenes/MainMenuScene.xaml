@@ -73,7 +73,7 @@
                     Margin="0,0,0,0"
                     Stretch="Uniform"
                     Grid.Column="0"
-                    Source="C:\Users\gabik\OneDrive\Asztali gép\Final\Menu Background\background.png"/>
+                    Source="\Assets\Images\Menu Background\background.png"/>
             </Grid>
         </Grid>
     </Border>
