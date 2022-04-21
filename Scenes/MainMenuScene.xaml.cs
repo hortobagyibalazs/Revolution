@@ -20,9 +20,13 @@ namespace Revolution.Scenes
     /// </summary>
     public partial class MainMenuScene : UserControl, IScene
     {
-        public MainMenuScene()
+        FrameworkElement framework { get; set; }    
+        public MainMenuScene(FrameworkElement frameworkElement )
         {
             InitializeComponent();
+            this.framework = frameworkElement;
+           
+            
         }
 
         private SceneManager manager;
@@ -55,6 +59,11 @@ namespace Revolution.Scenes
         void IScene.OnResume()
         {
             
+        }
+
+        private void Button_Play(object sender, RoutedEventArgs e)
+        {
+            manager.Push(new GameScene(framework));
         }
     }
 }
