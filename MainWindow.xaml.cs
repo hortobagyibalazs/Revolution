@@ -52,6 +52,10 @@ namespace WpfApp
         private void ScenePopped(object? sender, IScene e)
         {
             Root.Children.Remove(e.Content);
+            if (sceneManager.Scene == null)
+            {
+                Close();
+            }
         }
     }
 }
