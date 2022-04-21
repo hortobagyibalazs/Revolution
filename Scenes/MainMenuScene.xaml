@@ -8,7 +8,14 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Border>
-        <Grid Background="Green">
+        <Grid>
+            
+                <Grid.Background>
+                <ImageBrush 
+                    ImageSource="\Assets\Images\Menu Background\map1.png"
+                    Stretch="UniformToFill"/>
+                </Grid.Background>
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="7*"/>
@@ -33,7 +40,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Button 
                     BorderBrush="Gold"
                     Background="Gold"
@@ -69,11 +76,12 @@
                 </StackPanel>
 
 
-                <Image 
+                <!--<Image 
+                   
                     Margin="0,0,0,0"
                     Stretch="Uniform"
-                    Grid.Column="0"
-                    Source="\Assets\Images\Menu Background\background.png"/>
+                    Grid.Column="1"
+                    Source="\Assets\Images\Menu Background\background.png"/>-->
             </Grid>
         </Grid>
     </Border>

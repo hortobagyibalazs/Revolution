@@ -20,6 +20,7 @@
 		<None Remove="Assets\Images\bgd_trees.png" />
 		<None Remove="Assets\Images\bgd_water.png" />
 		<None Remove="Assets\Images\Menu Background\background.png" />
+		<None Remove="Assets\Images\Menu Background\map1.png" />
 		<None Remove="Assets\Images\spr_archer_attacking\spr_archer_attacking_0.png" />
 		<None Remove="Assets\Images\spr_archer_attacking\spr_archer_attacking_1.png" />
 		<None Remove="Assets\Images\spr_archer_attacking\spr_archer_attacking_2.png" />
@@ -215,6 +216,9 @@
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\Menu Background\background.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\Menu Background\map1.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_archer_attacking\spr_archer_attacking_0.png">
