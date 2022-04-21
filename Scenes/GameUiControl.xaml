@@ -7,13 +7,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64*"/>
+            <RowDefinition Height="11*"/>
+        </Grid.RowDefinitions>
         <ScrollViewer x:Name="CanvasViewer"
             HorizontalScrollBarVisibility="Hidden" 
-            VerticalScrollBarVisibility="Hidden">
+            VerticalScrollBarVisibility="Hidden" Grid.RowSpan="2">
             <Canvas x:Name="MainCanvas"/>
         </ScrollViewer>
 
-        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center">
+        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
@@ -23,10 +27,15 @@
                 Source="/Assets/Images/spr_gui_bar.png"/>
 
             <Grid Grid.Row="1">
+                <!--Total width should be 528-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="17*"/>
-                    <ColumnDefinition Width="59*"/>
-                    <ColumnDefinition Width="452*"/>
+                    <ColumnDefinition Width="59*"/> <!--Minimap-->
+                    <ColumnDefinition Width="79*"/>
+                    <ColumnDefinition Width="223*"/> <!--Info panel-->
+                    <ColumnDefinition Width="65*"/>
+                    <ColumnDefinition Width="70*" /> <!--Action panel-->
+                    <ColumnDefinition Width="15*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -36,6 +45,8 @@
                 </Grid.RowDefinitions>
 
                 <Canvas x:Name="Minimap" Grid.Column="1" Grid.Row="1"/>
+                <Grid x:Name="InfoHud" Grid.Column="3" Grid.Row="1"></Grid>
+                <WrapPanel x:Name="ActionHud" Grid.Column="5" Grid.Row="1"></WrapPanel>
             </Grid>
         </Grid>
     </Grid>

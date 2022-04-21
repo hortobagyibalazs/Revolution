@@ -60,7 +60,7 @@ namespace Revolution.Scenes
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / fps);
             timer.Tick += UpdateSystems;
 
-            var mapData = MapLoader.LoadFromFile(@"", @"Assets\map1.tmx");
+            var mapData = MapLoader.LoadFromFile(@"", @"Assets\map2.tmx");
 
             // Setup entity-component system
             systemManager = new SystemManager();
@@ -72,6 +72,7 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new MinimapSystem(contentHolder.Minimap, mapData, canvas, scrollViewer));
             systemManager.RegisterSystem(new SpriteAnimationSystem());
             systemManager.RegisterSystem(new MapSystem(mapData));
+            systemManager.RegisterSystem(new HudSystem(contentHolder.InfoHud, contentHolder.ActionHud));
 
             // Start timer
             lastUpdate = Environment.TickCount;

@@ -110,6 +110,7 @@ namespace Revolution.ECS.Systems
 
             Rect selectionRect = new Rect((int) startX, (int) startY, (int) (endX - startX), (int) (endY - startY));
 
+            HashSet<Entity> selected = new HashSet<Entity>();
             foreach (var entity in EntityManager.GetEntities())
             {
                 var selectionComp = entity.GetComponent<SelectionComponent>();
@@ -120,6 +121,21 @@ namespace Revolution.ECS.Systems
 
                     Rect entityRect = new Rect(posComp.X, posComp.Y, sizeComp.Width, sizeComp.Height);
                     if (selectionRect.IntersectsWith(entityRect))
+                    {
+                        selected.Add(entity);
+                    }
+                }
+            }
+
+            // This part is to handle cases where some entities only allow single-selection
+            // where others allow multi-selection
+            foreach(var entity in EntityManager.GetEntities())
+            {
+                var selectionComp = entity.GetComponent<SelectionComponent>();
+                if (selectionComp != null)
+                {
+                    if (selected.Contains(entity) && 
+                        (selected.Count == 1 || selectionComp.MultiSelectable))
                     {
                         selectionComp.Selected = true;
                     }

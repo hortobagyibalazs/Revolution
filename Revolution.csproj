@@ -162,6 +162,7 @@
 		<None Remove="Assets\Images\spr_x\spr_x_2.png" />
 		<None Remove="Assets\Images\spr_x\spr_x_3.png" />
 		<None Remove="Assets\map1.tmx" />
+		<None Remove="Assets\map2.tmx" />
 		<None Remove="Assets\menu_bg.png" />
 		<None Remove="Assets\spr_gui_bar.png" />
 		<None Remove="Assets\test.png" />
@@ -632,6 +633,9 @@
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_x\spr_x_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\map2.tmx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\menu_bg.png">

@@ -29,6 +29,8 @@ namespace Revolution.ECS.Components
             }
         }
 
+        public bool MultiSelectable { get; set; }
+
         public override FrameworkElement Renderable { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
