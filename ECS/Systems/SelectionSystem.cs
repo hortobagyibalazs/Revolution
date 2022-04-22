@@ -47,7 +47,7 @@ namespace Revolution.ECS.Systems
             } 
             else if (Dragging && Mouse.LeftButton == MouseButtonState.Released)
             {
-                if (Dragging)
+                if (Dragging && Canvas.IsMouseOver)
                 {
                     SelectEntities((Point)DragStart, Mouse.GetPosition(Canvas));
                 }
