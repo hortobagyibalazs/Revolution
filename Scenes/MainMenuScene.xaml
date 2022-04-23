@@ -11,7 +11,7 @@
         <Grid>
             <Grid.Background>
                 <ImageBrush 
-                    ImageSource="\Assets\Images\Menu Background\map1.png"
+                    ImageSource="\Assets\Images\Menu Background\map.png"
                     Stretch="UniformToFill"/>
                 </Grid.Background>
             
@@ -38,7 +38,7 @@
             <Grid Grid.Row="1" >
                 
 
-                <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center">
                     <Button 
                     Style="{StaticResource CustomFont}"
                     BorderBrush="Gold"
