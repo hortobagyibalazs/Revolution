@@ -5,12 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Revolution.Scenes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
     <Border>
         <Grid>
-            
-                <Grid.Background>
+            <Grid.Background>
                 <ImageBrush 
                     ImageSource="\Assets\Images\Menu Background\map1.png"
                     Stretch="UniformToFill"/>
@@ -23,10 +22,12 @@
 
             <Label
                 Grid.Row="0"
+                Style="{StaticResource CustomFont}"
                 Content="Revolution"
                 Foreground="Gold"
+                
                 FontWeight="Bold"
-                FontSize="70"
+                FontSize="60"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Center"
@@ -39,6 +40,7 @@
 
                 <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Button 
+                    Style="{StaticResource CustomFont}"
                     BorderBrush="Gold"
                     Background="Gold"
                     Foreground="Green"
@@ -55,6 +57,7 @@
                     Margin="20,5,20,20" Click="Button_Play"/>
 
                     <Button 
+                    Style="{StaticResource CustomFont}"
                     BorderBrush="Gold"
                     Background="Gold"
                     Foreground="Green"

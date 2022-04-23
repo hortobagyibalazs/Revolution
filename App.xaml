@@ -4,9 +4,11 @@
              xmlns:local="clr-namespace:WpfApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="35"/>
-            <Setter Property="FontFamily" Value="Fonts/pcsenior.ttf"/>
+        <Style x:Key="CustomFont">
+            <Setter Property="TextElement.FontFamily"
+                    Value="/Fonts/#Pc Senior">
+            </Setter>
+
         </Style>
     </Application.Resources>
 </Application>
