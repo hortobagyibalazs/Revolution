@@ -176,6 +176,8 @@
 		<None Remove="Assets\tileset.png" />
 		<None Remove="Assets\town_center.png" />
 		<None Remove="Assets\villager.png" />
+		<None Remove="Fonts\license.txt" />
+		<None Remove="Fonts\pcsenior.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -667,6 +669,12 @@
 		</Content>
 		<Content Include="Assets\villager.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Fonts\license.txt">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Fonts\pcsenior.ttf">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 
