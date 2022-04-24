@@ -45,7 +45,7 @@ namespace Revolution.ECS.Systems
                 DragStart = Mouse.GetPosition(Canvas);
                 SelectionRect.Visibility = System.Windows.Visibility.Visible;
             } 
-            else if (Dragging && Mouse.LeftButton == MouseButtonState.Released)
+            else if (Dragging && Mouse.LeftButton == MouseButtonState.Released && Canvas.IsMouseOver)
             {
                 if (Dragging)
                 {
