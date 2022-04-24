@@ -39,7 +39,7 @@ namespace Revolution.ECS.Systems
 
         public void Update(int deltaMs)
         {
-            if (!Dragging && Mouse.LeftButton == MouseButtonState.Pressed)
+            if (!Dragging && Mouse.LeftButton == MouseButtonState.Pressed && Canvas.IsMouseOver)
             {
                 Dragging = true;
                 DragStart = Mouse.GetPosition(Canvas);

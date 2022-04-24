@@ -45,8 +45,23 @@
                 </Grid.RowDefinitions>
 
                 <Canvas x:Name="Minimap" Grid.Column="1" Grid.Row="1"/>
-                <Grid x:Name="InfoHud" Grid.Column="3" Grid.Row="1"></Grid>
-                <WrapPanel x:Name="ActionHud" Grid.Column="5" Grid.Row="1"></WrapPanel>
+                <Grid Grid.Column="3" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="12*"/>
+                        <RowDefinition Height="60*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid x:Name="InfoHud" Grid.Row="1"></Grid>
+                </Grid>
+
+                <Grid Grid.Column="5" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="12*"/>
+                        <RowDefinition Height="60*"/>
+                    </Grid.RowDefinitions>
+
+                    <WrapPanel x:Name="ActionHud" Grid.Row="1"/>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>
