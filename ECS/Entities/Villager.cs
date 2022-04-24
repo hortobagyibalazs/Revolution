@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Revolution.ECS.Components;
+using Revolution.HUD.Entities;
 using Revolution.IO;
 
 namespace Revolution.ECS.Entities
@@ -25,12 +26,7 @@ namespace Revolution.ECS.Entities
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
             var selectionComp = new SelectionComponent(posComp, sizeComp);
             var directionComp = new DirectionComponent();
-            var hudComp = new HudComponent()
-            {
-                Portrait = new Image(),
-                Info = new Button() { Content = "Hi"},
-                Action = new Button() { Content = "Lol" }
-            };
+            var hudComp = new VillagerHud().CreateComponent(this);
 
             spriteComp.CurrentFrame = VillagerSpriteFrame.Moving;
 
