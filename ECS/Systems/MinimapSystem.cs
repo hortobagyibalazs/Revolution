@@ -128,10 +128,10 @@ namespace Revolution.ECS.Systems
 
         private void UpdateCameraPos(CameraComponent cameraComp)
         {
-            // This is very buggy, should be rewritten with event handlers
-            return;
-
-            if (Mouse.LeftButton != MouseButtonState.Pressed) return;
+            if ((Mouse.LeftButton != MouseButtonState.Pressed) || (!minimapCanvas.IsMouseOver))
+            {
+                return;
+            }
 
             var mousePos = Mouse.GetPosition(minimapCanvas);
             int mouseX = (int) (mousePos.X - (minimapRect.ActualWidth / 2));
