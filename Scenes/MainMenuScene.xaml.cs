@@ -21,7 +21,7 @@ namespace Revolution.Scenes
     public partial class MainMenuScene : UserControl, IScene
     {
         FrameworkElement framework { get; set; }    
-        public MainMenuScene(FrameworkElement frameworkElement )
+        public MainMenuScene(FrameworkElement frameworkElement)
         {
             InitializeComponent();
             this.framework = frameworkElement;
@@ -39,6 +39,7 @@ namespace Revolution.Scenes
             if (asnwer.Equals(MessageBoxResult.Yes))
             {
                 manager.Pop();
+                
             }
         }
         void IScene.OnEnter()
@@ -63,7 +64,8 @@ namespace Revolution.Scenes
 
         private void Button_Play(object sender, RoutedEventArgs e)
         {
-            manager.Push(new GameScene(framework));
+            //manager.Push(new GameScene(framework));
+            manager.Push(new MapSelectorMenu(framework));
         }
     }
 }

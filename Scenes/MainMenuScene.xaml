@@ -28,6 +28,7 @@
                 
                 FontWeight="Bold"
                 FontSize="60"
+                Background="Brown"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Center"
