@@ -10,11 +10,11 @@ namespace Revolution.Misc
 {
     public class MapMenuManager
     {
-        public IList<Map> AvailabeMaps { get; set; }    
+        public IList<Map> AvailabeMaps { get; set; }
 
         public MapMenuManager()
         {
-           this.AvailabeMaps = new List<Map>(); 
+            this.AvailabeMaps = new List<Map>();
         }
 
         public IList<Map> LoadMaps()
@@ -42,8 +42,24 @@ namespace Revolution.Misc
                 ImageSource = @"D:\Egyetem\4.felev\SZTGUI\Féléves\Féléves\Revolution\Assets\Images\MapSelectorMenuImages\map2.png"
             };
 
+
+            Map map3 = new Map()
+            {
+                Text = "Map 3",
+                FilePath = @"D:\Egyetem\4.felev\SZTGUI\Féléves\Féléves\Revolution\Assets\map2.tmx",
+                ImageSource = @"D:\Egyetem\4.felev\SZTGUI\Féléves\Féléves\Revolution\Assets\Images\MapSelectorMenuImages\map2.png"
+            };
+
             AvailabeMaps.Add(map1);
             AvailabeMaps.Add(map2);
+            AvailabeMaps.Add(map2);
+            AvailabeMaps.Add(map2);
+            AvailabeMaps.Add(map2);
+            AvailabeMaps.Add(map2);
+            AvailabeMaps.Add(map2);
+            AvailabeMaps.Add(map2);
+
+            AvailabeMaps.Add(map3);
 
             return AvailabeMaps;
         }

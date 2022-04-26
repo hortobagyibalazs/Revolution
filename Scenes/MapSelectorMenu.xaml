@@ -38,30 +38,42 @@
                 Width="50"
                 Click="Button_RetunToMainMenu"/>
             
-            <StackPanel Name="stack1" Grid.Row="1" Height="200" Width="500">
+            <StackPanel Name="stack1" Grid.Row="1"  VerticalAlignment="Top">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"></RowDefinition>
                         <RowDefinition Height="8*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <ScrollViewer>
-                        <ListBox Height="200" Grid.Row="0"  Margin="3"  x:Name ="MapsView" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Disabled" ori>
+                    
+                    
+                    <ScrollViewer VerticalContentAlignment="Top" VerticalScrollBarVisibility="Hidden" Margin="80">
+                        <ListView    Grid.Row="1"  Margin="3"  x:Name ="MapsView" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" VerticalContentAlignment="Top">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
+                                    </WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <ListBoxItem>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="8*"/>
-                                                <RowDefinition Height="2*"/>
-                                            </Grid.RowDefinitions>
-                                            <Image Source="{Binding ImageSource}" Width="100"  Height="100" Grid.Row="0"/>
-                                            <Label Content="{Binding Text}" Grid.Row="1" FontSize="20" Style="{StaticResource CustomFont}"/>
-
-                                        </Grid>
+                                    <ListBoxItem> 
+                                        <Border BorderBrush="Black" BorderThickness="2">
+                                            
+                                                <DockPanel >
+                                                    <Image Source="{Binding ImageSource}" Width="200"  Height="200" DockPanel.Dock="Top"/>
+                                                    <Label Content="{Binding Text}"  FontSize="30" Style="{StaticResource CustomFont}" Foreground="Gold" DockPanel.Dock="Bottom"/>
+                                                </DockPanel>
+                                                
+                                            
+                                        </Border>
                                     </ListBoxItem>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
-                        </ListBox>
+                        </ListView>
+                           
+                        
                     </ScrollViewer>
 
                     <!--<ListView x:Name ="MapsView">
