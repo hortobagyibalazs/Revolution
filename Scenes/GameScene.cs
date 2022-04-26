@@ -50,6 +50,11 @@ namespace Revolution.Scenes
 
         public GameScene(FrameworkElement Root)
         {
+            PathFinderSystem finder = new PathFinderSystem(new GridComponent(75, 75, 1));
+            finder.UpdateCell(5, 10, -3);
+            finder.UpdateCell(12, 2, -2);
+            finder.PathFinding();
+
             GameUiControl contentHolder = new GameUiControl();
             var scrollViewer = contentHolder.CanvasViewer;
             var canvas = contentHolder.MainCanvas;
