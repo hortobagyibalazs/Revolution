@@ -45,25 +45,8 @@ namespace Revolution.Misc
                 FilePath = @"D:\Egyetem\4.felev\SZTGUI\Féléves\Féléves\Revolution\Assets\map2.tmx",
                 ImageSource = @"D:\Egyetem\4.felev\SZTGUI\Féléves\Féléves\Revolution\Assets\Images\MapSelectorMenuImages\map2.png"
             };
-
-
-            Map map3 = new Map()
-            {
-                Text = "Map 3",
-                FilePath = @"D:\Egyetem\4.felev\SZTGUI\Féléves\Féléves\Revolution\Assets\map2.tmx",
-                ImageSource = @"D:\Egyetem\4.felev\SZTGUI\Féléves\Féléves\Revolution\Assets\Images\MapSelectorMenuImages\map2.png"
-            };
-
+            AvailabeMaps.Add(map2);
             AvailabeMaps.Add(map1);
-            AvailabeMaps.Add(map2);
-            AvailabeMaps.Add(map2);
-            AvailabeMaps.Add(map2);
-            AvailabeMaps.Add(map2);
-            AvailabeMaps.Add(map2);
-            AvailabeMaps.Add(map2);
-            AvailabeMaps.Add(map2);
-
-            AvailabeMaps.Add(map3);
 
             return AvailabeMaps;
         }

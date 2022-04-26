@@ -72,7 +72,7 @@
                     </Grid.RowDefinitions>
 
 
-                    <ScrollViewer VerticalContentAlignment="Top" VerticalScrollBarVisibility="Hidden" Margin="80">
+                    <ScrollViewer  VerticalScrollBarVisibility="Hidden" Margin="80" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                         <ListView   Grid.Row="1"  Margin="3"  x:Name ="MapsView" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" VerticalContentAlignment="Top">
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>

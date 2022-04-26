@@ -64,9 +64,12 @@ namespace Revolution.Scenes
         private void Button_RG_EasterEgg(object sender, RoutedEventArgs e)
         {
             MediaPlayer mediaPlayer = new MediaPlayer();
-            var path = Path.Combine(@"\Assets\Musics\rick_astley_never_gonna_give_you_up_video.mp3");
+            string basePath = Environment.CurrentDirectory;
+            var trimmedBasePath = basePath.Remove(basePath.Length - 24, 24);
+            string relativePath = "Assets\\Musics\\rick_astley_never_gonna_give_you_up_video.mp3";
+            string fullPath = trimmedBasePath + relativePath;
 
-            mediaPlayer.Open(new Uri(path, UriKind.Relative));
+            mediaPlayer.Open(new Uri(fullPath, UriKind.Relative));
             mediaPlayer.Play();
         }
     }
