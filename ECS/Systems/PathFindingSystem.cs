@@ -1,4 +1,5 @@
 ﻿using Revolution.ECS.Components;
+using Revolution.ECS.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,7 +32,21 @@ namespace Revolution.ECS.Systems
 
 		public void Update(int deltaMs)
 		{
+			foreach(var entity in EntityManager.GetEntities())
+            {
+				var movementComponent = entity.GetComponent<MovementComponent>();
+				if (movementComponent != null && movementComponent.CurrentTarget != null)
+                {
+					// Start pathfinding
+					// ...
 
+					// Load result into MovementComponent's Path
+					// ...
+
+					// Clear target
+					movementComponent.CurrentTarget = null;
+                }
+            }
 		}
 
 		public void PathFinding()
@@ -180,32 +195,31 @@ namespace Revolution.ECS.Systems
 			int waveMinX = 9999;
 			int waveMinY = 9999;
 
-			//for (int i = -1; i < 2; i++)
-			//{
-			//	for (int j = -1; j < 2; j++)
-			//	{
-			//		actualCell = grid.GridArray[travelerX + i, travelerY + j];
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    actualCell = grid.GridArray[travelerX + i, travelerY + j];
 
-			//		if (actualCell == targetCell)
-			//		{
-			//			pathComplete = true;
-			//			waveMinX = travelerX + i;
-			//			waveMinY = travelerY + j;
-			//			break;
-			//		}
-			//		else if (actualCell > 0 && actualCell < localMin)
-			//		{
-			//			localMin = actualCell;
-			//			waveMinX = travelerX + i;
-			//			waveMinY = travelerY + j;
-			//		}
-			//	}
-			//}
+                    if (actualCell == targetCell)
+                    {
+                        pathComplete = true;
+                        waveMinX = travelerX + i;
+                        waveMinY = travelerY + j;
+                        break;
+                    }
+                    else if (actualCell > 0 && actualCell < localMin)
+                    {
+                        localMin = actualCell;
+                        waveMinX = travelerX + i;
+                        waveMinY = travelerY + j;
+                    }
+                }
+            }
 
-			travelerX = waveMinX;
+            travelerX = waveMinX;
 			travelerY = waveMinY;
 
-			//grid.GridArray[travelerX, travelerY] = globalMax * 1.2;
 		}
 	}
 }

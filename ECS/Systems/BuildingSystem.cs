@@ -79,12 +79,19 @@ namespace Revolution.ECS.Systems
                     int startY = gmoComp.Y - 1;
 
 
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 1, startY));
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 2, startY));
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 3, startY));
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 3, startY + 1));
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 3, startY + 2));
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 2, startY + 2));
+                   
+            }
+
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                foreach (var entity in Entities.EntityManager.GetEntities())
+                {
+                    if (entity is Entities.Villager)
+                    {
+                        var movementComp = entity.GetComponent<MovementComponent>();
+                        movementComp.CurrentTarget = new Vector2(GetGameObjectPosBasedOnCursorX(), GetGameObjectPosBasedOnCursorY());
+                    }
+                }
             }
         }
 
