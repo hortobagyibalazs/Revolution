@@ -37,17 +37,43 @@
                 Height="40"
                 Width="50"
                 Click="Button_RetunToMainMenu"/>
-            
+
+
+
+
+            <Button 
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,50"
+                        Grid.Row="1"
+                        Style="{StaticResource CustomFont}"
+                        BorderBrush="Gold"
+                        Background="Gold"
+                        Foreground="Green"
+                        BorderThickness="3"
+                        Content="Play Selected Map"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                    
+                        Width="400"
+                        Height="50"
+                        FontSize="20"
+                        FontWeight="Bold"
+                    >
+
+            </Button>
+
+
             <StackPanel Name="stack1" Grid.Row="1"  VerticalAlignment="Top">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"></RowDefinition>
                         <RowDefinition Height="8*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    
-                    
+
+
                     <ScrollViewer VerticalContentAlignment="Top" VerticalScrollBarVisibility="Hidden" Margin="80">
-                        <ListView    Grid.Row="1"  Margin="3"  x:Name ="MapsView" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" VerticalContentAlignment="Top">
+                        <ListView   Grid.Row="1"  Margin="3"  x:Name ="MapsView" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" VerticalContentAlignment="Top">
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Orientation="Horizontal" ScrollViewer.HorizontalScrollBarVisibility="Auto">
@@ -55,39 +81,26 @@
                                     </WrapPanel>
                                 </ItemsPanelTemplate>
                             </ListView.ItemsPanel>
-                            
+
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <ListBoxItem> 
+                                    <ListBoxItem>
                                         <Border BorderBrush="Black" BorderThickness="2">
-                                            
-                                                <DockPanel >
-                                                    <Image Source="{Binding ImageSource}" Width="200"  Height="200" DockPanel.Dock="Top"/>
-                                                    <Label Content="{Binding Text}"  FontSize="30" Style="{StaticResource CustomFont}" Foreground="Gold" DockPanel.Dock="Bottom"/>
-                                                </DockPanel>
-                                                
-                                            
+
+                                            <DockPanel >
+                                                <Image Source="{Binding ImageSource}" Width="200"  Height="200" DockPanel.Dock="Top"/>
+                                                <Label Content="{Binding Text}"  FontSize="30" Style="{StaticResource CustomFont}" Foreground="Gold" DockPanel.Dock="Bottom"/>
+                                            </DockPanel>
                                         </Border>
                                     </ListBoxItem>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListView>
-                           
-                        
                     </ScrollViewer>
-
-                    <!--<ListView x:Name ="MapsView">
-                        <ListViewItem>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Text}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListViewItem>
-                    </ListView>-->
                 </Grid>
-            </StackPanel>
 
+
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

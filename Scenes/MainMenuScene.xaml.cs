@@ -68,5 +68,10 @@ namespace Revolution.Scenes
             manager.Push(new MapSelectorMenu(framework));
             
         }
+
+        private void Button_Credits(object sender, RoutedEventArgs e)
+        {
+            manager.Push(new MakersCreditsScene(framework));
+        }
     }
 }

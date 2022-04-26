@@ -12,10 +12,14 @@ namespace Revolution.Misc
     {
         public IList<Map> AvailabeMaps { get; set; }
 
+        public Map SelectedMap { get; set; }    
+
         public MapMenuManager()
         {
             this.AvailabeMaps = new List<Map>();
         }
+
+
 
         public IList<Map> LoadMaps()
         {
