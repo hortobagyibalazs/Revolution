@@ -83,7 +83,7 @@ namespace Revolution.ECS.Systems
 								{
 									actualCell = grid.GridArray[i + k, j + l];
 
-									Debug.WriteLine("Actual: " + (i + k) + " : " + (j + l));
+									//Debug.WriteLine("Actual: " + (i + k) + " : " + (j + l));
 
 									if (actualCell > emptyCell)
 									{
@@ -124,8 +124,6 @@ namespace Revolution.ECS.Systems
 
 				grid.GridArray = cloneGridArray;
 			}
-
-			ExportGrid();
 
 			//check wavefront vs. startCell
 
