@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Revolution.ECS.Models;
+using Revolution.Misc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +20,7 @@ namespace Revolution.Scenes
     /// <summary>
     /// Interaction logic for MapSelectorMenu.xaml
     /// </summary>
-    public partial class MapSelectorMenu : UserControl, IScene
+    public partial class MapSelectorMenu : UserControl, IScene 
     {
 
         FrameworkElement framework { get; set; }
@@ -35,7 +37,10 @@ namespace Revolution.Scenes
 
         void IScene.OnEnter()
         {
-            
+            MapMenuManager mapMenuManager = new MapMenuManager();
+            var maps = mapMenuManager.LoadMaps();
+            var maps2 = mapMenuManager.CreateMaps();
+            MapsView.ItemsSource = maps2;
         }
 
         void IScene.OnPause()
@@ -55,7 +60,7 @@ namespace Revolution.Scenes
 
         private void Button_RetunToMainMenu(object sender, RoutedEventArgs e)
         {
-            manager.Push(new MainMenuScene(framework));
+            manager.Pop();
         }
     }
 }

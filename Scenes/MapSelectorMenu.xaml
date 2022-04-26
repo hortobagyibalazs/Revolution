@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Revolution.Scenes"
+             xmlns:misc="clr-namespace:Revolution.Misc"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border>
@@ -14,39 +15,67 @@
                     Stretch="UniformToFill"/>
             </Grid.Background>
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+
             <Button
                 Grid.Row="0"
-                Style="{StaticResource CustomFont}"
-                Content="Back To Main Menu"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE830;"
                 Foreground="Gold"
                 FontWeight="Bold"
-                FontSize="10"
-                Padding="5"
+                FontSize="20"
+                Padding="10"
                 Background="Brown"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Margin="0,0,0,0" 
-                Height="30"
+                Height="40"
+                Width="50"
                 Click="Button_RetunToMainMenu"/>
+            
+            <StackPanel Name="stack1" Grid.Row="1" Height="200" Width="500">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="8*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer>
+                        <ListBox Height="200" Grid.Row="0"  Margin="3"  x:Name ="MapsView" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Disabled" ori>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="8*"/>
+                                                <RowDefinition Height="2*"/>
+                                            </Grid.RowDefinitions>
+                                            <Image Source="{Binding ImageSource}" Width="100"  Height="100" Grid.Row="0"/>
+                                            <Label Content="{Binding Text}" Grid.Row="1" FontSize="20" Style="{StaticResource CustomFont}"/>
 
+                                        </Grid>
+                                    </ListBoxItem>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
 
+                    <!--<ListView x:Name ="MapsView">
+                        <ListViewItem>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Text}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListViewItem>
+                    </ListView>-->
+                </Grid>
+            </StackPanel>
 
-            <Label
-                Grid.Row="0"
-                Style="{StaticResource CustomFont}"
-                Content="Map Selector Menu"
-                Foreground="Gold"
-                FontWeight="Bold"
-                FontSize="20"
-                Background="Brown"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Margin="0,0,0,30"
-                />
         </Grid>
     </Border>
 </UserControl>

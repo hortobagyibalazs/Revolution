@@ -66,6 +66,7 @@ namespace Revolution.Scenes
         {
             //manager.Push(new GameScene(framework));
             manager.Push(new MapSelectorMenu(framework));
+            
         }
     }
 }
