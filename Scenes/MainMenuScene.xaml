@@ -44,7 +44,7 @@
                     Style="{StaticResource CustomFont}"
                     BorderBrush="Gold"
                     Background="Gold"
-                    Foreground="Green"
+                    Foreground="Brown"
                     BorderThickness="3"
                     Content="Play"
                     VerticalContentAlignment="Center"

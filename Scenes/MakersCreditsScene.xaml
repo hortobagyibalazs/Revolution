@@ -53,7 +53,7 @@
                 Margin="0,0,0,30"
                 />
 
-            <Grid Grid.Row="1" Margin="100">
+            <Grid Grid.Row="1" Margin="100,0,100,0">
 
 
                 <Grid.ColumnDefinitions>
@@ -68,47 +68,54 @@
                 </Grid.RowDefinitions>
 
 
-                <Grid>
-                    <Grid.Background>
-                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                            <GradientStop Color="#3963ad" Offset="0.0" />
-                            <GradientStop Color="Gold" Offset="0.75" />
-                        </LinearGradientBrush>
-                    </Grid.Background>
-                    <Image Source="/Assets/Images/TeamImages/l60Hf.png"
+                <Border BorderBrush="Gold" BorderThickness="6">
+                    <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#3963ad" Offset="0.0" />
+                                <GradientStop Color="Gold" Offset="0.75" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Image Source="/Assets/Images/TeamImages/l60Hf.png"
                            Opacity="0.7"
                            Stretch="UniformToFill"/>
-                    <Canvas Grid.Row="0">
-                    </Canvas>
-                </Grid>
+                        <Canvas Grid.Row="0">
+                        </Canvas>
+                    </Grid>
+                </Border>
+                
 
-                <Grid Grid.Row="0" Grid.Column="1">
-                    <Grid.Background>
-                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                            <GradientStop Color="#3963ad" Offset="0.0" />
-                            <GradientStop Color="Gold" Offset="0.75" />
-                        </LinearGradientBrush>
-                    </Grid.Background>
-                    <Image  Source="/Assets/Images/TeamImages/beni.jpg"
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="Gold" BorderThickness="0,6,0,6">
+                    <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#3963ad" Offset="0.0" />
+                                <GradientStop Color="Gold" Offset="0.75" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Image  Source="/Assets/Images/TeamImages/beni.jpg"
                            Opacity="0.7"
                             Stretch="UniformToFill"/>
-                    <Canvas  Grid.Row="0">
-                    </Canvas>
-                </Grid>
+                        <Canvas  Grid.Row="0">
+                        </Canvas>
+                    </Grid>
+                </Border>
 
-                <Grid Grid.Row="0" Grid.Column="2">
-                    <Grid.Background>
-                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                            <GradientStop Color="#3963ad" Offset="0.0" />
-                            <GradientStop Color="Gold" Offset="0.75" />
-                        </LinearGradientBrush>
-                    </Grid.Background>
-                    <Image Source="/Assets/Images/TeamImages/gabi.jpeg"
+                <Border Grid.Row="0" Grid.Column="2" BorderBrush="Gold" BorderThickness="6">
+                    <Grid >
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#3963ad" Offset="0.0" />
+                                <GradientStop Color="Gold" Offset="0.75" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Image Source="/Assets/Images/TeamImages/gabi.jpeg"
                            Opacity="0.7"
                            Stretch="UniformToFill"/>
-                    <Canvas  Grid.Row="0">
-                    </Canvas>
-                </Grid>
+                        <Canvas  Grid.Row="0">
+                        </Canvas>
+                    </Grid>
+                </Border>
 
 
                 

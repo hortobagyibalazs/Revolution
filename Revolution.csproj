@@ -174,6 +174,7 @@
 		<None Remove="Assets\map1.tmx" />
 		<None Remove="Assets\map2.tmx" />
 		<None Remove="Assets\menu_bg.png" />
+		<None Remove="Assets\Musics\rick_astley_never_gonna_give_you_up_video.mp3" />
 		<None Remove="Assets\spr_gui_bar.png" />
 		<None Remove="Assets\test.png" />
 		<None Remove="Assets\Test.tsx" />
@@ -679,6 +680,9 @@
 		</Content>
 		<Content Include="Assets\map1.tmx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Musics\rick_astley_never_gonna_give_you_up_video.mp3">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\town_center.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
