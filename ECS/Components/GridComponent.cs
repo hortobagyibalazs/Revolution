@@ -47,7 +47,7 @@ namespace Revolution.ECS.Components
 
 		public void ExportGrid(int[,] gridArray)
 		{
-			using (StreamWriter sw = new StreamWriter(gridFile))
+			using (StreamWriter sw = new StreamWriter("grid_output.txt"))
 			{
 				for (int i = 0; i < gridArray.GetLength(0); i++)
 				{

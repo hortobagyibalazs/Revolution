@@ -2,6 +2,7 @@ using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
 using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Windows.Input;
 

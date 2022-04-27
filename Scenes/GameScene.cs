@@ -50,9 +50,9 @@ namespace Revolution.Scenes
 
         public GameScene(FrameworkElement Root)
         {
-            //PathFinderSystem finder = new PathFinderSystem(new GridComponent(75, 75, 1));
-            //finder.UpdateCell(2, 2, -2);
-            //finder.UpdateCell(13 ,13, -3);
+            //PathFinderSystem finder = new PathFinderSystem(new GridComponent(25, 25, 1));
+            //finder.UpdateCell(3, 4, -2);
+            //finder.UpdateCell(21, 5, -3);
             //Debug.WriteLine("===============< START >===============");
             //Stopwatch sw = new Stopwatch();
             //sw.Start();
@@ -84,7 +84,7 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new SpriteAnimationSystem());
             systemManager.RegisterSystem(new MapSystem(mapData));
             systemManager.RegisterSystem(new HudSystem(contentHolder.InfoHud, contentHolder.ActionHud));
-            systemManager.RegisterSystem(new PathFinderSystem(new GridComponent(75, 75, 1)));
+            systemManager.RegisterSystem(new PathFinderSystem(new GridComponent(60, 60, 1)));
 
             // Start timer
             lastUpdate = Environment.TickCount;
