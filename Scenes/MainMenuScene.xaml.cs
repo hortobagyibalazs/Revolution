@@ -71,12 +71,14 @@ namespace Revolution.Scenes
 
         private void Button_Credits(object sender, RoutedEventArgs e)
         {
-            manager.Push(new MakersCreditsScene(framework));
+            //manager.Push(new MakersCreditsScene(framework));
+             manager.Push(new PauseMenuScene(framework));
         }
 
         private void Button_GameSpecs(object sender, RoutedEventArgs e)
         {
             manager.Push(new SpecsScene(framework));
+
         }
     }
 }

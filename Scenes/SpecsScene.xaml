@@ -38,9 +38,7 @@
                 Click="Button_RetunToMainMenu"/>
 
 
-            <WebBrowser Grid.Row="1">
-                
-            </WebBrowser>
+            
         </Grid>
     </Border>
 </UserControl>

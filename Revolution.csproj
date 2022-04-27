@@ -19,6 +19,7 @@
 		<None Remove="Assets\Images\bgd_grass.png" />
 		<None Remove="Assets\Images\bgd_trees.png" />
 		<None Remove="Assets\Images\bgd_water.png" />
+		<None Remove="Assets\Images\GameSpecs\Revolution.pdf" />
 		<None Remove="Assets\Images\Menu Background\background.png" />
 		<None Remove="Assets\Images\Menu Background\map.png" />
 		<None Remove="Assets\Images\Menu Background\map1.png" />
@@ -220,6 +221,9 @@
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\bgd_water.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\GameSpecs\Revolution.pdf">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\Menu Background\background.png">
