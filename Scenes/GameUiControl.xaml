@@ -23,6 +23,8 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
+            <Grid Grid.Row="0" x:Name="Tooltip" HorizontalAlignment="Left" Margin="0, 0, 10, 10"/>
+
             <Image Grid.Row="1"
                 Source="/Assets/Images/spr_gui_bar.png"/>
 

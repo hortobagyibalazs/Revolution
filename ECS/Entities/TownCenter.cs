@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Controls;
 using Revolution.ECS.Components;
+using Revolution.HUD.Entities;
 using Revolution.IO;
 
 namespace Revolution.ECS.Entities
@@ -17,6 +18,7 @@ namespace Revolution.ECS.Entities
             var buildingComponent = new BuildingComponent() { State = BuildingState.Placing};
             var collisionComp = new CollisionComponent(mapObjectComp);
             var selectionComp = new SelectionComponent(posComp, sizeComp);
+            var hudComp = new TownCenterHud().CreateComponent(this);
             
             sizeComp.PropertyChanged += delegate
             {
@@ -50,6 +52,7 @@ namespace Revolution.ECS.Entities
             AddComponent(buildingComponent);
             AddComponent(collisionComp);
             AddComponent(selectionComp);
+            AddComponent(hudComp);
         }
     }
 }
