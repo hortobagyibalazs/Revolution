@@ -42,8 +42,8 @@ namespace Revolution.ECS.Entities
 
             mapObjectComp.X = 1;
             mapObjectComp.Y = 1;
-            mapObjectComp.Width = 3;
-            mapObjectComp.Height = 3;
+            mapObjectComp.Width = 4;
+            mapObjectComp.Height = 4;
             
             AddComponent(renderComp);
             AddComponent(posComp);
