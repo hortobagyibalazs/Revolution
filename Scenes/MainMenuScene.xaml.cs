@@ -73,5 +73,10 @@ namespace Revolution.Scenes
         {
             manager.Push(new MakersCreditsScene(framework));
         }
+
+        private void Button_GameSpecs(object sender, RoutedEventArgs e)
+        {
+            manager.Push(new SpecsScene(framework));
+        }
     }
 }

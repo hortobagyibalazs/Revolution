@@ -53,11 +53,69 @@
                 Margin="0,0,0,30"
                 />
 
-            <Grid Grid.Row="1" >
+            <Grid Grid.Row="1" Margin="100">
 
 
-                <StackPanel Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center">
-                    <Label 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Color="#3963ad" Offset="0.0" />
+                            <GradientStop Color="Gold" Offset="0.75" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Image Source="/Assets/Images/TeamImages/l60Hf.png"
+                           Opacity="0.7"
+                           Stretch="UniformToFill"/>
+                    <Canvas Grid.Row="0">
+                    </Canvas>
+                </Grid>
+
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Color="#3963ad" Offset="0.0" />
+                            <GradientStop Color="Gold" Offset="0.75" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Image  Source="/Assets/Images/TeamImages/beni.jpg"
+                           Opacity="0.7"
+                            Stretch="UniformToFill"/>
+                    <Canvas  Grid.Row="0">
+                    </Canvas>
+                </Grid>
+
+                <Grid Grid.Row="0" Grid.Column="2">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Color="#3963ad" Offset="0.0" />
+                            <GradientStop Color="Gold" Offset="0.75" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Image Source="/Assets/Images/TeamImages/gabi.jpeg"
+                           Opacity="0.7"
+                           Stretch="UniformToFill"/>
+                    <Canvas  Grid.Row="0">
+                    </Canvas>
+                </Grid>
+
+
+                
+
+                <Label 
+                    Grid.Row="1"
+                    Grid.Column="0"
                     Style="{StaticResource CustomFont}"
                     BorderBrush="Gold"
                     Background="Gold"
@@ -66,15 +124,17 @@
                     Content="Hortobágyi Balázs"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
                     Width="400"
                     Height="50"
                     FontSize="20"
                     FontWeight="Bold"
-                    Margin="20,5,20,20"/>
+                    />
 
                     <Label 
+                    Grid.Row="1"
+                    Grid.Column="1"
                     Style="{StaticResource CustomFont}"
                     BorderBrush="Gold"
                     Background="Gold"
@@ -83,16 +143,18 @@
                     Content="Vereczkei Benjamin"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
                     Width="400"
                     Height="50"
                     FontSize="20"
                     FontWeight="Bold"
-                    Margin="20,5,20,20"/>
+                    />
 
                     <Button 
                     Style="{StaticResource CustomFont}"
+                    Grid.Row="1"
+                    Grid.Column="2" 
                     BorderBrush="Gold"
                     Background="Gold"
                     Foreground="Purple"
@@ -100,16 +162,14 @@
                     Content="Rajnai Gábor"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
                     Width="400"
                     Height="50"
                     FontSize="20"
                     FontWeight="Bold"
-                    Margin="20,5,20,20"
                     Click="Button_RG_EasterEgg"/>
-                </StackPanel>
-
+                
 
                 <!--<Image 
                    
