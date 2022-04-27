@@ -68,7 +68,7 @@ namespace Revolution.HUD.Entities
 
             var button = new HudMiniActionButton(
                     new Uri(@"\Assets\Images\spr_barracks_button.png", UriKind.Relative),
-                    () => { }
+                    () => _messenger.Send(new ShowToastEvent("Not enough gold"))
                 );
 
             return button;
@@ -80,7 +80,7 @@ namespace Revolution.HUD.Entities
 
             var button = new HudMiniActionButton(
                     new Uri(@"\Assets\Images\spr_stable_button.png", UriKind.Relative),
-                    () => { }
+                    () => _messenger.Send(new ShowToastEvent("Hello World!"))
                 );
 
             return button;
