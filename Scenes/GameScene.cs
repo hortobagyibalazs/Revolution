@@ -81,6 +81,7 @@ namespace Revolution.Scenes
             timer.Start();
 
             EntityManager.CreateEntity<Camera>();
+            EntityManager.CreateEntity<Player>();
             canvas.Width = mapData.Dimension.X * GlobalConfig.TileSize;
             canvas.Height = mapData.Dimension.Y * GlobalConfig.TileSize;
         }
