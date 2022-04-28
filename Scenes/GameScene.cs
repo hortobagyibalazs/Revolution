@@ -76,6 +76,7 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new TooltipSystem(contentHolder.Tooltip));
             systemManager.RegisterSystem(new ToastMessageSystem(contentHolder.MessageLabel));
             systemManager.RegisterSystem(new SpawnerSystem(mapData));
+            systemManager.RegisterSystem(new CheatcodeSystem(canvas));
 
             // Start timer
             lastUpdate = Environment.TickCount;
