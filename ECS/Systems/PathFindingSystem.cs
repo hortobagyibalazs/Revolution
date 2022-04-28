@@ -38,12 +38,12 @@ namespace Revolution.ECS.Systems
                 if (entity is Entities.Villager)
                 {
                     var movementComponent = entity.GetComponent<MovementComponent>();
-                    var positionComponent = entity.GetComponent<PositionComponent>();
+                    var gameMapObjectComponent = entity.GetComponent<GameMapObjectComponent>();
                     if (movementComponent != null && movementComponent.CurrentTarget != null)
                     {
                         movementComponent.Path.Clear();
                         grid.GridArray = null;
-                        movementComponent.Path = PathFinding(positionComponent.Y / 64, positionComponent.X / 64, (int)movementComponent.CurrentTarget.Value.Y, (int)movementComponent.CurrentTarget.Value.X);
+                        movementComponent.Path = PathFinding(gameMapObjectComponent.Y , gameMapObjectComponent.X, (int)movementComponent.CurrentTarget.Value.Y, (int)movementComponent.CurrentTarget.Value.X);
                         movementComponent.CurrentTarget = null;
                     }
                 }
