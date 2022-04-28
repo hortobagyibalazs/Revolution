@@ -84,7 +84,7 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new SpriteAnimationSystem());
             systemManager.RegisterSystem(new MapSystem(mapData));
             systemManager.RegisterSystem(new HudSystem(contentHolder.InfoHud, contentHolder.ActionHud));
-            systemManager.RegisterSystem(new PathFinderSystem(new GridComponent(60, 60, 1)));
+            systemManager.RegisterSystem(new PathFinderSystem(new GridComponent((int) mapData.Dimension.X, (int) mapData.Dimension.Y, 1)));
 
             // Start timer
             lastUpdate = Environment.TickCount;
