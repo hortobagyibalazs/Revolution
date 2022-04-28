@@ -10,13 +10,21 @@ namespace Revolution.ECS.Entities
     // Can be either user or AI controlled
     public class Player : Entity
     {
+        public bool IsGuiControlled
+        {
+            get => GetComponent<ControlComponent>().IsGuiControlled; 
+            set => GetComponent<ControlComponent>().IsGuiControlled = value;
+        }
+
         public Player()
         {
             var teamComp = new TeamComponent();
             var resourceComp = new ResourceComponent();
+            var controlComp = new ControlComponent();
 
             AddComponent(teamComp);
             AddComponent(resourceComp);
+            AddComponent(controlComp);
         }
     }
 }

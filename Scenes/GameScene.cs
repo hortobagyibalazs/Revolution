@@ -80,10 +80,15 @@ namespace Revolution.Scenes
             lastUpdate = Environment.TickCount;
             timer.Start();
 
-            EntityManager.CreateEntity<Camera>();
-            EntityManager.CreateEntity<Player>();
+
+            // Set canvas size
             canvas.Width = mapData.Dimension.X * GlobalConfig.TileSize;
             canvas.Height = mapData.Dimension.Y * GlobalConfig.TileSize;
+
+            // Add entities
+            EntityManager.CreateEntity<Camera>();
+            Player player = EntityManager.CreateEntity<Player>();
+            player.IsGuiControlled = true;
         }
 
         private void UpdateSystems(object? sender, EventArgs e)

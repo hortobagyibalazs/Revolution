@@ -3,6 +3,7 @@ using Microsoft.Toolkit.Mvvm.Messaging;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.HUD.Events;
+using Revolution.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -114,7 +115,7 @@ namespace Revolution.HUD.Entities
 
         private void PurchaseBuilding<T>() where T : Entity
         {
-            _messenger.Send(new BuildingPurchaseEvent(typeof(T)));
+            _messenger.Send(new BuildingPurchaseEvent(typeof(T), PlayerHelper.GetGuiControlledPlayer()));
         }
     }
 }

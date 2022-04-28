@@ -19,6 +19,7 @@ namespace Revolution.ECS.Entities
             var selectionComp = new SelectionComponent(posComp, sizeComp);
             var teamComp = new TeamComponent() { TeamColor = Brushes.DarkBlue };
             var minimapComp = new MinimapComponent() { Background = teamComp.TeamColor };
+            var priceComp = new PriceComponent() { Wood = 100, Gold = 100 };
             
             sizeComp.PropertyChanged += delegate
             {
@@ -54,6 +55,7 @@ namespace Revolution.ECS.Entities
             AddComponent(selectionComp);
             AddComponent(teamComp);
             AddComponent(minimapComp);
+            AddComponent(priceComp);
         }
     }
 }

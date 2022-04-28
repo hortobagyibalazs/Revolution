@@ -25,7 +25,28 @@ namespace Revolution.ECS.Systems
 
         public void Receive(BuildingPurchaseEvent message)
         {
-            EntityManager.CreateEntity(message.BuildingType);
+            var player = message.Player;
+            var playerResourceComp = player.GetComponent<ResourceComponent>();
+
+            var building = EntityManager.CreateEntity(message.BuildingType);
+            var buildingPriceComp = building.GetComponent<PriceComponent>();
+
+            if (buildingPriceComp == null || (buildingPriceComp != null 
+                && playerResourceComp.Wood >= buildingPriceComp.Wood 
+                && playerResourceComp.Gold >= buildingPriceComp.Gold))
+            {
+                var buildingTeamComp = building.GetComponent<TeamComponent>();
+                if (buildingTeamComp != null)
+                {
+                    var playerTeamComp = player.GetComponent<TeamComponent>();
+                    buildingTeamComp.SetValuesFrom(playerTeamComp);
+                }
+            }
+            else
+            {
+                _messenger.Send(new ShowToastEvent(GlobalStrings.NotEnoughResources));
+                building.Destroy();
+            }
         }
 
         public void Update(int deltaMs)
