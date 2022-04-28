@@ -7,11 +7,20 @@ using Revolution.IO;
 
 namespace Revolution.ECS.Entities
 {
+    internal class TownCenterSpriteFrame
+    {
+        public static readonly SpriteFrame UnderConstruction = new SpriteFrame() { Source = new Uri(@"\Assets\Images\spr_construction_site.png", UriKind.Relative) };
+        public static readonly SpriteFrame Normal = new SpriteFrame() { Source = new Uri(@"\Assets\Images\spr_town_hall.png", UriKind.Relative) };
+    }
+
     public class TownCenter : Entity
     {
         public TownCenter()
         {
-            var renderComp = new SpriteComponent() {Source = new Uri(@"\Assets\Images\spr_town_hall.png", UriKind.Relative)};
+            var renderComp = new AnimatedSpriteComponent()
+            {
+                CurrentFrame = TownCenterSpriteFrame.Normal
+            };
             var posComp = new PositionComponent();
             var sizeComp = new SizeComponent();
             var mapObjectComp = new GameMapObjectComponent();
@@ -41,6 +50,18 @@ namespace Revolution.ECS.Entities
                 posComp.Y = mapObjectComp.Y * GlobalConfig.TileSize;
 
                 spawnerComp.SpawnTarget = new System.Numerics.Vector2(mapObjectComp.X + 1, mapObjectComp.Y + mapObjectComp.Height);
+            };
+
+            buildingComponent.PropertyChanged += delegate
+            {
+                if (buildingComponent.State == BuildingState.UnderConstruction)
+                {
+                    renderComp.CurrentFrame = TownCenterSpriteFrame.UnderConstruction;
+                }
+                else
+                {
+                    renderComp.CurrentFrame = TownCenterSpriteFrame.Normal;
+                }
             };
 
             mapObjectComp.X = 1;

@@ -26,7 +26,7 @@ namespace Revolution.ECS.Components
 
         public void NextFrame()
         {
-            if (CurrentFrame != null)
+            if (CurrentFrame != null && CurrentFrame.NextFrame != null)
             {
                 CurrentFrame = CurrentFrame.NextFrame;
             }
