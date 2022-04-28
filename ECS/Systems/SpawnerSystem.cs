@@ -1,6 +1,7 @@
 ﻿using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
+using Revolution.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,40 +37,16 @@ namespace Revolution.ECS.Systems
                         var posComp = newEntity.GetComponent<PositionComponent>();
                         if (gmoComp != null && posComp != null)
                         {
-                            var spawnPosition = GetClosestEmptyCellToDesired(spawnerComp.SpawnTarget);
-                            posComp.X = (int) spawnPosition.X * GlobalConfig.TileSize;
-                            posComp.Y = (int) spawnPosition.Y * GlobalConfig.TileSize;
+                            var spawnPosition = MapHelper.GetClosestEmptyCellToDesired(spawnerComp.SpawnTarget, _gameMap);
+                            if (spawnPosition != null)
+                            {
+                                posComp.X = (int)spawnPosition?.X * GlobalConfig.TileSize;
+                                posComp.Y = (int)spawnPosition?.Y * GlobalConfig.TileSize;
+                            }
                         }
                     }
                 }
             }
-        }
-
-        // NOTE: Doesn't exactly work as expected, but it will do the job
-        private Vector2 GetClosestEmptyCellToDesired(Vector2 spawnTarget)
-        {
-            // If desired cell is empty, return it
-            if (_gameMap.Entities[(int) spawnTarget.X, (int) spawnTarget.Y] == null)
-            {
-                return spawnTarget;
-            }
-
-            // Look for closest empty cell in spiral
-            int[] xRot = new int[] { 1, 1, 0, -1, -1, -1, 0, 1 };
-            int[] yRot = new int[] { 0, -1, -1, -1, 0, 1, 1, 1 };
-            int i = 0;
-            int distance = 1;
-            while (_gameMap.Entities[(int) spawnTarget.X + distance * xRot[i], (int) spawnTarget.Y + distance * yRot[i]] != null)
-            {
-                i++;
-                if (i >= xRot.Length)
-                {
-                    i = 0;
-                    distance++;
-                }
-            }
-
-            return new Vector2((int)spawnTarget.X + distance * xRot[i], (int)spawnTarget.Y + distance * yRot[i]);
         }
     }
 }
