@@ -20,7 +20,7 @@ namespace Revolution.HUD.Entities
             panel.Children.Add(
                 new HudMiniActionButton(
                     new Uri(@"\Assets\Images\spr_peasant_button.png", UriKind.Relative),
-                    () => { }
+                    () => entity.GetComponent<SpawnerComponent>().SpawnQueue.Enqueue(typeof(Villager))
                 )
             );
 

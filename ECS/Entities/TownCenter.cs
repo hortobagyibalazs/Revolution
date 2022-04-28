@@ -18,6 +18,7 @@ namespace Revolution.ECS.Entities
             var buildingComponent = new BuildingComponent() { State = BuildingState.Placing};
             var collisionComp = new CollisionComponent(mapObjectComp);
             var selectionComp = new SelectionComponent(posComp, sizeComp);
+            var spawnerComp = new SpawnerComponent();
             var hudComp = new TownCenterHud().CreateComponent(this);
             
             sizeComp.PropertyChanged += delegate
@@ -38,6 +39,8 @@ namespace Revolution.ECS.Entities
                 sizeComp.Height = mapObjectComp.Height * GlobalConfig.TileSize;
                 posComp.X = mapObjectComp.X * GlobalConfig.TileSize;
                 posComp.Y = mapObjectComp.Y * GlobalConfig.TileSize;
+
+                spawnerComp.SpawnTarget = new System.Numerics.Vector2(mapObjectComp.X + 1, mapObjectComp.Y + mapObjectComp.Height);
             };
 
             mapObjectComp.X = 1;
@@ -52,6 +55,7 @@ namespace Revolution.ECS.Entities
             AddComponent(buildingComponent);
             AddComponent(collisionComp);
             AddComponent(selectionComp);
+            AddComponent(spawnerComp);
             AddComponent(hudComp);
         }
     }
