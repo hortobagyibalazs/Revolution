@@ -1,4 +1,5 @@
 ﻿using Revolution.ECS.Components;
+using Revolution.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Revolution.ECS.Entities
         public Player()
         {
             var teamComp = new TeamComponent();
-            var resourceComp = new ResourceComponent();
+            var resourceComp = new ResourceComponent() { Gold = GlobalConfig.StarterGold, Wood = GlobalConfig.StarterWood};
             var controlComp = new ControlComponent();
 
             AddComponent(teamComp);

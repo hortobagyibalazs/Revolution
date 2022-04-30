@@ -18,8 +18,6 @@ namespace Revolution.IO
 {
     public class MapLoader
     {
-        private static List<Entity> tiles = new List<Entity>();
-
         /**
          * @return Map dimension
          */
@@ -65,23 +63,28 @@ namespace Revolution.IO
                         croppedBitmap.Freeze();
 
                         var entity = CreateEntity(tileset, gid);
-                        if (entity == null) continue;
+                        if (entity == null)
+                        {
+                            var tileObj = new Tile()
+                            {
+                                Drawable = croppedBitmap,
+                                CellX = tile.X,
+                                CellY = tile.Y,
+                                Width = tileset.TileWidth,
+                                Height = tileset.TileHeight
+                            };
+                            mapData.Tiles.Add(tileObj);
+                            continue;
+                        }
                         var mapObjectComp = entity.GetComponent<GameMapObjectComponent>();
 
                         var renderComp = entity.GetComponent<RenderComponent>();
                         if (renderComp != null)
                         {
-                            (renderComp.Renderable as Image).Source = croppedBitmap;
                             renderComp.ZIndex = zIndex;
                         }
                         mapObjectComp.X = tile.X;
                         mapObjectComp.Y = tile.Y;
-
-                        if (entity is Tile)
-                        {
-                            System.Windows.Media.SolidColorBrush brush = GetMinimapColorForTile(tileset);
-                            entity.GetComponent<MinimapComponent>().Background = brush;
-                        }
                     } 
                     catch 
                     {
@@ -95,12 +98,7 @@ namespace Revolution.IO
 
         public static void Unload()
         {
-            foreach (var tile in tiles)
-            {
-                tile.Destroy();
-            }
-
-            tiles.Clear();
+            
         }
 
         private static TmxTileset GetTilesetForGid(TmxList<TmxTileset> tilesets, int gid)
@@ -136,7 +134,7 @@ namespace Revolution.IO
             }
             else
             {
-                entity = EntityManager.CreateEntity<Tile>();
+                //entity = EntityManager.CreateEntity<Tile>();
             }
 
             return entity;

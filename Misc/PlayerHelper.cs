@@ -26,5 +26,24 @@ namespace Revolution.Misc
 
             return null;
         }
+
+        public static int GetMaxPopulation(Player player)
+        {
+            var playerTeamId = player.GetComponent<TeamComponent>().TeamId;
+
+            int maxPopulation = 0;
+            foreach (var entity in EntityManager.GetEntities())
+            {
+                var teamComponent = entity.GetComponent<TeamComponent>();
+                var resourceComponent = entity.GetComponent<ResourceComponent>();
+
+                if (teamComponent != null && teamComponent.TeamId == playerTeamId && resourceComponent != null)
+                {
+                    maxPopulation += resourceComponent.Population;
+                }
+            }
+
+            return maxPopulation;
+        }
     }
 }

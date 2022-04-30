@@ -28,6 +28,8 @@ namespace Revolution.ECS.Entities
             var collisionComp = new CollisionComponent(mapObjectComp);
             var selectionComp = new SelectionComponent(posComp, sizeComp);
             var spawnerComp = new SpawnerComponent();
+            var resourceComp = new ResourceComponent() { Population = 10 };
+            var teamComp = new TeamComponent();
             var hudComp = new TownCenterHud().CreateComponent(this);
             
             sizeComp.PropertyChanged += delegate
@@ -56,10 +58,16 @@ namespace Revolution.ECS.Entities
             {
                 if (buildingComponent.State == BuildingState.UnderConstruction)
                 {
+                    AddComponent(teamComp);
                     renderComp.CurrentFrame = TownCenterSpriteFrame.UnderConstruction;
+                }
+                else if (buildingComponent.State == BuildingState.Destroyed)
+                {
+                    // TODO : 
                 }
                 else
                 {
+                    AddComponent(resourceComp);
                     renderComp.CurrentFrame = TownCenterSpriteFrame.Normal;
                 }
             };
