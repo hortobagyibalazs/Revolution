@@ -23,6 +23,23 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
+            <Grid
+                  x:Name="Tooltip" 
+                  HorizontalAlignment="Left" 
+                  Margin="0, 0, 10, 10" 
+                  Background="Black"
+                  Visibility="Visible" />
+
+            <Label
+                x:Name="MessageLabel"
+                HorizontalAlignment="Center"
+                FontSize="16"
+                Foreground="White"
+                Background="#3b000000"
+                Grid.Row="1"
+                Visibility="Collapsed"
+                />
+
             <Image Grid.Row="1"
                 Source="/Assets/Images/spr_gui_bar.png"/>
 
@@ -30,11 +47,13 @@
                 <!--Total width should be 528-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="17*"/>
-                    <ColumnDefinition Width="59*"/> <!--Minimap-->
-                    <ColumnDefinition Width="79*"/>
-                    <ColumnDefinition Width="223*"/> <!--Info panel-->
+                    <ColumnDefinition Width="59*"/> <!--Minimap-->                  
+                    <ColumnDefinition Width="18*"/>
+                    <ColumnDefinition Width="48*"/> <!--Resource Info-->
+                    <ColumnDefinition Width="16*"/>
+                    <ColumnDefinition Width="223*"/> <!--Info Pane-->
                     <ColumnDefinition Width="65*"/>
-                    <ColumnDefinition Width="70*" /> <!--Action panel-->
+                    <ColumnDefinition Width="70*" /> <!--Action Pane-->
                     <ColumnDefinition Width="15*"/>
                 </Grid.ColumnDefinitions>
 
@@ -45,16 +64,44 @@
                 </Grid.RowDefinitions>
 
                 <Canvas x:Name="Minimap" Grid.Column="1" Grid.Row="1"/>
+
                 <Grid Grid.Column="3" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="/Assets/Images/spr_tree_gui.png" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+                    <Image Source="/Assets/Images/spr_gold_coin_gui.png" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
+                    <Image Source="/Assets/Images/spr_food_gui.png" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
+                    
+                    <Label x:Name="WoodLabel" DockPanel.Dock="Right" Foreground="White" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="2, 0, 0, 0"/>
+                    <Label x:Name="GoldLabel" Foreground="White" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="2, 0, 0, 0"/>
+                    <Label x:Name="PopulationLabel" Foreground="White" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Margin="2, 0, 0, 0"/>
+                </Grid>
+                
+                <Grid Grid.Column="5" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="177*"/>
+                        <ColumnDefinition Width="161*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="12*"/>
                         <RowDefinition Height="60*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid x:Name="InfoHud" Grid.Row="1"></Grid>
+                    <Grid x:Name="InfoHud" Grid.Row="1" Grid.ColumnSpan="2"></Grid>
                 </Grid>
 
-                <Grid Grid.Column="5" Grid.Row="1">
+                <Grid Grid.Column="7" Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="12*"/>
                         <RowDefinition Height="60*"/>

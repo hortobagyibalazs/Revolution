@@ -71,7 +71,7 @@ namespace Revolution.Scenes
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / fps);
             timer.Tick += UpdateSystems;
 
-            var mapData = MapLoader.LoadFromFile(@"", @"Assets\map2.tmx");
+            var mapData = MapLoader.LoadFromFile(@"", @"Assets\map1.tmx");
 
             // Setup entity-component system
             systemManager = new SystemManager();
@@ -83,16 +83,31 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new MinimapSystem(contentHolder.Minimap, mapData, canvas, scrollViewer));
             systemManager.RegisterSystem(new SpriteAnimationSystem());
             systemManager.RegisterSystem(new MapSystem(mapData));
-            systemManager.RegisterSystem(new HudSystem(contentHolder.InfoHud, contentHolder.ActionHud));
-            systemManager.RegisterSystem(new PathFinderSystem(new GridComponent((int) mapData.Dimension.X, (int) mapData.Dimension.Y, 1)));
+            systemManager.RegisterSystem(new HudSystem(contentHolder.InfoHud, contentHolder.ActionHud, contentHolder.WoodLabel, contentHolder.GoldLabel, contentHolder.PopulationLabel));
+            systemManager.RegisterSystem(new TooltipSystem(contentHolder.Tooltip));
+            systemManager.RegisterSystem(new ToastMessageSystem(contentHolder.MessageLabel));
+            systemManager.RegisterSystem(new SpawnerSystem(mapData));
+            systemManager.RegisterSystem(new CheatcodeSystem(canvas));
+            systemManager.RegisterSystem(new PathFinderSystem(new GridComponent((int)mapData.Dimension.X, (int)mapData.Dimension.Y, 1)));
 
             // Start timer
             lastUpdate = Environment.TickCount;
             timer.Start();
 
-            EntityManager.CreateEntity<Camera>();
+            // Set canvas size
             canvas.Width = mapData.Dimension.X * GlobalConfig.TileSize;
             canvas.Height = mapData.Dimension.Y * GlobalConfig.TileSize;
+
+            // Add entities
+            var renderableMap = EntityManager.CreateEntity<RenderableMap>();
+            renderableMap.Width = (int) mapData.Dimension.X * GlobalConfig.TileSize;
+            renderableMap.Height = (int) mapData.Dimension.Y * GlobalConfig.TileSize;
+            renderableMap.Tiles.AddRange(mapData.Tiles);
+            renderableMap.InvalidateTiles();
+
+            EntityManager.CreateEntity<Camera>();
+            Player player = EntityManager.CreateEntity<Player>();
+            player.IsGuiControlled = true;
         }
 
         private void UpdateSystems(object? sender, EventArgs e)

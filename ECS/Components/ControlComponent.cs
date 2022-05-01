@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace Revolution.ECS.Components
 {
-    public class MinimapComponent : Component
+    public class ControlComponent : Component
     {
-        public Brush Background { get; set; }
-
-        public EventHandler<DrawingContext> Draw;
+        public bool IsGuiControlled { get; set; }
     }
 }

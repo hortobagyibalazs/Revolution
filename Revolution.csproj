@@ -56,9 +56,7 @@
 		<None Remove="Assets\Images\spr_button\spr_button_1.png" />
 		<None Remove="Assets\Images\spr_button_small\spr_button_small_0.png" />
 		<None Remove="Assets\Images\spr_button_small\spr_button_small_1.png" />
-		<None Remove="Assets\Images\spr_construction_site_GRIDx2.png" />
-		<None Remove="Assets\Images\spr_construction_site_GRIDx3.png" />
-		<None Remove="Assets\Images\spr_construction_site_GRIDx4.png" />
+		<None Remove="Assets\Images\spr_construction_site.png" />
 		<None Remove="Assets\Images\spr_cursor.png" />
 		<None Remove="Assets\Images\spr_destroyed_building.png" />
 		<None Remove="Assets\Images\spr_farm.png" />
@@ -317,13 +315,7 @@
 		<Content Include="Assets\Images\spr_button_small\spr_button_small_1.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Assets\Images\spr_construction_site_GRIDx2.png">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Assets\Images\spr_construction_site_GRIDx3.png">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Assets\Images\spr_construction_site_GRIDx4.png">
+		<Content Include="Assets\Images\spr_construction_site.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_cursor.png">

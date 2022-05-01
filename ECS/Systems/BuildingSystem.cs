@@ -2,21 +2,26 @@ using System;
 using System.Numerics;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
+using Revolution.HUD.Events;
 using Revolution.IO;
 
 namespace Revolution.ECS.Systems
 {
-    public class BuildingSystem : ISystem
+    public class BuildingSystem : ISystem, IRecipient<BuildingPurchaseEvent>
     {
+        private IMessenger _messenger = Ioc.Default.GetService<IMessenger>();
+
         private ScrollViewer ScrollViewer;
 
         public BuildingSystem(ScrollViewer scrollViewer)
         {
             ScrollViewer = scrollViewer;
         }
-
+        
         public void Update(int deltaMs)
         {
             foreach (var entity in EntityManager.GetEntities())
@@ -60,7 +65,7 @@ namespace Revolution.ECS.Systems
                 entity.GetComponent<BuildingComponent>().State = BuildingState.Placing;
                 entity.GetComponent<GameMapObjectComponent>().X = GetGameObjectPosBasedOnCursorX();
                 entity.GetComponent<GameMapObjectComponent>().Y = GetGameObjectPosBasedOnCursorY();
-            }
+            } 
             else if (Keyboard.IsKeyDown(Key.N))
             {
                 var entity = EntityManager.CreateEntity<TownCenter>();
@@ -68,7 +73,7 @@ namespace Revolution.ECS.Systems
                 entity.GetComponent<GameMapObjectComponent>().X = GetGameObjectPosBasedOnCursorX();
                 entity.GetComponent<GameMapObjectComponent>().Y = GetGameObjectPosBasedOnCursorY();
             }
-            else if (Keyboard.IsKeyDown(Key.V))
+            else if (Keyboard.IsKeyDown (Key.V))
             {
                 var villager = EntityManager.CreateEntity<Villager>();
                 var posComp = villager.GetComponent<PositionComponent>();

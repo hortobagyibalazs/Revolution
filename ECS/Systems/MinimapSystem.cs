@@ -72,12 +72,7 @@ namespace Revolution.ECS.Systems
                 {
                     if (drawingContext != null && minimapCanvas.ActualWidth != double.NaN)
                     {
-                        double x = gameMapObjectComp.X * (minimapCanvas.ActualWidth / mapData.Dimension.X);
-                        double y = gameMapObjectComp.Y * (minimapCanvas.ActualHeight / mapData.Dimension.Y);
-                        double width = gameMapObjectComp.Width * (minimapCanvas.ActualWidth / mapData.Dimension.X);
-                        double height = gameMapObjectComp.Height * (minimapCanvas.ActualHeight / mapData.Dimension.Y);
-
-                        drawingContext.DrawRectangle(minimapComp.Background, null, new Rect(x, y, width, height));
+                        minimapComp.Draw?.Invoke(this, drawingContext);
                     }
                 }
                 else if (cameraComp != null)
