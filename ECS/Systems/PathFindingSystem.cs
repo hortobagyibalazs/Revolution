@@ -1,5 +1,6 @@
 ﻿using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
+using Revolution.IO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,10 +15,11 @@ namespace Revolution.ECS.Systems
     public class PathFinderSystem : ISystem
     {
         GridComponent grid;
+        MapData mapData;
 
-        public PathFinderSystem(GridComponent grid)
+        public PathFinderSystem(MapData mapData)
         {
-            this.grid = grid;
+            this.mapData = mapData;
         }
 
         public void UpdateCell(int x, int y, int data)
@@ -42,17 +44,20 @@ namespace Revolution.ECS.Systems
                     if (movementComponent != null && movementComponent.CurrentTarget != null)
                     {
                         movementComponent.Path.Clear();
-                        grid.GridArray = null;
-                        movementComponent.Path = PathFinding(gameMapObjectComponent.Y , gameMapObjectComponent.X, (int)movementComponent.CurrentTarget.Value.Y, (int)movementComponent.CurrentTarget.Value.X);
+                        if (grid != null)
+                        {
+                            grid.GridArray = null;
+                        }
+                        movementComponent.Path = PathFinding(mapData, gameMapObjectComponent.Y, gameMapObjectComponent.X, (int)movementComponent.CurrentTarget.Value.Y, (int)movementComponent.CurrentTarget.Value.X);
                         movementComponent.CurrentTarget = null;
                     }
                 }
             }
         }
 
-        public Queue<Vector2> PathFinding(int startX, int startY, int targetX, int targetY)
+        public Queue<Vector2> PathFinding(MapData mapData, int startX, int startY, int targetX, int targetY)
         {
-            grid = new GridComponent(60, 60, 1);
+            grid = new GridComponent(mapData);
 
             Queue<Vector2> Path = new Queue<Vector2>();
 

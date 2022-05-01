@@ -88,7 +88,7 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new ToastMessageSystem(contentHolder.MessageLabel));
             systemManager.RegisterSystem(new SpawnerSystem(mapData));
             systemManager.RegisterSystem(new CheatcodeSystem(canvas));
-            systemManager.RegisterSystem(new PathFinderSystem(new GridComponent((int)mapData.Dimension.X, (int)mapData.Dimension.Y, 1)));
+            systemManager.RegisterSystem(new PathFinderSystem(mapData));//(new GridComponent((int)mapData.Dimension.X, (int)mapData.Dimension.Y, 1)));
 
             // Start timer
             lastUpdate = Environment.TickCount;
