@@ -59,21 +59,7 @@ namespace Revolution.ECS.Systems
             }
 
             // This is for testing
-            if (Keyboard.IsKeyDown(Key.B))
-            {
-                var entity = EntityManager.CreateEntity<House>();
-                entity.GetComponent<BuildingComponent>().State = BuildingState.Placing;
-                entity.GetComponent<GameMapObjectComponent>().X = GetGameObjectPosBasedOnCursorX();
-                entity.GetComponent<GameMapObjectComponent>().Y = GetGameObjectPosBasedOnCursorY();
-            } 
-            else if (Keyboard.IsKeyDown(Key.N))
-            {
-                var entity = EntityManager.CreateEntity<TownCenter>();
-                entity.GetComponent<BuildingComponent>().State = BuildingState.Placing;
-                entity.GetComponent<GameMapObjectComponent>().X = GetGameObjectPosBasedOnCursorX();
-                entity.GetComponent<GameMapObjectComponent>().Y = GetGameObjectPosBasedOnCursorY();
-            }
-            else if (Keyboard.IsKeyDown (Key.V))
+            if (Keyboard.IsKeyDown (Key.V))
             {
                 var villager = EntityManager.CreateEntity<Villager>();
                 var posComp = villager.GetComponent<PositionComponent>();
