@@ -20,15 +20,13 @@ namespace Revolution.ECS.Entities
         {
             var sizeComp = new SizeComponent();
             var posComp = new PositionComponent();
-            var spriteComp = new AnimatedSpriteComponent();
+            var spriteComp = new AnimatedSpriteComponent() { CurrentFrame = VillagerSpriteFrame.Idle };
             var gameMapObjectComp = new GameMapObjectComponent();
             var collisionComp = new CollisionComponent(gameMapObjectComp);
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
             var selectionComp = new SelectionComponent(posComp, sizeComp);
             var directionComp = new DirectionComponent();
             var hudComp = new VillagerHud().CreateComponent(this);
-
-            spriteComp.CurrentFrame = VillagerSpriteFrame.Moving;
 
             gameMapObjectComp.PropertyChanged += delegate
             {
@@ -49,6 +47,18 @@ namespace Revolution.ECS.Entities
 
                 Canvas.SetLeft(spriteComp.Renderable, posComp.X);
                 Canvas.SetTop(spriteComp.Renderable, posComp.Y);
+            };
+
+            movementComp.PropertyChanged += delegate
+            {
+                if (movementComp.VelocityX != 0 || movementComp.VelocityY != 0)
+                {
+                    spriteComp.CurrentFrame = VillagerSpriteFrame.Moving;
+                }
+                else
+                {
+                    spriteComp.CurrentFrame = VillagerSpriteFrame.Idle;
+                }
             };
 
             gameMapObjectComp.Width = 1;

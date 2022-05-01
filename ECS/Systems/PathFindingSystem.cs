@@ -55,7 +55,6 @@ namespace Revolution.ECS.Systems
                 }
                 Debug.WriteLine("Find path from " + gameMapObjectComponent.X + ";" + gameMapObjectComponent.Y + " to " + dest.X + ";" + dest.Y);
                 movementComponent.Path = PathFinding(mapData, gameMapObjectComponent.Y, gameMapObjectComponent.X, (int)dest.Y, (int)dest.X);
-                movementComponent.CurrentTarget = null;
             }
         }
 
@@ -232,8 +231,6 @@ namespace Revolution.ECS.Systems
 
             while (!pathComplete)
             {
-
-
                 for (int i = -1; i < 2; i++)
                 {
                     for (int j = -1; j < 2; j++)

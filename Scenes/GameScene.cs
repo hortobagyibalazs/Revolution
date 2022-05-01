@@ -78,8 +78,8 @@ namespace Revolution.Scenes
             systemManager = new SystemManager();
             systemManager.RegisterSystem(new RenderSystem(canvas));
             systemManager.RegisterSystem(new CameraSystem(scrollViewer, canvas, Root));
-            systemManager.RegisterSystem(new BuildingSystem(scrollViewer));
-            systemManager.RegisterSystem(new MovementSystem());
+            systemManager.RegisterSystem(new BuildingSystem(scrollViewer, canvas));
+            systemManager.RegisterSystem(new MovementSystem(mapData));
             systemManager.RegisterSystem(new SelectionSystem(canvas, scrollViewer));
             systemManager.RegisterSystem(new MinimapSystem(contentHolder.Minimap, mapData, canvas, scrollViewer));
             systemManager.RegisterSystem(new SpriteAnimationSystem());

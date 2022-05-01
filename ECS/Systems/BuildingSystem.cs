@@ -17,15 +17,24 @@ namespace Revolution.ECS.Systems
         private IMessenger _messenger = Ioc.Default.GetService<IMessenger>();
 
         private ScrollViewer ScrollViewer;
+        private Canvas Canvas;
 
-        public BuildingSystem(ScrollViewer scrollViewer)
+        public BuildingSystem(ScrollViewer scrollViewer, Canvas canvas)
         {
             ScrollViewer = scrollViewer;
+            Canvas = canvas;
+
+            _messenger.Register<BuildingPurchaseEvent>(this);
         }
 
         public void Receive(BuildingPurchaseEvent message)
         {
-            EntityManager.CreateEntity(message.BuildingType);
+            var entity = EntityManager.CreateEntity(message.BuildingType);
+            var buildingComponent = entity.GetComponent<BuildingComponent>();
+            if (buildingComponent != null)
+            {
+                buildingComponent.State = BuildingState.Placing;
+            }
         }
 
         public void Update(int deltaMs)
@@ -77,7 +86,7 @@ namespace Revolution.ECS.Systems
                 int startY = gmoComp.Y - 1;
             }
 
-            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            if (Mouse.LeftButton == MouseButtonState.Pressed && Canvas.IsMouseOver)
             {
                 foreach (var entity in Entities.EntityManager.GetEntities())
                 {

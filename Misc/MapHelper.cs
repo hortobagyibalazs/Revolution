@@ -12,36 +12,55 @@ namespace Revolution.Misc
     {
         public static Vector2? GetClosestEmptyCellToDesired(Vector2 spawnTarget, MapData gameMap)
         {
-            int targetX = (int)spawnTarget.X;
-            int targetY = (int)spawnTarget.Y;
+            HashSet<Vector2> processed = new HashSet<Vector2>();
+            Queue<Vector2> queue = new Queue<Vector2>();
 
-            // Look for closest empty cell in spiral
-            int maxDistance = (int) gameMap.Dimension.X / 2;
-
-            for (int distance = 0; distance < maxDistance; distance++)
+            queue.Enqueue(spawnTarget);
+            processed.Add(spawnTarget);
+            while (queue.Count > 0)
             {
-                int startX = targetX - distance;
-                int endX = targetX + distance;
-                int startY = targetY - distance;
-                int endY = targetY + distance;
+                var vector = queue.Dequeue();
+                if (gameMap.Entities[(int)vector.X, (int)vector.Y] == null) return vector;
 
-                for (int x = startX; x <= endX; x++)
+                foreach(var neighbor in GetNeighbors(vector, gameMap))
                 {
-                    for (int y = endY; y >= startX; y--)
+                    if (!processed.Contains(neighbor))
                     {
-                        if ((x == startX || y == startY || x == endX || y == endY)
-                           && startX >= 0 && startY >= 0 && endX < gameMap.Dimension.X && endY < gameMap.Dimension.Y)
-                        {
-                            if (gameMap.Entities[x, y] == null)
-                            {
-                                return new Vector2(x, y);
-                            }
-                        }
+                        queue.Enqueue(neighbor);
+                        processed.Add(neighbor);
                     }
                 }
             }
 
+
             return null;
+        }
+
+        private static List<Vector2> GetNeighbors(Vector2 cell, MapData gameMap)
+        {
+            List<Vector2> neighbors = new List<Vector2>();
+
+            int x = (int)cell.X;
+            int y = (int)cell.Y;
+
+            int minX = 0;
+            int minY = 0;
+            int maxX = (int) gameMap.Dimension.X - 1;
+            int maxY = (int) gameMap.Dimension.Y - 1;
+
+            for (int _x = x - 1; _x <= x + 1; _x++)
+            {
+                for (int _y = y - 1; _y <= y + 1; _y++)
+                {
+                    //if (_x >= minX && _x <= maxX && _y >= minY && _y <= maxY && !(_x == x && _y == y))
+                    if (_x == x || _x == x + 1 || _y == y + 1 || _y == y)
+                    {
+                        neighbors.Add(new Vector2(_x, _y));
+                    }
+                }
+            }
+
+            return neighbors;
         }
     }
 }

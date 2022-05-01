@@ -14,7 +14,7 @@ namespace Revolution.ECS.Entities
         {
             // Create entity instance from generic type
             var obj = Activator.CreateInstance<T>();
-           
+
             RegisterEntity(obj);
 
             return obj;
