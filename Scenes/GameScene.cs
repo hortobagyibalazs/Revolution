@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -102,7 +103,12 @@ namespace Revolution.Scenes
             var renderableMap = EntityManager.CreateEntity<RenderableMap>();
             renderableMap.Width = (int) mapData.Dimension.X * GlobalConfig.TileSize;
             renderableMap.Height = (int) mapData.Dimension.Y * GlobalConfig.TileSize;
-            renderableMap.Tiles.AddRange(mapData.Tiles);
+            var enumerator = mapData.Tiles.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                var tilesInCell = (enumerator.Current as List<Tile>);
+                renderableMap.Tiles.AddRange(tilesInCell);
+            }
             renderableMap.InvalidateTiles();
 
             EntityManager.CreateEntity<Camera>();

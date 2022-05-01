@@ -76,7 +76,7 @@ namespace Revolution.IO
                                 Width = tileset.TileWidth,
                                 Height = tileset.TileHeight
                             };
-                            mapData.Tiles.Add(tileObj);
+                            mapData.Tiles[tile.X, tile.Y].Add(tileObj);
                             continue;
                         }
                         var mapObjectComp = entity.GetComponent<GameMapObjectComponent>();

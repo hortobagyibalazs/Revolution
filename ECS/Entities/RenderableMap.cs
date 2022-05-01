@@ -34,7 +34,10 @@ namespace Revolution.ECS.Entities
         {
             Tiles = new List<Tile>();
 
-            var renderComp = new RenderComponent() { Renderable = new Image() };
+            var renderComp = new RenderComponent() { 
+                Renderable = new Image(), 
+                ZIndex = -1
+            };
             var posComp = new PositionComponent();
             var sizeComp = new SizeComponent();
             var minimapComp = new MinimapComponent();
