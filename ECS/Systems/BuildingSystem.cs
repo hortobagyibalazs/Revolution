@@ -21,7 +21,12 @@ namespace Revolution.ECS.Systems
         {
             ScrollViewer = scrollViewer;
         }
-        
+
+        public void Receive(BuildingPurchaseEvent message)
+        {
+            EntityManager.CreateEntity(message.BuildingType);
+        }
+
         public void Update(int deltaMs)
         {
             foreach (var entity in EntityManager.GetEntities())
