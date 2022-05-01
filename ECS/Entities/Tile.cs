@@ -14,5 +14,6 @@ namespace Revolution.ECS.Entities
         public int CellY { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+        public bool Colliding { get; set; }
     }
 }
