@@ -33,23 +33,9 @@ namespace Revolution.ECS.Systems
                         SetNextDestination(movementComp, gameObjectComp, directionComp);
                     }
 
-                    var collisionComp = entity.GetComponent<CollisionComponent>();
-                    bool collides = false;
-                    if (collisionComp != null)
-                    {
-                        collides = EntityCollides(entity);
-                    }
-
-                    if (!collides)
-                    {
-                        var posComp = entity.GetComponent<PositionComponent>();
-                        posComp.X += movementComp.VelocityX;
-                        posComp.Y += movementComp.VelocityY;
-                    } 
-                    else
-                    {
-                        movementComp.Stop();
-                    }
+                    var posComp = entity.GetComponent<PositionComponent>();
+                    posComp.X += movementComp.VelocityX;
+                    posComp.Y += movementComp.VelocityY;
                 }
             }
         }

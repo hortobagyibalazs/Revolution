@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Messaging;
+using Revolution.Commands;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.HUD.Events;
@@ -83,7 +84,8 @@ namespace Revolution.ECS.Systems
                     if (entity is Entities.Villager)
                     {
                         var movementComp = entity.GetComponent<MovementComponent>();
-                        movementComp.CurrentTarget = new Vector2(GetGameObjectPosBasedOnCursorX(), GetGameObjectPosBasedOnCursorY());
+                        var dest = new Vector2(GetGameObjectPosBasedOnCursorX(), GetGameObjectPosBasedOnCursorY());
+                        _messenger.Send(new FindRouteCommand(entity, dest));
                     }
                 }
             }

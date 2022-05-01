@@ -1,4 +1,7 @@
-﻿using Revolution.ECS.Components;
+﻿using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Messaging;
+using Revolution.Commands;
+using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
 using System;
@@ -12,14 +15,18 @@ using System.Threading.Tasks;
 
 namespace Revolution.ECS.Systems
 {
-    public class PathFinderSystem : ISystem
+    public class PathFinderSystem : ISystem, IRecipient<FindRouteCommand>
     {
+        private IMessenger _messenger = Ioc.Default.GetService<IMessenger>();
+
         GridComponent grid;
         MapData mapData;
 
         public PathFinderSystem(MapData mapData)
         {
             this.mapData = mapData;
+
+            _messenger.Register<FindRouteCommand>(this);
         }
 
         public void UpdateCell(int x, int y, int data)
@@ -33,26 +40,27 @@ namespace Revolution.ECS.Systems
             grid.ExportGrid(grid.GridArray);
         }
 
+        public void Receive(FindRouteCommand message)
+        {
+            var entity = message.Entity;
+            var dest = message.Destination;
+            var movementComponent = entity.GetComponent<MovementComponent>();
+            var gameMapObjectComponent = entity.GetComponent<GameMapObjectComponent>();
+            if (movementComponent != null)
+            {
+                movementComponent.Path.Clear();
+                if (grid != null)
+                {
+                    grid.GridArray = null;
+                }
+                movementComponent.Path = PathFinding(mapData, gameMapObjectComponent.Y, gameMapObjectComponent.X, (int)dest.Y, (int)dest.X);
+                movementComponent.CurrentTarget = null;
+            }
+        }
+
         public void Update(int deltaMs)
         {
-            foreach (var entity in EntityManager.GetEntities())
-            {
-                if (entity is Entities.Villager)
-                {
-                    var movementComponent = entity.GetComponent<MovementComponent>();
-                    var gameMapObjectComponent = entity.GetComponent<GameMapObjectComponent>();
-                    if (movementComponent != null && movementComponent.CurrentTarget != null)
-                    {
-                        movementComponent.Path.Clear();
-                        if (grid != null)
-                        {
-                            grid.GridArray = null;
-                        }
-                        movementComponent.Path = PathFinding(mapData, gameMapObjectComponent.Y, gameMapObjectComponent.X, (int)movementComponent.CurrentTarget.Value.Y, (int)movementComponent.CurrentTarget.Value.X);
-                        movementComponent.CurrentTarget = null;
-                    }
-                }
-            }
+
         }
 
         public Queue<Vector2> PathFinding(MapData mapData, int startX, int startY, int targetX, int targetY)
