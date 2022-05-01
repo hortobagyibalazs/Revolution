@@ -45,6 +45,7 @@ namespace Revolution.IO
                     int gid = tile.Gid;
                     // Find tileset for tile
                     var tileset = GetTilesetForGid(map.Tilesets, tile.Gid);
+                    
                     if (tileset == null) continue;
                     int actualGid = gid - tileset.FirstGid + 1;
 
@@ -62,6 +63,7 @@ namespace Revolution.IO
                         var cropRect = new Int32Rect(startX, startY, tileset.TileWidth, tileset.TileHeight);
                         var croppedBitmap = new CroppedBitmap(bitmaps[tileset], cropRect);
                         croppedBitmap.Freeze();
+                        
 
                         var entity = CreateEntity(tileset, gid);
                         if (entity == null)
@@ -74,7 +76,7 @@ namespace Revolution.IO
                                 Width = tileset.TileWidth,
                                 Height = tileset.TileHeight
                             };
-                            mapData.Tiles.Add(tileObj);
+                            mapData.Tiles[tile.X, tile.Y] = tileObj;
                             continue;
                         }
                         var mapObjectComp = entity.GetComponent<GameMapObjectComponent>();

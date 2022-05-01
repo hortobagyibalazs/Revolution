@@ -8,9 +8,9 @@ namespace Revolution.IO
     public class MapData
     {
         public Uri FileSource { get; set; }
-        public List<Tile> Tiles { get; }
-        public Vector2 Dimension { get; }
+        public Vector2 Dimension { get; } // width, height (in terms of number of cells)
         public Entity[,] Entities { get; } // x,y
+        public List<Tile> Tiles { get; }
 
         public MapData(Vector2 size)
         {
