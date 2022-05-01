@@ -74,6 +74,8 @@ namespace Revolution.ECS.Systems
                         cameraComp.SnapTo(cameraComp.X, newY);
                     }
 
+                    Debug.WriteLine($"X: {newX}  Y: {newY}");
+
                     scrollViewer.ScrollToHorizontalOffset(cameraComp.X);
                     scrollViewer.ScrollToVerticalOffset(cameraComp.Y);
 

@@ -20,39 +20,13 @@ namespace Revolution.ECS.Systems
         public BuildingSystem(ScrollViewer scrollViewer)
         {
             ScrollViewer = scrollViewer;
-            _messenger.Register(this);
         }
-
-        public void Receive(BuildingPurchaseEvent message)
-        {
-            var player = message.Player;
-            var playerResourceComp = player.GetComponent<ResourceComponent>();
-
-            var building = EntityManager.CreateEntity(message.BuildingType);
-            var buildingPriceComp = building.GetComponent<PriceComponent>();
-
-            if (buildingPriceComp == null || (buildingPriceComp != null 
-                && playerResourceComp.Wood >= buildingPriceComp.Wood 
-                && playerResourceComp.Gold >= buildingPriceComp.Gold))
-            {
-                var buildingTeamComp = building.GetComponent<TeamComponent>();
-                if (buildingTeamComp != null)
-                {
-                    var playerTeamComp = player.GetComponent<TeamComponent>();
-                    buildingTeamComp.SetValuesFrom(playerTeamComp);
-                }
-            }
-            else
-            {
-                _messenger.Send(new ShowToastEvent(GlobalStrings.NotEnoughResources));
-                building.Destroy();
-            }
-        }
-
+        
         public void Update(int deltaMs)
         {
             foreach (var entity in EntityManager.GetEntities())
             {
+                var movementComponent = entity.GetComponent<MovementComponent>();
                 var buildingComponent = entity.GetComponent<BuildingComponent>();
                 var mapObjectComponent = entity.GetComponent<GameMapObjectComponent>();
                 if (mapObjectComponent != null && buildingComponent?.State == BuildingState.Placing)
@@ -83,37 +57,55 @@ namespace Revolution.ECS.Systems
                     return;
                 }
             }
-            
+
             // This is for testing
-            if (Keyboard.IsKeyDown (Key.V))
+            if (Keyboard.IsKeyDown(Key.B))
             {
-                    var villager = EntityManager.CreateEntity<Villager>();
-                    var posComp = villager.GetComponent<PositionComponent>();
-                    var gmoComp = villager.GetComponent<GameMapObjectComponent>();
+                var entity = EntityManager.CreateEntity<House>();
+                entity.GetComponent<BuildingComponent>().State = BuildingState.Placing;
+                entity.GetComponent<GameMapObjectComponent>().X = GetGameObjectPosBasedOnCursorX();
+                entity.GetComponent<GameMapObjectComponent>().Y = GetGameObjectPosBasedOnCursorY();
+            } 
+            else if (Keyboard.IsKeyDown(Key.N))
+            {
+                var entity = EntityManager.CreateEntity<TownCenter>();
+                entity.GetComponent<BuildingComponent>().State = BuildingState.Placing;
+                entity.GetComponent<GameMapObjectComponent>().X = GetGameObjectPosBasedOnCursorX();
+                entity.GetComponent<GameMapObjectComponent>().Y = GetGameObjectPosBasedOnCursorY();
+            }
+            else if (Keyboard.IsKeyDown (Key.V))
+            {
+                var villager = EntityManager.CreateEntity<Villager>();
+                var posComp = villager.GetComponent<PositionComponent>();
+                var gmoComp = villager.GetComponent<GameMapObjectComponent>();
 
-                    posComp.X = (int)(Mouse.GetPosition(ScrollViewer).X + ScrollViewer.HorizontalOffset);
-                    posComp.Y = (int)(Mouse.GetPosition(ScrollViewer).Y + ScrollViewer.VerticalOffset);
-                    int startX = gmoComp.X - 1;
-                    int startY = gmoComp.Y - 1;
+                posComp.X = (int)(Mouse.GetPosition(ScrollViewer).X + ScrollViewer.HorizontalOffset);
+                posComp.Y = (int)(Mouse.GetPosition(ScrollViewer).Y + ScrollViewer.VerticalOffset);
+                int startX = gmoComp.X - 1;
+                int startY = gmoComp.Y - 1;
+            }
 
-
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 1, startY));
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 2, startY));
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 3, startY));
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 3, startY + 1));
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 3, startY + 2));
-                    villager.GetComponent<MovementComponent>().Path.Enqueue(new Vector2(startX + 2, startY + 2));
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                foreach (var entity in Entities.EntityManager.GetEntities())
+                {
+                    if (entity is Entities.Villager)
+                    {
+                        var movementComp = entity.GetComponent<MovementComponent>();
+                        movementComp.CurrentTarget = new Vector2(GetGameObjectPosBasedOnCursorX(), GetGameObjectPosBasedOnCursorY());
+                    }
+                }
             }
         }
 
         private int GetGameObjectPosBasedOnCursorX()
         {
-            return (int) (Mouse.GetPosition(ScrollViewer).X + ScrollViewer.HorizontalOffset) / GlobalConfig.TileSize;
+            return (int)(Mouse.GetPosition(ScrollViewer).X + ScrollViewer.HorizontalOffset) / GlobalConfig.TileSize;
         }
 
         private int GetGameObjectPosBasedOnCursorY()
         {
-            return (int) (Mouse.GetPosition(ScrollViewer).Y + ScrollViewer.VerticalOffset) / GlobalConfig.TileSize;
+            return (int)(Mouse.GetPosition(ScrollViewer).Y + ScrollViewer.VerticalOffset) / GlobalConfig.TileSize;
         }
     }
 }

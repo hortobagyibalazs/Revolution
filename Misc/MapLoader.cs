@@ -32,7 +32,6 @@ namespace Revolution.IO
             }
 
             var mapData = new MapData(new Vector2(map.Width, map.Height));
-            mapData.FileSource = new Uri(tileMapPath, UriKind.Relative);
             int tilesInRow = 8;
 
             int zIndex = -1;
