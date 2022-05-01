@@ -53,6 +53,7 @@ namespace Revolution.ECS.Systems
                 {
                     grid.GridArray = null;
                 }
+                Debug.WriteLine("Find path from " + gameMapObjectComponent.X + ";" + gameMapObjectComponent.Y + " to " + dest.X + ";" + dest.Y);
                 movementComponent.Path = PathFinding(mapData, gameMapObjectComponent.Y, gameMapObjectComponent.X, (int)dest.Y, (int)dest.X);
                 movementComponent.CurrentTarget = null;
             }

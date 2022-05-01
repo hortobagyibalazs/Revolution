@@ -17,36 +17,39 @@ namespace Revolution.ECS.Systems
                 var movementComp = entity.GetComponent<MovementComponent>();
                 var gameObjectComp = entity.GetComponent<GameMapObjectComponent>();
                 var directionComp = entity.GetComponent<DirectionComponent>();
+                var posComp = entity.GetComponent<PositionComponent>();
 
-                if (movementComp != null && gameObjectComp != null)
+                if (movementComp != null && gameObjectComp != null && posComp != null)
                 {
                     if (movementComp.CurrentTarget != null)
                     {
-                        if (((int) movementComp.CurrentTarget?.X == gameObjectComp.X) 
-                            && ((int) movementComp.CurrentTarget?.Y == gameObjectComp.Y))
+                        int targetX = ((int) movementComp.CurrentTarget?.X) * GlobalConfig.TileSize;
+                        int targetY = ((int) movementComp.CurrentTarget?.Y) * GlobalConfig.TileSize;
+                        if ((posComp.X == targetX) && (posComp.Y == targetY))
                         {
-                            SetNextDestination(movementComp, gameObjectComp, directionComp);
+                            SetNextDestination(movementComp, posComp, directionComp);
                         }
+
                     }
                     else
                     {
-                        SetNextDestination(movementComp, gameObjectComp, directionComp);
+                        SetNextDestination(movementComp, posComp, directionComp);
+                        continue;
                     }
 
-                    var posComp = entity.GetComponent<PositionComponent>();
                     posComp.X += movementComp.VelocityX;
                     posComp.Y += movementComp.VelocityY;
                 }
             }
         }
 
-        private void SetNextDestination(MovementComponent movementComp, GameMapObjectComponent gameObjectComp, DirectionComponent directionComp)
+        private void SetNextDestination(MovementComponent movementComp, PositionComponent posComp, DirectionComponent directionComp)
         {
             Vector2 nextDest;
             if (movementComp.Path.TryDequeue(out nextDest))
             {
                 movementComp.CurrentTarget = nextDest;
-                SetVelocity(nextDest, movementComp, gameObjectComp, directionComp);
+                SetVelocity(nextDest, movementComp, posComp, directionComp);
             }
             else
             {
@@ -54,15 +57,15 @@ namespace Revolution.ECS.Systems
             }
         }
 
-        private void SetVelocity(Vector2 nextDest, MovementComponent movementComp, GameMapObjectComponent gameObjectComp, DirectionComponent directionComp)
+        private void SetVelocity(Vector2 nextDest, MovementComponent movementComp, PositionComponent posComp, DirectionComponent directionComp)
         {
             if (nextDest != null)
             {
-                var currentX = gameObjectComp.X;
-                var currentY = gameObjectComp.Y;
+                var currentX = posComp.X;
+                var currentY = posComp.Y;
 
-                var targetX = nextDest.X;
-                var targetY = nextDest.Y;
+                var targetX = (int) nextDest.X * GlobalConfig.TileSize;
+                var targetY = (int) nextDest.Y * GlobalConfig.TileSize;
 
                 if (currentX < targetX)
                 {

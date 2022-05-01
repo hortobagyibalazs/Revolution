@@ -71,8 +71,8 @@ namespace Revolution.ECS.Systems
                 var posComp = villager.GetComponent<PositionComponent>();
                 var gmoComp = villager.GetComponent<GameMapObjectComponent>();
 
-                posComp.X = (int)(Mouse.GetPosition(ScrollViewer).X + ScrollViewer.HorizontalOffset);
-                posComp.Y = (int)(Mouse.GetPosition(ScrollViewer).Y + ScrollViewer.VerticalOffset);
+                posComp.X = GetGameObjectPosBasedOnCursorX() * GlobalConfig.TileSize;
+                posComp.Y = GetGameObjectPosBasedOnCursorY() * GlobalConfig.TileSize;
                 int startX = gmoComp.X - 1;
                 int startY = gmoComp.Y - 1;
             }
