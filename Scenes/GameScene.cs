@@ -51,17 +51,6 @@ namespace Revolution.Scenes
 
         public GameScene(FrameworkElement Root)
         {
-            //PathFinderSystem finder = new PathFinderSystem(new GridComponent(25, 25, 1));
-            //finder.UpdateCell(3, 4, -2);
-            //finder.UpdateCell(21, 5, -3);
-            //Debug.WriteLine("===============< START >===============");
-            //Stopwatch sw = new Stopwatch();
-            //sw.Start();
-            //finder.PathFinding();
-            //sw.Stop();
-            //Debug.WriteLine(sw.ElapsedMilliseconds);
-            //Debug.WriteLine("===============< END >===============");
-
             GameUiControl contentHolder = new GameUiControl();
             var scrollViewer = contentHolder.CanvasViewer;
             var canvas = contentHolder.MainCanvas;
@@ -118,10 +107,13 @@ namespace Revolution.Scenes
 
         private void UpdateSystems(object? sender, EventArgs e)
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             // Update every system
             int deltaMs = (int)(Environment.TickCount - lastUpdate);
             lastUpdate = Environment.TickCount;
             systemManager.Update(deltaMs);
+            Debug.WriteLine(sw.ElapsedMilliseconds + "ms");
         }
     }
 }

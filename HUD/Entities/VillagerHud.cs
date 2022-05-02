@@ -140,7 +140,7 @@ namespace Revolution.HUD.Entities
 
         private void PurchaseBuilding<T>() where T : Entity
         {
-            _messenger.Send(new BuildingPurchaseEvent(typeof(T), PlayerHelper.GetGuiControlledPlayer()));
+            _messenger.Send(new BuildingPurchaseCommand(typeof(T), PlayerHelper.GetGuiControlledPlayer()));
         }
 
         private void GetPriceForBuilding<T>(ref int wood, ref int gold) where T : Entity

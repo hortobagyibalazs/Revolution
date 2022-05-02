@@ -47,36 +47,12 @@ namespace Revolution.IO
                     var tileset = GetTilesetForGid(map.Tilesets, tile.Gid);
                     
                     if (tileset == null) continue;
-                    int actualGid = gid - tileset.FirstGid + 1;
 
                     try
                     {
-                        int startX = (actualGid % tilesInRow - 1) * map.TileWidth;
-                        int startY = (actualGid / tilesInRow) * map.TileHeight;
-                        if (actualGid % tilesInRow == 0)
-                        {
-                            startX = (tilesInRow - 1) * map.TileWidth;
-                            startY -= map.TileHeight;
-                        }
-
-                        // TODO : Clean up this part ASAP
-                        var cropRect = new Int32Rect(startX, startY, tileset.TileWidth, tileset.TileHeight);
-                        var croppedBitmap = new CroppedBitmap(bitmaps[tileset], cropRect);
-                        croppedBitmap.Freeze();
-                        
-
-                        var entity = CreateEntity(tileset, gid);
+                        var entity = CreateEntity(tileset, gid, mapData, tilesInRow, map, tile, bitmaps[tileset]);
                         if (entity == null)
                         {
-                            var tileObj = new Tile()
-                            {
-                                Drawable = croppedBitmap,
-                                CellX = tile.X,
-                                CellY = tile.Y,
-                                Width = tileset.TileWidth,
-                                Height = tileset.TileHeight
-                            };
-                            mapData.Tiles[tile.X, tile.Y].Add(tileObj);
                             continue;
                         }
                         var mapObjectComp = entity.GetComponent<GameMapObjectComponent>();
@@ -91,7 +67,7 @@ namespace Revolution.IO
                     } 
                     catch 
                     {
-                         
+                        
                     }
                 }
             }
@@ -128,19 +104,56 @@ namespace Revolution.IO
             return null;
         }
 
-        private static Entity CreateEntity(TmxTileset tileset, int gid)
+        private static Entity CreateEntity(TmxTileset tileset, int gid, MapData mapData, int tilesInRow,
+            TmxMap map, TmxLayerTile tile, BitmapSource bitmap)
         {
+            int actualGid = gid - tileset.FirstGid + 1;
+
             Entity entity = null;
             if (tileset.Name == "gold_mine")
             {
                 entity = EntityManager.CreateEntity<Goldmine>();
             }
+            else if (tileset.Name == "bgd_trees")
+            {
+                //entity = EntityManager.CreateEntity<Tree>();
+                CreateTile(mapData, actualGid, tilesInRow, tileset, map, tile, bitmap);
+            }
             else
             {
                 //entity = EntityManager.CreateEntity<Tile>();
+                CreateTile(mapData, actualGid, tilesInRow, tileset, map, tile, bitmap);
             }
 
             return entity;
+        }
+
+        private static void CreateTile(MapData mapData, int actualGid, int tilesInRow, 
+            TmxTileset tileset, TmxMap map, TmxLayerTile tile, BitmapSource bitmap)
+        {
+            int startX = (actualGid % tilesInRow - 1) * map.TileWidth;
+            int startY = (actualGid / tilesInRow) * map.TileHeight;
+            if (actualGid % tilesInRow == 0)
+            {
+                startX = (tilesInRow - 1) * map.TileWidth;
+                startY -= map.TileHeight;
+            }
+
+            // TODO : Clean up this part ASAP
+            var cropRect = new Int32Rect(startX, startY, tileset.TileWidth, tileset.TileHeight);
+            var croppedBitmap = new CroppedBitmap(bitmap, cropRect);
+            croppedBitmap.Freeze();
+
+            var tileObj = new Tile()
+            {
+                Drawable = croppedBitmap,
+                CellX = tile.X,
+                CellY = tile.Y,
+                Width = tileset.TileWidth,
+                Height = tileset.TileHeight
+            };
+
+            mapData.Tiles[tile.X, tile.Y].Add(tileObj);
         }
 
         private static SolidColorBrush GetMinimapColorForTile(TmxTileset tileset)

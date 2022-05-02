@@ -1,4 +1,5 @@
-﻿using Revolution.IO;
+﻿using Revolution.ECS.Entities;
+using Revolution.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +13,28 @@ namespace Revolution.Misc
     {
         public static Vector2? GetClosestEmptyCellToDesired(Vector2 spawnTarget, MapData gameMap)
         {
+            return GetClosestCellByPredicate(spawnTarget, gameMap, (entity) => entity is null);
+        }
+
+        public static Vector2? GetClosestCellToEntityType(Type entityType, Vector2 target, MapData gameMap)
+        {
+            return GetClosestCellByPredicate(target, gameMap, (entity) => entity.GetType() == entityType);
+        }
+
+        public static Vector2? GetClosestCellByPredicate(Vector2 target, MapData gameMap, Func<Entity, bool> predicate)
+        {
             HashSet<Vector2> processed = new HashSet<Vector2>();
             Queue<Vector2> queue = new Queue<Vector2>();
 
-            queue.Enqueue(spawnTarget);
-            processed.Add(spawnTarget);
+            queue.Enqueue(target);
+            processed.Add(target);
             while (queue.Count > 0)
             {
                 var vector = queue.Dequeue();
-                if (gameMap.Entities[(int)vector.X, (int)vector.Y] == null) return vector;
+                var entity = gameMap.Entities[(int)vector.X, (int)vector.Y];
+                if (predicate(entity)) return vector;
 
-                foreach(var neighbor in GetNeighbors(vector, gameMap))
+                foreach (var neighbor in GetNeighbors(vector, gameMap))
                 {
                     if (!processed.Contains(neighbor))
                     {
@@ -31,7 +43,6 @@ namespace Revolution.Misc
                     }
                 }
             }
-
 
             return null;
         }

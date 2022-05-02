@@ -10,11 +10,14 @@ namespace Revolution.ECS.Systems
 {
     public class SpriteAnimationSystem : ISystem
     {
-        private long i = long.MinValue;
+        private long i = 0;
+        private long frameDelay = 160;
+
         public void Update(int deltaMs)
         {
-            if (i++ % 2 == 0) return;
-            if (i == long.MaxValue) i = long.MinValue;
+            i += deltaMs;
+            if (i < frameDelay) return;
+            i = 0;
 
             foreach (var entity in EntityManager.GetEntities())
             {

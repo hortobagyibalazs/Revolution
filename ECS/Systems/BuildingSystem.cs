@@ -12,7 +12,7 @@ using Revolution.IO;
 
 namespace Revolution.ECS.Systems
 {
-    public class BuildingSystem : ISystem, IRecipient<BuildingPurchaseEvent>
+    public class BuildingSystem : ISystem, IRecipient<BuildingPurchaseCommand>
     {
         private IMessenger _messenger = Ioc.Default.GetService<IMessenger>();
 
@@ -24,10 +24,10 @@ namespace Revolution.ECS.Systems
             ScrollViewer = scrollViewer;
             Canvas = canvas;
 
-            _messenger.Register<BuildingPurchaseEvent>(this);
+            _messenger.Register<BuildingPurchaseCommand>(this);
         }
 
-        public void Receive(BuildingPurchaseEvent message)
+        public void Receive(BuildingPurchaseCommand message)
         {
             var entity = EntityManager.CreateEntity(message.BuildingType);
             var buildingComponent = entity.GetComponent<BuildingComponent>();

@@ -24,8 +24,6 @@ namespace Revolution.ECS.Systems
 
         public void Update(int deltaMs)
         {
-            var sw = new Stopwatch();
-            sw.Start();
             foreach (var entity in EntityManager.GetEntities())
             {
                 var entities = EntityManager.GetEntities();
@@ -71,8 +69,6 @@ namespace Revolution.ECS.Systems
                     }
                 }
             }
-            sw.Stop();
-            ;
         }
 
         private void ApplyRenderTransform(DirectionComponent directionComp, FrameworkElement renderable)

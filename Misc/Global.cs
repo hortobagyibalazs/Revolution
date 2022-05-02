@@ -4,6 +4,7 @@ namespace Revolution.IO
     {
         public static int TileSize = 64;
         public static int GoldMineResources = 5000;
+        public static int TreeResources = 50;
         public static int StarterGold = 100;
         public static int StarterWood = 100;
     }

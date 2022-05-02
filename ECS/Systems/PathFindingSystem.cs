@@ -18,6 +18,7 @@ namespace Revolution.ECS.Systems
     public class PathFinderSystem : ISystem, IRecipient<FindRouteCommand>
     {
         private IMessenger _messenger = Ioc.Default.GetService<IMessenger>();
+        private Queue<FindRouteCommand> _commandQueue;
 
         GridComponent grid;
         MapData mapData;
@@ -26,6 +27,7 @@ namespace Revolution.ECS.Systems
         {
             this.mapData = mapData;
 
+            _commandQueue = new Queue<FindRouteCommand>();
             _messenger.Register<FindRouteCommand>(this);
         }
 
@@ -53,14 +55,18 @@ namespace Revolution.ECS.Systems
                 {
                     grid.GridArray = null;
                 }
-                Debug.WriteLine("Find path from " + gameMapObjectComponent.X + ";" + gameMapObjectComponent.Y + " to " + dest.X + ";" + dest.Y);
                 movementComponent.Path = PathFinding(mapData, gameMapObjectComponent.Y, gameMapObjectComponent.X, (int)dest.Y, (int)dest.X);
             }
         }
 
         public void Update(int deltaMs)
         {
-
+            FindRouteCommand result = null;
+            bool success = _commandQueue.TryDequeue(out result);
+            if (success)
+            {
+                Receive(result);
+            }
         }
 
         public Queue<Vector2> PathFinding(MapData mapData, int startX, int startY, int targetX, int targetY)

@@ -19,6 +19,8 @@ namespace Revolution.ECS.Systems
             cachedEntities = new HashSet<Entity>();
             componentEntityPairs = new Dictionary<GameMapObjectComponent, Entity>();
             mapData = map;
+
+            RecreateEntityMap();
         }
 
         public void Update(int deltaMs)
