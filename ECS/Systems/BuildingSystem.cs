@@ -55,35 +55,11 @@ namespace Revolution.ECS.Systems
 
                     if (Mouse.LeftButton == MouseButtonState.Pressed)
                     {
-                        foreach (var entity2 in EntityManager.GetEntities())
-                        {
-                            if (entity != entity2)
-                            {
-                                var collisionComp = entity2.GetComponent<CollisionComponent>();
-                                if (collisionComp != null && collisionComp.CollidesWith(entity.GetComponent<CollisionComponent>()))
-                                {
-                                    return;
-                                }
-                            }
-                        }
                         buildingComponent.State = BuildingState.UnderConstruction;
                     }
 
                     return;
                 }
-            }
-
-            // This is for testing
-            if (Keyboard.IsKeyDown (Key.V))
-            {
-                var villager = EntityManager.CreateEntity<Villager>();
-                var posComp = villager.GetComponent<PositionComponent>();
-                var gmoComp = villager.GetComponent<GameMapObjectComponent>();
-
-                posComp.X = GetGameObjectPosBasedOnCursorX() * GlobalConfig.TileSize;
-                posComp.Y = GetGameObjectPosBasedOnCursorY() * GlobalConfig.TileSize;
-                int startX = gmoComp.X - 1;
-                int startY = gmoComp.Y - 1;
             }
 
             if (Mouse.LeftButton == MouseButtonState.Pressed && Canvas.IsMouseOver)

@@ -4,6 +4,7 @@ using Revolution.Commands;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
+using Revolution.Misc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Revolution.ECS.Systems
 {
-    public class PathFinderSystem : ISystem, IRecipient<FindRouteCommand>
+    public class PathFinderSystem : ISystem, IRecipient<FindRouteCommand>, IRecipient<FindRouteToEntityTypeCommand>
     {
         private IMessenger _messenger = Ioc.Default.GetService<IMessenger>();
         private Queue<FindRouteCommand> _commandQueue;
@@ -29,6 +30,7 @@ namespace Revolution.ECS.Systems
 
             _commandQueue = new Queue<FindRouteCommand>();
             _messenger.Register<FindRouteCommand>(this);
+            _messenger.Register<FindRouteToEntityTypeCommand>(this);
         }
 
         public void UpdateCell(int x, int y, int data)
@@ -55,7 +57,20 @@ namespace Revolution.ECS.Systems
                 {
                     grid.GridArray = null;
                 }
-                movementComponent.Path = PathFinding(mapData, gameMapObjectComponent.Y, gameMapObjectComponent.X, (int)dest.Y, (int)dest.X);
+                var closestCell = MapHelper.GetClosestEmptyCellToDesired(dest, mapData);
+                movementComponent.Path = PathFinding(mapData, gameMapObjectComponent.Y, gameMapObjectComponent.X, (int)((Vector2)closestCell).Y, (int)((Vector2)closestCell).X);
+            }
+        }
+
+        public void Receive(FindRouteToEntityTypeCommand message)
+        {
+            var mapObjectComp = message.Entity.GetComponent<GameMapObjectComponent>();
+            var currentPos = new Vector2(mapObjectComp.X, mapObjectComp.Y);
+            var cell = MapHelper.GetClosestCellToEntityType(message.DestEntityType, currentPos, mapData);
+            if (cell != null)
+            {
+                var command = new FindRouteCommand(message.Entity, (Vector2)cell);
+                Receive(command);
             }
         }
 

@@ -63,7 +63,7 @@ namespace Revolution.IO
                             renderComp.ZIndex = zIndex;
                         }
                         mapObjectComp.X = tile.X;
-                        mapObjectComp.Y = tile.Y;
+                        mapObjectComp.Y = tile.Y - mapObjectComp.Height + 1;
                     } 
                     catch 
                     {
@@ -114,9 +114,21 @@ namespace Revolution.IO
             {
                 entity = EntityManager.CreateEntity<Goldmine>();
             }
+            else if (tileset.Name == "town_center")
+            {
+                entity = EntityManager.CreateEntity<TownCenter>();
+                entity.GetComponent<BuildingComponent>().State = BuildingState.Built;
+            }
             else if (tileset.Name == "bgd_trees")
             {
-                //entity = EntityManager.CreateEntity<Tree>();
+                if (actualGid != 48)
+                {
+                    entity = EntityManager.CreateEntity<Tree>();
+                }
+                CreateTile(mapData, actualGid, tilesInRow, tileset, map, tile, bitmap, true);
+            }
+            else if (tileset.Name == "vertical_brige")
+            {
                 CreateTile(mapData, actualGid, tilesInRow, tileset, map, tile, bitmap);
             }
             else
@@ -129,7 +141,7 @@ namespace Revolution.IO
         }
 
         private static void CreateTile(MapData mapData, int actualGid, int tilesInRow, 
-            TmxTileset tileset, TmxMap map, TmxLayerTile tile, BitmapSource bitmap)
+            TmxTileset tileset, TmxMap map, TmxLayerTile tile, BitmapSource bitmap, bool colliding = false)
         {
             int startX = (actualGid % tilesInRow - 1) * map.TileWidth;
             int startY = (actualGid / tilesInRow) * map.TileHeight;
@@ -150,7 +162,8 @@ namespace Revolution.IO
                 CellX = tile.X,
                 CellY = tile.Y,
                 Width = tileset.TileWidth,
-                Height = tileset.TileHeight
+                Height = tileset.TileHeight,
+                Colliding = colliding
             };
 
             mapData.Tiles[tile.X, tile.Y].Add(tileObj);

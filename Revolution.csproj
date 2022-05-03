@@ -177,6 +177,8 @@
 		<None Remove="Assets\Test.tsx" />
 		<None Remove="Assets\tileset.png" />
 		<None Remove="Assets\town_center.png" />
+		<None Remove="Assets\town_center.tsx" />
+		<None Remove="Assets\vertical_bridge.tsx" />
 		<None Remove="Assets\villager.png" />
 	</ItemGroup>
 
@@ -654,6 +656,12 @@
 		</Content>
 		<Content Include="Assets\town_center.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\town_center.tsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\vertical_bridge.tsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\villager.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -5,6 +5,8 @@ using System.Windows.Media;
 using Revolution.ECS.Components;
 using Revolution.HUD.Entities;
 using Revolution.IO;
+using Revolution.StateMachines;
+using Revolution.StateMachines.CollectWood;
 
 namespace Revolution.ECS.Entities
 {
@@ -27,6 +29,13 @@ namespace Revolution.ECS.Entities
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
             var selectionComp = new SelectionComponent(posComp, sizeComp);
             var directionComp = new DirectionComponent();
+            var smComp = new StateMachineComponent()
+            {
+                StateMachine = new StateMachine()
+                {
+                    CurrentState = new FindWoodState(this)
+                }
+            };
             var hudComp = new VillagerHud().CreateComponent(this);
 
             gameMapObjectComp.PropertyChanged += delegate
@@ -76,6 +85,7 @@ namespace Revolution.ECS.Entities
             AddComponent(movementComp);
             AddComponent(selectionComp);
             AddComponent(directionComp);
+            AddComponent(smComp);
             AddComponent(hudComp);
         }
     }

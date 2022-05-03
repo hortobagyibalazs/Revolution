@@ -44,7 +44,7 @@ namespace Revolution.ECS.Components
             {
                 for (int j = 0; j < width; j++)
                 {
-                    if (mapData.Entities[i,j] == null)
+                    if (mapData.Entities[i,j] == null && mapData.Tiles[i, j].All(tile => !tile.Colliding))
                     {
 						gridArray[i,j] = 0;
                     }

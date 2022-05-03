@@ -18,7 +18,7 @@ namespace Revolution.Misc
 
         public static Vector2? GetClosestCellToEntityType(Type entityType, Vector2 target, MapData gameMap)
         {
-            return GetClosestCellByPredicate(target, gameMap, (entity) => entity.GetType() == entityType);
+            return GetClosestCellByPredicate(target, gameMap, (entity) => entity?.GetType() == entityType);
         }
 
         public static Vector2? GetClosestCellByPredicate(Vector2 target, MapData gameMap, Func<Entity, bool> predicate)
@@ -47,7 +47,7 @@ namespace Revolution.Misc
             return null;
         }
 
-        private static List<Vector2> GetNeighbors(Vector2 cell, MapData gameMap)
+        public static List<Vector2> GetNeighbors(Vector2 cell, MapData gameMap)
         {
             List<Vector2> neighbors = new List<Vector2>();
 
@@ -63,8 +63,8 @@ namespace Revolution.Misc
             {
                 for (int _y = y - 1; _y <= y + 1; _y++)
                 {
-                    //if (_x >= minX && _x <= maxX && _y >= minY && _y <= maxY && !(_x == x && _y == y))
-                    if (_x == x || _x == x + 1 || _y == y + 1 || _y == y)
+                    if (_x >= minX && _x <= maxX && _y >= minY && _y <= maxY 
+                        && (_x == x || _x == x + 1 || _y == y + 1 || _y == y))
                     {
                         neighbors.Add(new Vector2(_x, _y));
                     }
