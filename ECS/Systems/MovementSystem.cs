@@ -66,9 +66,12 @@ namespace Revolution.ECS.Systems
                     SetVelocity(nextDest, movementComp, posComp);
                     SetDirection(directionComp, movementComp);
                 } 
-                else
+                else if (movementComp.Path.Count > 0)
                 {
-                    ReplanRoute(nextDest, entity);
+                    Vector2[] dests = new Vector2[movementComp.Path.Count];
+                    movementComp.Path.CopyTo(dests, 0);
+                    Vector2 finalDest = dests[dests.Length - 1];
+                    ReplanRoute(finalDest, entity);
                 }
             }
             else
@@ -132,7 +135,7 @@ namespace Revolution.ECS.Systems
 
         private void ReplanRoute(Vector2 nextDest, Entity entity)
         {
-            var closestCell = MapHelper.GetClosestEmptyCellToDesired(nextDest, _gameMap);
+            var closestCell = MapHelper.GetClosestEmptyCellToDesired(nextDest, _gameMap, entity);
             if (closestCell != null)
             {
                 _messenger.Send(new FindRouteCommand(entity, (Vector2)closestCell));
@@ -145,7 +148,7 @@ namespace Revolution.ECS.Systems
             int y = (int)nextDest.Y;
 
             var cell = _gameMap.Entities[x, y];
-            return (cell == null || cell == entity);
+            return (cell == null || cell == entity) && _gameMap.Tiles[x, y].TrueForAll(tile => !tile.Colliding);
         }
 
         private bool IsOtherEntityMovingToCell(Vector2 cell, Entity entity)

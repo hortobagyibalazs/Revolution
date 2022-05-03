@@ -37,7 +37,7 @@ namespace Revolution.ECS.Systems
                         var posComp = newEntity.GetComponent<PositionComponent>();
                         if (gmoComp != null && posComp != null)
                         {
-                            var spawnPosition = MapHelper.GetClosestEmptyCellToDesired(spawnerComp.SpawnTarget, _gameMap);
+                            var spawnPosition = MapHelper.GetClosestEmptyCellToDesired(spawnerComp.SpawnTarget, _gameMap, entity);
                             if (spawnPosition != null)
                             {
                                 posComp.X = (int)spawnPosition?.X * GlobalConfig.TileSize;

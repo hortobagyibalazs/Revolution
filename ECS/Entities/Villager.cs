@@ -65,6 +65,10 @@ namespace Revolution.ECS.Entities
                 {
                     spriteComp.CurrentFrame = VillagerSpriteFrame.Moving;
                 }
+                else if (smComp.StateMachine.CurrentState is CutWoodState)
+                {
+                    spriteComp.CurrentFrame = VillagerSpriteFrame.CutWood;
+                }
                 else
                 {
                     spriteComp.CurrentFrame = VillagerSpriteFrame.Idle;
@@ -85,7 +89,7 @@ namespace Revolution.ECS.Entities
             AddComponent(movementComp);
             AddComponent(selectionComp);
             AddComponent(directionComp);
-            AddComponent(smComp);
+            //AddComponent(smComp);
             AddComponent(hudComp);
         }
     }

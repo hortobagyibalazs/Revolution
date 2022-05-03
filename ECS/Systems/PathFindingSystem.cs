@@ -57,8 +57,9 @@ namespace Revolution.ECS.Systems
                 {
                     grid.GridArray = null;
                 }
-                var closestCell = MapHelper.GetClosestEmptyCellToDesired(dest, mapData);
+                var closestCell = MapHelper.GetClosestEmptyCellToDesired(dest, mapData, entity);
                 movementComponent.Path = PathFinding(mapData, gameMapObjectComponent.Y, gameMapObjectComponent.X, (int)((Vector2)closestCell).Y, (int)((Vector2)closestCell).X);
+                Debug.WriteLine($"Pathfinding: Desired({dest.X};{dest.Y}) Closest({((Vector2)closestCell).X};{((Vector2)closestCell).Y})");
             }
         }
 

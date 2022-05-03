@@ -114,7 +114,7 @@ namespace Revolution.Scenes
             int deltaMs = (int)(Environment.TickCount - lastUpdate);
             lastUpdate = Environment.TickCount;
             systemManager.Update(deltaMs);
-            Debug.WriteLine(sw.ElapsedMilliseconds + "ms");
+            //Debug.WriteLine(sw.ElapsedMilliseconds + "ms");
         }
     }
 }
