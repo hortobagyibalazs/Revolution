@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Revolution.Scenes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Border>
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+    <Border KeyDown="Border_KeyDown">
         <Grid>
             <Grid.Background>
                 <ImageBrush 
