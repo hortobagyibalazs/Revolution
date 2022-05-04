@@ -35,15 +35,15 @@ namespace Revolution.Misc
             Map map1 = new Map()
             {
                 Text = "Map 2",
-                FilePath = @"D:\Egyetem\4.felev\SZTGUI\Féléves\Féléves\Revolution\Assets\map1.tmx",
-                ImageSource = @"D:\Egyetem\4.felev\SZTGUI\Féléves\Féléves\Revolution\Assets\Images\MapSelectorMenuImages\map1.png"
+                FilePath = "\\Assets\\map1.tmx",
+                ImageSource = "\\Assets\\Images\\MapSelectorMenuImages\\map1.png"
             };
 
             Map map2 = new Map()
             {
                 Text = "Map 1",
-                FilePath = @"D:\Egyetem\4.felev\SZTGUI\Féléves\Féléves\Revolution\Assets\map2.tmx",
-                ImageSource = @"D:\Egyetem\4.felev\SZTGUI\Féléves\Féléves\Revolution\Assets\Images\MapSelectorMenuImages\map2.png"
+                FilePath = "\\Assets\\map2.tmx",
+                ImageSource = "\\Assets\\Images\\MapSelectorMenuImages\\map2.png"
             };
             AvailabeMaps.Add(map2);
             AvailabeMaps.Add(map1);
