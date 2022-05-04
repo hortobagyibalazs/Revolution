@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ECS",
+    "\\ECS\\Systems"
   ],
+  "SelectedNode": "\\ECS\\Systems\\PathFindingSystem.cs",
   "PreviewInSolutionExplorer": false
 }
