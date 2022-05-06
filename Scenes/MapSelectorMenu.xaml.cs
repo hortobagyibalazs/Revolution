@@ -22,7 +22,6 @@ namespace Revolution.Scenes
     /// </summary>
     public partial class MapSelectorMenu : UserControl, IScene 
     {
-
         FrameworkElement framework { get; set; }
         public MapSelectorMenu(FrameworkElement frameworkElement)
         {
@@ -38,7 +37,7 @@ namespace Revolution.Scenes
         void IScene.OnEnter()
         {
             MapMenuManager mapMenuManager = new MapMenuManager();
-            var maps = mapMenuManager.LoadMaps();
+            //var maps = mapMenuManager.LoadMaps();
             var maps2 = mapMenuManager.CreateMaps();
             MapsView.ItemsSource = maps2;
         }
@@ -61,6 +60,12 @@ namespace Revolution.Scenes
         private void Button_RetunToMainMenu(object sender, RoutedEventArgs e)
         {
             manager.Pop();
+        }
+
+        private void Button_PlaySelected(object sender, RoutedEventArgs e)
+        {
+            var idk = MapsView.SelectedItem;
+            ;
         }
     }
 }

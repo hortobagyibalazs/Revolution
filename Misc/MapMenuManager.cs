@@ -12,23 +12,21 @@ namespace Revolution.Misc
     {
         public IList<Map> AvailabeMaps { get; set; }
 
-        public Map SelectedMap { get; set; }    
+        
 
         public MapMenuManager()
         {
             this.AvailabeMaps = new List<Map>();
         }
 
+        //public IList<Map> LoadMaps()
+        //{
+        //    ////var directoryPath = Path.Combine("Assets");
+        //    ////var maps = Directory.GetFiles(directoryPath).Where(x => x.Contains(".tmx")).ToList();
 
-
-        public IList<Map> LoadMaps()
-        {
-            ////var directoryPath = Path.Combine("Assets");
-            ////var maps = Directory.GetFiles(directoryPath).Where(x => x.Contains(".tmx")).ToList();
-
-            //return maps;
-            return null;
-        }
+        //    //return maps;
+        //    return null;
+        //}
 
         public IList<Map> CreateMaps()
         {
@@ -50,5 +48,14 @@ namespace Revolution.Misc
 
             return AvailabeMaps;
         }
+
+        private Map selectedMap;
+
+        public Map SelectedMap
+        {
+            get { return selectedMap; }
+            set { selectedMap = value; }
+        }
+
     }
 }

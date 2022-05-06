@@ -51,14 +51,14 @@
                         Background="Gold"
                         Foreground="Green"
                         BorderThickness="3"
-                        Content="Play Selected Map"
+                        Content="Play Selected&#x0a;     Map"
                         VerticalContentAlignment="Center"
                         HorizontalContentAlignment="Center"
                     
                         Width="400"
-                        Height="50"
-                        FontSize="20"
-                        FontWeight="Bold"
+                        Height="100"
+                        FontSize="30"
+                        FontWeight="Bold" Click="Button_PlaySelected"
                     >
 
             </Button>
@@ -72,8 +72,8 @@
                     </Grid.RowDefinitions>
 
 
-                    <ScrollViewer  VerticalScrollBarVisibility="Hidden" Margin="80" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <ListView   Grid.Row="1"  Margin="3"  x:Name ="MapsView" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" VerticalContentAlignment="Top">
+                    <ScrollViewer  x:Name="ScrollViewer" VerticalScrollBarVisibility="Hidden" Margin="80" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <ListView   SelectedItem="{Binding SelectedMap}"  Grid.Row="1"  Margin="3"  x:Name ="MapsView" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Center">
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Orientation="Horizontal" ScrollViewer.HorizontalScrollBarVisibility="Auto">
@@ -86,7 +86,6 @@
                                 <DataTemplate>
                                     <ListBoxItem>
                                         <Border BorderBrush="Black" BorderThickness="2">
-
                                             <DockPanel >
                                                 <Image Source="{Binding ImageSource}" Width="200"  Height="200" DockPanel.Dock="Top"/>
                                                 <Label Content="{Binding Text}"  FontSize="30" Style="{StaticResource CustomFont}" Foreground="Gold" DockPanel.Dock="Bottom"/>

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              >
-    <Border KeyDown="Border_KeyDown">
+    <Border>
         <Grid>
             <Grid.Background>
                 <ImageBrush 

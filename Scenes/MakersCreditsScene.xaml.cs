@@ -79,12 +79,10 @@ namespace Revolution.Scenes
             mediaPlayer.Play();
         }
 
-        private void Border_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-            {
-                MessageBox.Show("test");
-            }
-        }
+        
+
+        
+
+        
     }
 }

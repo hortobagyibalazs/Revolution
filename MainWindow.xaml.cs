@@ -57,5 +57,14 @@ namespace WpfApp
                 Close();
             }
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape && !(sceneManager.Scene is MainMenuScene))
+            {
+                sceneManager.Pop();
+            }
+
+        }
     }
 }
