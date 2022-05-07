@@ -73,7 +73,11 @@
 
 
                     <ScrollViewer  x:Name="ScrollViewer" VerticalScrollBarVisibility="Hidden" Margin="80" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        <ListView   SelectedItem="{Binding SelectedMap}"  Grid.Row="1"  Margin="3"  x:Name ="MapsView" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Center">
+                        <ListView   
+                                    SelectionChanged="MapsView_SelectionChanged"
+                                    Grid.Row="1"  Margin="3"  x:Name ="MapsView" Background="Transparent"
+                                    ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top"
+                                    VerticalContentAlignment="Top" HorizontalContentAlignment="Center">
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Orientation="Horizontal" ScrollViewer.HorizontalScrollBarVisibility="Auto">
@@ -84,7 +88,10 @@
 
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <ListBoxItem>
+                                    <ListBoxItem 
+                                                Selected="lbi0_Selected"
+                                                 
+                                                 Name="lbi0">
                                         <Border BorderBrush="Black" BorderThickness="2">
                                             <DockPanel >
                                                 <Image Source="{Binding ImageSource}" Width="200"  Height="200" DockPanel.Dock="Top"/>
