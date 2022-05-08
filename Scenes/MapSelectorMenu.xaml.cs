@@ -66,25 +66,13 @@ namespace Revolution.Scenes
         private void Button_PlaySelected(object sender, RoutedEventArgs e)
         {
             var idk = MapsView.SelectedItem;
-            ;
+            
         }
 
-        private void lbi0_Selected(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("lbi0_Selected");
-            ;
-        }
-
-        private void lbi0_Unselected(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("lbi0_Unselected");
-            ;
-        }
+        
 
         private void MapsView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MessageBox.Show("MapsView_SelectionChanged");
-            ;
         }
     }
 }

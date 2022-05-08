@@ -74,6 +74,7 @@
 
                     <ScrollViewer  x:Name="ScrollViewer" VerticalScrollBarVisibility="Hidden" Margin="80" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                         <ListView   
+                                    BorderThickness="0"
                                     SelectionChanged="MapsView_SelectionChanged"
                                     Grid.Row="1"  Margin="3"  x:Name ="MapsView" Background="Transparent"
                                     ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top"
@@ -87,18 +88,17 @@
                             </ListView.ItemsPanel>
 
                             <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <ListBoxItem 
-                                                Selected="lbi0_Selected"
-                                                 
-                                                 Name="lbi0">
+                                <DataTemplate> 
+                                    
                                         <Border BorderBrush="Black" BorderThickness="2">
-                                            <DockPanel >
-                                                <Image Source="{Binding ImageSource}" Width="200"  Height="200" DockPanel.Dock="Top"/>
+                                            <DockPanel Background="Black" >
+                                                <Image Source="{Binding ImageSource}"
+                                                       Margin="10"
+                                                       Width="200"  Height="200" DockPanel.Dock="Top"/>
                                                 <Label Content="{Binding Text}"  FontSize="30" Style="{StaticResource CustomFont}" Foreground="Gold" DockPanel.Dock="Bottom"/>
                                             </DockPanel>
                                         </Border>
-                                    </ListBoxItem>
+                                    
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListView>
