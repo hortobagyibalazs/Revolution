@@ -5,6 +5,12 @@
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Assets\Images\spr_peasant_attacking\**" />
+	  <EmbeddedResource Remove="Assets\Images\spr_peasant_attacking\**" />
+	  <None Remove="Assets\Images\spr_peasant_attacking\**" />
+	  <Page Remove="Assets\Images\spr_peasant_attacking\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Remove="Assets\bgd_dirt.tsx" />
@@ -63,9 +69,7 @@
 		<None Remove="Assets\Images\spr_button\spr_button_1.png" />
 		<None Remove="Assets\Images\spr_button_small\spr_button_small_0.png" />
 		<None Remove="Assets\Images\spr_button_small\spr_button_small_1.png" />
-		<None Remove="Assets\Images\spr_construction_site_GRIDx2.png" />
-		<None Remove="Assets\Images\spr_construction_site_GRIDx3.png" />
-		<None Remove="Assets\Images\spr_construction_site_GRIDx4.png" />
+		<None Remove="Assets\Images\spr_construction_site.png" />
 		<None Remove="Assets\Images\spr_cursor.png" />
 		<None Remove="Assets\Images\spr_destroyed_building.png" />
 		<None Remove="Assets\Images\spr_farm.png" />
@@ -129,6 +133,10 @@
 		<None Remove="Assets\Images\spr_medium_vertical_bridge.png" />
 		<None Remove="Assets\Images\spr_move_button.png" />
 		<None Remove="Assets\Images\spr_parchment.png" />
+		<None Remove="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_0.png" />
+		<None Remove="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_1.png" />
+		<None Remove="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_2.png" />
+		<None Remove="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_3.png" />
 		<None Remove="Assets\Images\spr_peasant_button.png" />
 		<None Remove="Assets\Images\spr_peasant_death\spr_peasant_death_0.png" />
 		<None Remove="Assets\Images\spr_peasant_death\spr_peasant_death_1.png" />
@@ -183,6 +191,8 @@
 		<None Remove="Assets\Test.tsx" />
 		<None Remove="Assets\tileset.png" />
 		<None Remove="Assets\town_center.png" />
+		<None Remove="Assets\town_center.tsx" />
+		<None Remove="Assets\vertical_bridge.tsx" />
 		<None Remove="Assets\villager.png" />
 		<None Remove="Fonts\pcsenior.ttf" />
 		<None Remove="Fonts\PlayMeGames-Demo.otf" />
@@ -354,13 +364,7 @@
 		<Content Include="Assets\Images\spr_button_small\spr_button_small_1.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Assets\Images\spr_construction_site_GRIDx2.png">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Assets\Images\spr_construction_site_GRIDx3.png">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Assets\Images\spr_construction_site_GRIDx4.png">
+		<Content Include="Assets\Images\spr_construction_site.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_cursor.png">
@@ -552,6 +556,18 @@
 		<Content Include="Assets\Images\spr_parchment.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Assets\Images\spr_peasant_button.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
@@ -699,6 +715,12 @@
 		<Content Include="Assets\town_center.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Assets\town_center.tsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\vertical_bridge.tsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Assets\villager.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
@@ -708,6 +730,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
 		<PackageReference Include="System.Drawing.Common" Version="6.0.0" />
 		<PackageReference Include="TiledSharp" Version="1.0.1" />
 	</ItemGroup>

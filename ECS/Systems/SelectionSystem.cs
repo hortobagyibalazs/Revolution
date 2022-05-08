@@ -39,13 +39,13 @@ namespace Revolution.ECS.Systems
 
         public void Update(int deltaMs)
         {
-            if (!Dragging && Mouse.LeftButton == MouseButtonState.Pressed)
+            if (!Dragging && Mouse.LeftButton == MouseButtonState.Pressed && Canvas.IsMouseOver)
             {
                 Dragging = true;
                 DragStart = Mouse.GetPosition(Canvas);
                 SelectionRect.Visibility = System.Windows.Visibility.Visible;
             } 
-            else if (Dragging && Mouse.LeftButton == MouseButtonState.Released)
+            else if (Dragging && Mouse.LeftButton == MouseButtonState.Released && Canvas.IsMouseOver)
             {
                 if (Dragging && Canvas.IsMouseOver)
                 {

@@ -15,8 +15,8 @@ namespace Revolution.ECS.Entities
     {
         public Goldmine()
         {
-            var resourceComp = new ResourceComponent() { Gold = GlobalConfig.GOLD_MINE_SIZE };
-            var renderComp = new SpriteComponent() { Source = new Uri(@"\Assets\Images\spr_gold_mine.png", UriKind.Relative) };
+            var resourceComp = new ResourceComponent() { Gold = GlobalConfig.GoldMineResources };
+            var renderComp = new SpriteComponent() { Source = new Uri(@"\Assets\Images\spr_gold_mine.png", UriKind.Relative)};
             var posComp = new PositionComponent();
             var sizeComp = new SizeComponent();
             var mapObjectComp = new GameMapObjectComponent();

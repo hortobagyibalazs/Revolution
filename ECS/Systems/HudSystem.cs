@@ -1,5 +1,6 @@
 ﻿using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
+using Revolution.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,20 @@ namespace Revolution.ECS.Systems
         private Panel _centerPanel;
         private Panel _rightPanel;
 
+        private Label _playerWood;
+        private Label _playerGold;
+        private Label _playerPopulation;
+
         HashSet<Entity> _selectedEntities;
 
-        public HudSystem(Panel center, Panel right)
+        public HudSystem(Panel center, Panel right, Label wood, Label gold, Label population)
         {
             _centerPanel = center;
             _rightPanel = right;
+
+            _playerWood = wood;
+            _playerGold = gold;
+            _playerPopulation = population;
 
             _selectedEntities = new HashSet<Entity>();
         }
@@ -30,6 +39,12 @@ namespace Revolution.ECS.Systems
             _selectedEntities.Clear();
             foreach(var entity in EntityManager.GetEntities())
             {
+                if (entity is Player && (entity as Player).IsGuiControlled)
+                {
+                    UpdateLabels(entity as Player);
+                    continue;
+                }
+
                 var selectionComp = entity.GetComponent<SelectionComponent>();
                 var hudComp = entity.GetComponent<HudComponent>();
                 if (selectionComp != null && selectionComp.Selected && hudComp != null)
@@ -83,6 +98,18 @@ namespace Revolution.ECS.Systems
         {
             return _centerPanel.Children.Count == 1 && _rightPanel.Children.Count == 1
                 && _centerPanel.Children.Contains(component.Info) && _rightPanel.Children.Contains(component.Action);
+        }
+
+        private void UpdateLabels(Player player)
+        {
+            var resourceComponent = player.GetComponent<ResourceComponent>();
+
+            int maxPopulation = PlayerHelper.GetMaxPopulation(player);
+            string population = resourceComponent.Population + "/" + maxPopulation;
+
+            _playerWood.Content = resourceComponent.Wood;
+            _playerGold.Content = resourceComponent.Gold;
+            _playerPopulation.Content = population;
         }
     }
 }

@@ -11,5 +11,11 @@ namespace Revolution.ECS.Components
     {
         public int TeamId { get; set; }
         public SolidColorBrush TeamColor { get; set; }
+
+        public void SetValuesFrom(TeamComponent src)
+        {
+            TeamId = src.TeamId;
+            TeamColor = src.TeamColor;
+        }
     }
 }

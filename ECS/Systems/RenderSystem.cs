@@ -26,6 +26,8 @@ namespace Revolution.ECS.Systems
         {
             foreach (var entity in EntityManager.GetEntities())
             {
+                var entities = EntityManager.GetEntities();
+
                 var posComp = entity.GetComponent<PositionComponent>();
                 var sizeComp = entity.GetComponent<SizeComponent>();
                 var directionComp = entity.GetComponent<DirectionComponent>();

@@ -72,12 +72,7 @@ namespace Revolution.ECS.Systems
                 {
                     if (drawingContext != null && minimapCanvas.ActualWidth != double.NaN)
                     {
-                        double x = gameMapObjectComp.X * (minimapCanvas.ActualWidth / mapData.Dimension.X);
-                        double y = gameMapObjectComp.Y * (minimapCanvas.ActualHeight / mapData.Dimension.Y);
-                        double width = gameMapObjectComp.Width * (minimapCanvas.ActualWidth / mapData.Dimension.X);
-                        double height = gameMapObjectComp.Height * (minimapCanvas.ActualHeight / mapData.Dimension.Y);
-
-                        drawingContext.DrawRectangle(minimapComp.Background, null, new Rect(x, y, width, height));
+                        minimapComp.Draw?.Invoke(this, drawingContext);
                     }
                 }
                 else if (cameraComp != null)
@@ -128,10 +123,10 @@ namespace Revolution.ECS.Systems
 
         private void UpdateCameraPos(CameraComponent cameraComp)
         {
-            // This is very buggy, should be rewritten with event handlers
-            return;
-
-            if (Mouse.LeftButton != MouseButtonState.Pressed) return;
+            if ((Mouse.LeftButton != MouseButtonState.Pressed) || (!minimapCanvas.IsMouseOver))
+            {
+                return;
+            }
 
             var mousePos = Mouse.GetPosition(minimapCanvas);
             int mouseX = (int) (mousePos.X - (minimapRect.ActualWidth / 2));

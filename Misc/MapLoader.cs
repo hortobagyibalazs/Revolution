@@ -18,8 +18,6 @@ namespace Revolution.IO
 {
     public class MapLoader
     {
-        private static List<Entity> tiles = new List<Entity>();
-
         /**
          * @return Map dimension
          */
@@ -34,6 +32,7 @@ namespace Revolution.IO
             }
 
             var mapData = new MapData(new Vector2(map.Width, map.Height));
+            mapData.FileSource = new Uri(tileMapPath, UriKind.Relative);
             int tilesInRow = 8;
 
             int zIndex = -1;
@@ -46,46 +45,29 @@ namespace Revolution.IO
                     int gid = tile.Gid;
                     // Find tileset for tile
                     var tileset = GetTilesetForGid(map.Tilesets, tile.Gid);
+                    
                     if (tileset == null) continue;
-                    int actualGid = gid - tileset.FirstGid + 1;
 
                     try
                     {
-                        int startX = (actualGid % tilesInRow - 1) * map.TileWidth;
-                        int startY = (actualGid / tilesInRow) * map.TileHeight;
-                        if (actualGid % tilesInRow == 0)
+                        var entity = CreateEntity(tileset, gid, mapData, tilesInRow, map, tile, bitmaps[tileset]);
+                        if (entity == null)
                         {
-                            startX = (tilesInRow - 1) * map.TileWidth;
-                            startY -= map.TileHeight;
+                            continue;
                         }
-
-                        // TODO : Clean up this part ASAP
-                        var cropRect = new Int32Rect(startX, startY, tileset.TileWidth, tileset.TileHeight);
-                        var croppedBitmap = new CroppedBitmap(bitmaps[tileset], cropRect);
-                        croppedBitmap.Freeze();
-
-                        var entity = CreateEntity(tileset, gid);
-                        if (entity == null) continue;
                         var mapObjectComp = entity.GetComponent<GameMapObjectComponent>();
 
                         var renderComp = entity.GetComponent<RenderComponent>();
                         if (renderComp != null)
                         {
-                            (renderComp.Renderable as Image).Source = croppedBitmap;
                             renderComp.ZIndex = zIndex;
                         }
                         mapObjectComp.X = tile.X;
-                        mapObjectComp.Y = tile.Y;
-
-                        if (entity is Tile)
-                        {
-                            System.Windows.Media.SolidColorBrush brush = GetMinimapColorForTile(tileset);
-                            entity.GetComponent<MinimapComponent>().Background = brush;
-                        }
+                        mapObjectComp.Y = tile.Y - mapObjectComp.Height + 1;
                     } 
                     catch 
                     {
-                         
+                        
                     }
                 }
             }
@@ -95,12 +77,7 @@ namespace Revolution.IO
 
         public static void Unload()
         {
-            foreach (var tile in tiles)
-            {
-                tile.Destroy();
-            }
-
-            tiles.Clear();
+            
         }
 
         private static TmxTileset GetTilesetForGid(TmxList<TmxTileset> tilesets, int gid)
@@ -127,19 +104,69 @@ namespace Revolution.IO
             return null;
         }
 
-        private static Entity CreateEntity(TmxTileset tileset, int gid)
+        private static Entity CreateEntity(TmxTileset tileset, int gid, MapData mapData, int tilesInRow,
+            TmxMap map, TmxLayerTile tile, BitmapSource bitmap)
         {
+            int actualGid = gid - tileset.FirstGid + 1;
+
             Entity entity = null;
             if (tileset.Name == "gold_mine")
             {
                 entity = EntityManager.CreateEntity<Goldmine>();
             }
+            else if (tileset.Name == "town_center")
+            {
+                entity = EntityManager.CreateEntity<TownCenter>();
+                entity.GetComponent<BuildingComponent>().State = BuildingState.Built;
+            }
+            else if (tileset.Name == "bgd_trees")
+            {
+                if (actualGid != 48)
+                {
+                    entity = EntityManager.CreateEntity<Tree>();
+                }
+                CreateTile(mapData, actualGid, tilesInRow, tileset, map, tile, bitmap, true);
+            }
+            else if (tileset.Name == "vertical_brige")
+            {
+                CreateTile(mapData, actualGid, tilesInRow, tileset, map, tile, bitmap);
+            }
             else
             {
-                entity = EntityManager.CreateEntity<Tile>();
+                //entity = EntityManager.CreateEntity<Tile>();
+                CreateTile(mapData, actualGid, tilesInRow, tileset, map, tile, bitmap);
             }
 
             return entity;
+        }
+
+        private static void CreateTile(MapData mapData, int actualGid, int tilesInRow, 
+            TmxTileset tileset, TmxMap map, TmxLayerTile tile, BitmapSource bitmap, bool colliding = false)
+        {
+            int startX = (actualGid % tilesInRow - 1) * map.TileWidth;
+            int startY = (actualGid / tilesInRow) * map.TileHeight;
+            if (actualGid % tilesInRow == 0)
+            {
+                startX = (tilesInRow - 1) * map.TileWidth;
+                startY -= map.TileHeight;
+            }
+
+            // TODO : Clean up this part ASAP
+            var cropRect = new Int32Rect(startX, startY, tileset.TileWidth, tileset.TileHeight);
+            var croppedBitmap = new CroppedBitmap(bitmap, cropRect);
+            croppedBitmap.Freeze();
+
+            var tileObj = new Tile()
+            {
+                Drawable = croppedBitmap,
+                CellX = tile.X,
+                CellY = tile.Y,
+                Width = tileset.TileWidth,
+                Height = tileset.TileHeight,
+                Colliding = colliding
+            };
+
+            mapData.Tiles[tile.X, tile.Y].Add(tileObj);
         }
 
         private static SolidColorBrush GetMinimapColorForTile(TmxTileset tileset)

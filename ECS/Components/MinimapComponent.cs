@@ -10,5 +10,7 @@ namespace Revolution.ECS.Components
     public class MinimapComponent : Component
     {
         public Brush Background { get; set; }
+
+        public EventHandler<DrawingContext> Draw;
     }
 }
