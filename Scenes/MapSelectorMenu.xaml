@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="Revolution.Scenes.MapSelectorMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Revolution.Scenes"
+             xmlns:misc="clr-namespace:Revolution.Misc"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush 
+                    ImageSource="\Assets\Images\Menu Background\map.png"
+                    Stretch="UniformToFill"/>
+            </Grid.Background>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+
+            <Button
+                Grid.Row="0"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE830;"
+                Foreground="Gold"
+                FontWeight="Bold"
+                FontSize="20"
+                Padding="10"
+                Background="Brown"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="0,0,0,0" 
+                Height="40"
+                Width="50"
+                Click="Button_RetunToMainMenu"/>
+
+
+
+
+            <Button 
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,50"
+                        Grid.Row="1"
+                        Style="{StaticResource CustomFont}"
+                        BorderBrush="Gold"
+                        Background="Gold"
+                        Foreground="Green"
+                        BorderThickness="3"
+                        Content="Play Selected&#x0a;     Map"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                    
+                        Width="400"
+                        Height="100"
+                        FontSize="30"
+                        FontWeight="Bold" Click="Button_PlaySelected"
+                    >
+
+            </Button>
+
+
+            <StackPanel Name="stack1" Grid.Row="1"  VerticalAlignment="Top">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="8*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+
+                    <ScrollViewer  x:Name="ScrollViewer" VerticalScrollBarVisibility="Hidden" Margin="80" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <ListView   
+                                    BorderThickness="0"
+                                    SelectionChanged="MapsView_SelectionChanged"
+                                    Grid.Row="1"  Margin="3"  x:Name ="MapsView" Background="Transparent"
+                                    ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top"
+                                    VerticalContentAlignment="Top" HorizontalContentAlignment="Center">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
+                                    </WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate> 
+                                    
+                                        <Border BorderBrush="Black" BorderThickness="2">
+                                            <DockPanel Background="Black" >
+                                                <Image Source="{Binding ImageSource}"
+                                                       Margin="10"
+                                                       Width="200"  Height="200" DockPanel.Dock="Top"/>
+                                                <Label Content="{Binding Text}"  FontSize="30" Style="{StaticResource CustomFont}" Foreground="Gold" DockPanel.Dock="Bottom"/>
+                                            </DockPanel>
+                                        </Border>
+                                    
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+
+
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
+
+

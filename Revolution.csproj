@@ -25,6 +25,12 @@
 		<None Remove="Assets\Images\bgd_grass.png" />
 		<None Remove="Assets\Images\bgd_trees.png" />
 		<None Remove="Assets\Images\bgd_water.png" />
+		<None Remove="Assets\Images\GameSpecs\Revolution.pdf" />
+		<None Remove="Assets\Images\MapSelectorMenuImages\map1.png" />
+		<None Remove="Assets\Images\MapSelectorMenuImages\map2.png" />
+		<None Remove="Assets\Images\Menu Background\background.png" />
+		<None Remove="Assets\Images\Menu Background\map.png" />
+		<None Remove="Assets\Images\Menu Background\map1.png" />
 		<None Remove="Assets\Images\spr_archer_attacking\spr_archer_attacking_0.png" />
 		<None Remove="Assets\Images\spr_archer_attacking\spr_archer_attacking_1.png" />
 		<None Remove="Assets\Images\spr_archer_attacking\spr_archer_attacking_2.png" />
@@ -54,6 +60,7 @@
 		<None Remove="Assets\Images\spr_barracks.png" />
 		<None Remove="Assets\Images\spr_barracks_button.png" />
 		<None Remove="Assets\Images\spr_barracks_color.png" />
+		<None Remove="Assets\Images\spr_barracks_mask.png" />
 		<None Remove="Assets\Images\spr_blacksmith_white.png" />
 		<None Remove="Assets\Images\spr_black_smith.png" />
 		<None Remove="Assets\Images\spr_black_smith_button.png" />
@@ -97,6 +104,8 @@
 		<None Remove="Assets\Images\spr_gold_mine.png" />
 		<None Remove="Assets\Images\spr_gui_bar.png" />
 		<None Remove="Assets\Images\spr_horizontal_bridge.png" />
+		<None Remove="Assets\Images\spr_house.png" />
+		<None Remove="Assets\Images\spr_house_mask.png" />
 		<None Remove="Assets\Images\spr_inventory_slot.png" />
 		<None Remove="Assets\Images\spr_knight_attacking\spr_knight_attacking_0.png" />
 		<None Remove="Assets\Images\spr_knight_attacking\spr_knight_attacking_1.png" />
@@ -159,6 +168,7 @@
 		<None Remove="Assets\Images\spr_tower_color.png" />
 		<None Remove="Assets\Images\spr_town_hall.png" />
 		<None Remove="Assets\Images\spr_town_hall_button.png" />
+		<None Remove="Assets\Images\spr_town_hall_mask.png" />
 		<None Remove="Assets\Images\spr_town_hall_white.png" />
 		<None Remove="Assets\Images\spr_train_archer_button.png" />
 		<None Remove="Assets\Images\spr_train_footman_button.png" />
@@ -169,9 +179,13 @@
 		<None Remove="Assets\Images\spr_x\spr_x_1.png" />
 		<None Remove="Assets\Images\spr_x\spr_x_2.png" />
 		<None Remove="Assets\Images\spr_x\spr_x_3.png" />
+		<None Remove="Assets\Images\TeamImages\beni.jpg" />
+		<None Remove="Assets\Images\TeamImages\gabi.jpeg" />
+		<None Remove="Assets\Images\TeamImages\l60Hf.png" />
 		<None Remove="Assets\map1.tmx" />
 		<None Remove="Assets\map2.tmx" />
 		<None Remove="Assets\menu_bg.png" />
+		<None Remove="Assets\Musics\rick_astley_never_gonna_give_you_up_video.mp3" />
 		<None Remove="Assets\spr_gui_bar.png" />
 		<None Remove="Assets\test.png" />
 		<None Remove="Assets\Test.tsx" />
@@ -180,6 +194,8 @@
 		<None Remove="Assets\town_center.tsx" />
 		<None Remove="Assets\vertical_bridge.tsx" />
 		<None Remove="Assets\villager.png" />
+		<None Remove="Fonts\pcsenior.ttf" />
+		<None Remove="Fonts\PlayMeGames-Demo.otf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -217,6 +233,24 @@
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\bgd_water.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\GameSpecs\Revolution.pdf">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\MapSelectorMenuImages\map1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\MapSelectorMenuImages\map2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\Menu Background\background.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\Menu Background\map.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\Menu Background\map1.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_archer_attacking\spr_archer_attacking_0.png">
@@ -301,6 +335,9 @@
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_barracks_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_barracks_mask.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_blacksmith_white.png">
@@ -430,6 +467,12 @@
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_horizontal_bridge.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_house.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_house_mask.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_inventory_slot.png">
@@ -618,6 +661,9 @@
 		<Content Include="Assets\Images\spr_town_hall_button.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Assets\Images\spr_town_hall_mask.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Assets\Images\spr_train_archer_button.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
@@ -645,6 +691,15 @@
 		<Content Include="Assets\Images\spr_x\spr_x_3.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Assets\Images\TeamImages\beni.jpg">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\TeamImages\gabi.jpeg">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\TeamImages\l60Hf.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Assets\map2.tmx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
@@ -653,6 +708,9 @@
 		</Content>
 		<Content Include="Assets\map1.tmx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Musics\rick_astley_never_gonna_give_you_up_video.mp3">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\town_center.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -666,6 +724,9 @@
 		<Content Include="Assets\villager.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Resource Include="Fonts\pcsenior.ttf">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
 	</ItemGroup>
 
 	<ItemGroup>

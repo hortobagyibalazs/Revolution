@@ -39,7 +39,8 @@ namespace WpfApp
             sceneManager.ScenePushed += ScenePushed;
             sceneManager.ScenePopped += ScenePopped;
 
-            sceneManager.Push(new GameScene(Root));
+            sceneManager.Push(new MainMenuScene(Root));
+            //sceneManager.Push(new GameScene(Root));
         }
 
 
@@ -51,6 +52,19 @@ namespace WpfApp
         private void ScenePopped(object? sender, IScene e)
         {
             Root.Children.Remove(e.Content);
+            if (sceneManager.Scene == null)
+            {
+                Close();
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape && !(sceneManager.Scene is MainMenuScene))
+            {
+                sceneManager.Pop();
+            }
+
         }
     }
 }

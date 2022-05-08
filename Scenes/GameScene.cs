@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
+using Revolution.ECS.Models;
 using Revolution.ECS.Systems;
 using Revolution.IO;
 
@@ -49,7 +50,7 @@ namespace Revolution.Scenes
             timer.Stop();
         }
 
-        public GameScene(FrameworkElement Root)
+        public GameScene(FrameworkElement Root,Map selectedMap)
         {
             GameUiControl contentHolder = new GameUiControl();
             var scrollViewer = contentHolder.CanvasViewer;

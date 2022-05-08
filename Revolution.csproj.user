@@ -5,6 +5,9 @@
     <Compile Update="Scenes\GameUiControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Scenes\MainMenuScene.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Scenes\GameUiControl.xaml">
