@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
+using Revolution.ECS.Models;
 using Revolution.ECS.Systems;
 using Revolution.IO;
 
@@ -48,7 +49,7 @@ namespace Revolution.Scenes
             timer.Stop();
         }
 
-        public GameScene(FrameworkElement Root)
+        public GameScene(FrameworkElement Root,Map selectedMap)
         {
             GameUiControl contentHolder = new GameUiControl();
             var scrollViewer = contentHolder.CanvasViewer;
@@ -60,7 +61,12 @@ namespace Revolution.Scenes
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / fps);
             timer.Tick += UpdateSystems;
 
-            var mapData = MapLoader.LoadFromFile(@"", @"Assets\map2.tmx");
+            //var mapData = MapLoader.LoadFromFile(@"", @"Assets\map2.tmx");
+
+            var selectedMapFilePath = selectedMap.FilePath.Remove(0, 1);
+            
+            var mapData = MapLoader.LoadFromFile(@"", selectedMapFilePath);
+
 
             // Setup entity-component system
             systemManager = new SystemManager();

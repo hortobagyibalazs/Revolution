@@ -65,11 +65,10 @@ namespace Revolution.Scenes
 
         private void Button_PlaySelected(object sender, RoutedEventArgs e)
         {
-            var idk = MapsView.SelectedItem;
+            var idk = (Map)MapsView.SelectedItem;
             
+            manager.Push(new GameScene(framework,idk));
         }
-
-        
 
         private void MapsView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
