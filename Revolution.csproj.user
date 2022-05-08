@@ -8,33 +8,9 @@
     <Compile Update="Scenes\MainMenuScene.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Scenes\MakersCreditsScene.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Scenes\MapSelectorMenu.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Scenes\PauseMenuScene.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Scenes\SpecsScene.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Scenes\GameUiControl.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Scenes\MakersCreditsScene.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Scenes\MapSelectorMenu.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Scenes\PauseMenuScene.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Scenes\SpecsScene.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
