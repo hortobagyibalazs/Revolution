@@ -84,6 +84,7 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new StateMachineSystem());
             systemManager.RegisterSystem(new PlayerInputSystem(canvas));
             systemManager.RegisterSystem(new UnitCommandProcessorSystem(scrollViewer, mapData));
+            systemManager.RegisterSystem(new PlayerResourceSystem());
 
             // Start timer
             lastUpdate = Environment.TickCount;

@@ -34,11 +34,13 @@ namespace Revolution.ECS.Entities
             var selectionComp = new SelectionComponent(posComp, sizeComp) { MultiSelectable = true };
             var directionComp = new DirectionComponent();
             var smComp = new StateMachineComponent(new IdleState());
-            var resourceComp = new ResourceComponent() 
+            var resourceComp = new ResourceComponent()
             { 
+                Population = 1,
                 MaxWood = GlobalConfig.PeasantWoodCapacity, 
                 MaxGold = GlobalConfig.PeasantGoldCapacity 
             };
+            var teamComp = new TeamComponent();
             var hudComp = new VillagerHud().CreateComponent(this);
             var inputComp = new PlayerInputComponent();
 
@@ -104,6 +106,7 @@ namespace Revolution.ECS.Entities
             AddComponent(smComp);
             AddComponent(hudComp);
             AddComponent(inputComp);
+            AddComponent(teamComp);
             AddComponent(resourceComp);
         }
     }

@@ -32,15 +32,15 @@ namespace Revolution.Misc
         {
             Map map1 = new Map()
             {
-                Text = "Map 1",
-                FilePath = "\\Assets\\map1.tmx",
+                Text = "Coastal",
+                FilePath = @"Assets\map1.tmx",
                 ImageSource = "\\Assets\\Images\\MapSelectorMenuImages\\map1.png"
             };
 
             Map map2 = new Map()
             {
-                Text = "Map 2",
-                FilePath = "\\Assets\\map2.tmx",
+                Text = "Shite",
+                FilePath = @"Assets\map2.tmx",
                 ImageSource = "\\Assets\\Images\\MapSelectorMenuImages\\map2.png"
             };
             

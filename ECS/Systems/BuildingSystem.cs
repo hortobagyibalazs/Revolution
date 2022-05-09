@@ -31,10 +31,19 @@ namespace Revolution.ECS.Systems
         public void Receive(BuildingPurchaseCommand message)
         {
             var entity = EntityManager.CreateEntity(message.BuildingType);
+            var player = PlayerHelper.GetGuiControlledPlayer();
+            var playerResources = player.GetComponent<ResourceComponent>();
+
             var buildingComponent = entity.GetComponent<BuildingComponent>();
-            if (buildingComponent != null)
+            var buildingPrice = entity.GetComponent<PriceComponent>();
+            if (buildingComponent != null && buildingPrice.Buy(playerResources))
             {
                 buildingComponent.State = BuildingState.Placing;
+            }
+            else
+            {
+                _messenger.Send(new ShowToastEvent(GlobalStrings.NotEnoughResources));
+                entity.Destroy();
             }
         }
 
@@ -42,7 +51,6 @@ namespace Revolution.ECS.Systems
         {
             foreach (var entity in EntityManager.GetEntities())
             {
-                var movementComponent = entity.GetComponent<MovementComponent>();
                 var buildingComponent = entity.GetComponent<BuildingComponent>();
                 var mapObjectComponent = entity.GetComponent<GameMapObjectComponent>();
                 if (mapObjectComponent != null && buildingComponent?.State == BuildingState.Placing)

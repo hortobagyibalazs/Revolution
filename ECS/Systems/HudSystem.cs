@@ -104,8 +104,7 @@ namespace Revolution.ECS.Systems
         {
             var resourceComponent = player.GetComponent<ResourceComponent>();
 
-            int maxPopulation = PlayerHelper.GetMaxPopulation(player);
-            string population = resourceComponent.Population + "/" + maxPopulation;
+            string population = resourceComponent.Population + "/" + resourceComponent.MaxPopulation;
 
             _playerWood.Content = resourceComponent.Wood;
             _playerGold.Content = resourceComponent.Gold;

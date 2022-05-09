@@ -10,5 +10,17 @@ namespace Revolution.ECS.Components
     {
         public int Wood { get; set; }
         public int Gold { get; set; }
+
+        public bool Buy(ResourceComponent resource)
+        {
+            if (resource != null && resource.Wood >= Wood && resource.Gold >= Gold)
+            {
+                resource.Wood -= Wood;
+                resource.Gold -= Gold;
+                return true;
+            }
+
+            return false;
+        }
     }
 }

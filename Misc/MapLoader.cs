@@ -104,6 +104,7 @@ namespace Revolution.IO
             return null;
         }
 
+        private static int townCenter = 0;
         private static Entity CreateEntity(TmxTileset tileset, int gid, MapData mapData, int tilesInRow,
             TmxMap map, TmxLayerTile tile, BitmapSource bitmap)
         {
@@ -118,6 +119,7 @@ namespace Revolution.IO
             {
                 entity = EntityManager.CreateEntity<TownCenter>();
                 entity.GetComponent<BuildingComponent>().State = BuildingState.Built;
+                entity.GetComponent<TeamComponent>().TeamId = townCenter++;
             }
             else if (tileset.Name == "bgd_trees")
             {
