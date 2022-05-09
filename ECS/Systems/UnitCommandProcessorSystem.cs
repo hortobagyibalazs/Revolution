@@ -17,7 +17,7 @@ using System.Windows.Controls;
 
 namespace Revolution.ECS.Systems
 {
-    public class UnitCommandProcessorSystem : ISystem, IRecipient<MoveVillagerToCursorCommand>
+    public class UnitCommandProcessorSystem : ISystem, IRecipient<MoveVillagerToCursorCommand>, IRecipient<DropResourcesCommand>
     {
         private ScrollViewer _scrollViewer;
         private MapData _map;
@@ -30,6 +30,7 @@ namespace Revolution.ECS.Systems
             _map = map;
 
             _messenger.Register<MoveVillagerToCursorCommand>(this);
+            _messenger.Register<DropResourcesCommand>(this);
         }
 
         public void Receive(MoveVillagerToCursorCommand message)
@@ -57,6 +58,32 @@ namespace Revolution.ECS.Systems
                 {
                     ;
                 }
+            }
+        }
+
+        public void Receive(DropResourcesCommand message)
+        {
+            var entity = message.Entity;
+            var resourceComp = entity.GetComponent<ResourceComponent>();
+            TownCenter? tc = null;
+            foreach(var _e in EntityManager.GetEntities())
+            {
+                if (_e is TownCenter)
+                {
+                    tc = (TownCenter)_e;
+                    break;
+                }
+            }
+
+            if (resourceComp != null && tc != null)
+            {
+                var tcResourceComp = tc.GetComponent<ResourceComponent>();
+
+                tcResourceComp.Wood += resourceComp.Wood;
+                tcResourceComp.Gold += resourceComp.Gold;
+
+                resourceComp.Wood = 0;
+                resourceComp.Gold = 0;
             }
         }
 

@@ -14,8 +14,7 @@ namespace Revolution.StateMachines.CollectWood
     public class CutWoodState : IState
     {
         private Entity _entity;
-        private int _woodCollected = 0;
-        private int _woodCapacity = GlobalConfig.PeasantWoodCapacity;
+        private static Random _random = new Random();
 
         public CutWoodState(Entity entity)
         {
@@ -29,10 +28,16 @@ namespace Revolution.StateMachines.CollectWood
 
         IState? IState.Execute()
         {
-            _woodCollected++;
-            if (_woodCollected >= _woodCapacity)
+            var resourceComp = _entity.GetComponent<ResourceComponent>();
+
+            if (resourceComp.Wood >= resourceComp.MaxWood)
             {
                 return new DropResourcesState(_entity);
+            } 
+            else
+            {
+                if (_random.Next(1, 11) == 1)
+                    resourceComp.Wood++;
             }
 
             return null;

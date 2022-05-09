@@ -11,5 +11,9 @@ namespace Revolution.ECS.Components
         public int Wood { get; set; }
         public int Gold { get; set; }
         public int Population { get; set; }
+
+        public int MaxWood { get; set; }
+        public int MaxGold { get; set; }
+        public int MaxPopulation { get; set; }
     }
 }

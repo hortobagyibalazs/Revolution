@@ -32,12 +32,11 @@ namespace Revolution.ECS.Entities
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
             var selectionComp = new SelectionComponent(posComp, sizeComp) { MultiSelectable = true };
             var directionComp = new DirectionComponent();
-            var smComp = new StateMachineComponent()
-            {
-                StateMachine = new StateMachine()
-                {
-                    CurrentState = new IdleState()
-                }
+            var smComp = new StateMachineComponent(new IdleState());
+            var resourceComp = new ResourceComponent() 
+            { 
+                MaxWood = GlobalConfig.PeasantWoodCapacity, 
+                MaxGold = GlobalConfig.PeasantGoldCapacity 
             };
             var hudComp = new VillagerHud().CreateComponent(this);
             var inputComp = new PlayerInputComponent();
@@ -100,6 +99,7 @@ namespace Revolution.ECS.Entities
             AddComponent(smComp);
             AddComponent(hudComp);
             AddComponent(inputComp);
+            AddComponent(resourceComp);
         }
     }
 }

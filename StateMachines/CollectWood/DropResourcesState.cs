@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Revolution.StateMachines.CollectWood
 {
-    public class DropResourcesState : IState
+    public class DropResourcesState : IMoveState
     {
         private Entity _entity;
         private Vector2? _woodPos;
@@ -33,6 +33,7 @@ namespace Revolution.StateMachines.CollectWood
             var movementComp = _entity.GetComponent<MovementComponent>();
             if (movementComp != null && movementComp.CurrentTarget == null)
             {
+                _messenger.Send(new DropResourcesCommand(_entity));
                 return new MoveToWoodState(_entity, _woodPos);
             }
 
