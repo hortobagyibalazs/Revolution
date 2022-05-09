@@ -9,6 +9,7 @@ using Revolution.ECS.Entities;
 using Revolution.ECS.Models;
 using Revolution.ECS.Systems;
 using Revolution.IO;
+using Revolution.Misc;
 
 namespace Revolution.Scenes
 {
@@ -81,6 +82,8 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new CheatcodeSystem(canvas));
             systemManager.RegisterSystem(new PathFinderSystem(mapData));
             systemManager.RegisterSystem(new StateMachineSystem());
+            systemManager.RegisterSystem(new PlayerInputSystem(canvas));
+            systemManager.RegisterSystem(new UnitCommandProcessorSystem(scrollViewer, mapData));
 
             // Start timer
             lastUpdate = Environment.TickCount;

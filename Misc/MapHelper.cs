@@ -6,6 +6,8 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Revolution.Misc
 {
@@ -72,6 +74,7 @@ namespace Revolution.Misc
                 {
                     if (_x >= minX && _x <= maxX && _y >= minY && _y <= maxY 
                         && (_x == x || _x == x + 1 || _y == y + 1 || _y == y))
+                        //!(_x == x - 1 || _x == x + 1 || _y == y - 1 || _y == y + 1))
                     {
                         neighbors.Add(new Vector2(_x, _y));
                     }
@@ -79,6 +82,22 @@ namespace Revolution.Misc
             }
 
             return neighbors;
+        }
+
+        public static int GetGameObjectPosBasedOnCursorX(ScrollViewer ScrollViewer)
+        {
+            return (int)(Mouse.GetPosition(ScrollViewer).X + ScrollViewer.HorizontalOffset) / GlobalConfig.TileSize;
+        }
+
+        public static int GetGameObjectPosBasedOnCursorY(ScrollViewer ScrollViewer)
+        {
+            return (int)(Mouse.GetPosition(ScrollViewer).Y + ScrollViewer.VerticalOffset) / GlobalConfig.TileSize;
+        }
+
+        public static bool CellAvailable(MapData map, int x, int y)
+        {
+            bool result = map.Entities[x, y] == null && map.Tiles[x, y].TrueForAll(tile => !tile.Colliding);
+            return result;
         }
     }
 }

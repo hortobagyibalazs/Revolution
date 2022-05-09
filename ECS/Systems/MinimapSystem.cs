@@ -68,7 +68,7 @@ namespace Revolution.ECS.Systems
 
                 var cameraComp = entity.GetComponent<CameraComponent>();
 
-                if (gameMapObjectComp != null && minimapComp != null)
+                if (minimapComp != null)
                 {
                     if (drawingContext != null && minimapCanvas.ActualWidth != double.NaN)
                     {

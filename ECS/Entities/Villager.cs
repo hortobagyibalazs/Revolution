@@ -1,12 +1,15 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Revolution.ECS.Components;
 using Revolution.HUD.Entities;
+using Revolution.HUD.EventHandlers;
 using Revolution.IO;
 using Revolution.StateMachines;
 using Revolution.StateMachines.CollectWood;
+using Revolution.StateMachines.Idle;
 
 namespace Revolution.ECS.Entities
 {
@@ -27,16 +30,17 @@ namespace Revolution.ECS.Entities
             var gameMapObjectComp = new GameMapObjectComponent();
             var collisionComp = new CollisionComponent(gameMapObjectComp);
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
-            var selectionComp = new SelectionComponent(posComp, sizeComp);
+            var selectionComp = new SelectionComponent(posComp, sizeComp) { MultiSelectable = true };
             var directionComp = new DirectionComponent();
             var smComp = new StateMachineComponent()
             {
                 StateMachine = new StateMachine()
                 {
-                    CurrentState = new FindWoodState(this)
+                    CurrentState = new IdleState()
                 }
             };
             var hudComp = new VillagerHud().CreateComponent(this);
+            var inputComp = new PlayerInputComponent();
 
             gameMapObjectComp.PropertyChanged += delegate
             {
@@ -59,21 +63,25 @@ namespace Revolution.ECS.Entities
                 Canvas.SetTop(spriteComp.Renderable, posComp.Y);
             };
 
-            movementComp.PropertyChanged += delegate
+            smComp.StateMachine.StateChanged += delegate
             {
-                if (movementComp.VelocityX != 0 || movementComp.VelocityY != 0)
-                {
-                    spriteComp.CurrentFrame = VillagerSpriteFrame.Moving;
-                }
-                else if (smComp.StateMachine.CurrentState is CutWoodState)
-                {
-                    spriteComp.CurrentFrame = VillagerSpriteFrame.CutWood;
-                }
-                else
+                var state = smComp.StateMachine.CurrentState;
+                if (state is IdleState)
                 {
                     spriteComp.CurrentFrame = VillagerSpriteFrame.Idle;
                 }
+                else if (state is IMoveState)
+                {
+                    spriteComp.CurrentFrame = VillagerSpriteFrame.Moving;
+                }
+                else if (state is CutWoodState)
+                {
+                    spriteComp.CurrentFrame = VillagerSpriteFrame.CutWood;
+                }
             };
+
+            var vih = new VillagerInputHandler(this);
+            inputComp.MouseButtonDownEventHandler += vih.RightButtonDownHandler;
 
             gameMapObjectComp.Width = 1;
             gameMapObjectComp.Height = 1;
@@ -89,8 +97,9 @@ namespace Revolution.ECS.Entities
             AddComponent(movementComp);
             AddComponent(selectionComp);
             AddComponent(directionComp);
-            //AddComponent(smComp);
+            AddComponent(smComp);
             AddComponent(hudComp);
+            AddComponent(inputComp);
         }
     }
 }

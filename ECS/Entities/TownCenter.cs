@@ -51,7 +51,7 @@ namespace Revolution.ECS.Entities
                 posComp.X = mapObjectComp.X * GlobalConfig.TileSize;
                 posComp.Y = mapObjectComp.Y * GlobalConfig.TileSize;
 
-                spawnerComp.SpawnTarget = new System.Numerics.Vector2(mapObjectComp.X + 1, mapObjectComp.Y + mapObjectComp.Height - 1);
+                spawnerComp.SpawnTarget = new System.Numerics.Vector2(mapObjectComp.X + 1, mapObjectComp.Y + mapObjectComp.Height);
             };
 
             buildingComponent.PropertyChanged += delegate

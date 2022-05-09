@@ -7,6 +7,7 @@ namespace Revolution.IO
         public static int TreeResources = 50;
         public static int StarterGold = 100;
         public static int StarterWood = 100;
+        public static int PeasantWoodCapacity = 10;
     }
 
     public class GlobalStrings

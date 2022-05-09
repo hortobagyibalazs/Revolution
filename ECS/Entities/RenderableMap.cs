@@ -74,7 +74,7 @@ namespace Revolution.ECS.Entities
         }
         private void DrawToMinimap(object? sender, DrawingContext e)
         {
-            
+
         }
     }
 }

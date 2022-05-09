@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Controls;
@@ -15,5 +16,6 @@ namespace Revolution.ECS.Entities
         public int Width { get; set; }
         public int Height { get; set; }
         public bool Colliding { get; set; }
+        public Type? EntityType { get; set; }
     }
 }

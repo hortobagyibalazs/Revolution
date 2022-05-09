@@ -125,7 +125,7 @@ namespace Revolution.IO
                 {
                     entity = EntityManager.CreateEntity<Tree>();
                 }
-                CreateTile(mapData, actualGid, tilesInRow, tileset, map, tile, bitmap, true);
+                CreateTile(mapData, actualGid, tilesInRow, tileset, map, tile, bitmap, true, typeof(Tree));
             }
             else if (tileset.Name == "vertical_brige")
             {
@@ -141,7 +141,7 @@ namespace Revolution.IO
         }
 
         private static void CreateTile(MapData mapData, int actualGid, int tilesInRow, 
-            TmxTileset tileset, TmxMap map, TmxLayerTile tile, BitmapSource bitmap, bool colliding = false)
+            TmxTileset tileset, TmxMap map, TmxLayerTile tile, BitmapSource bitmap, bool colliding = false, Type? entityType = null)
         {
             int startX = (actualGid % tilesInRow - 1) * map.TileWidth;
             int startY = (actualGid / tilesInRow) * map.TileHeight;
@@ -163,7 +163,8 @@ namespace Revolution.IO
                 CellY = tile.Y,
                 Width = tileset.TileWidth,
                 Height = tileset.TileHeight,
-                Colliding = colliding
+                Colliding = colliding,
+                EntityType = entityType
             };
 
             mapData.Tiles[tile.X, tile.Y].Add(tileObj);
