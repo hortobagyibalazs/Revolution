@@ -22,7 +22,7 @@ namespace Revolution.ECS.Systems
             foreach (var entity in EntityManager.GetEntities())
             {
                 var animatedSpriteComp = entity.GetComponent<AnimatedSpriteComponent>();
-                if (animatedSpriteComp != null)
+                if (animatedSpriteComp != null && animatedSpriteComp.AutoAnimation)
                 {
                     animatedSpriteComp.NextFrame();
                 }

@@ -24,6 +24,8 @@ namespace Revolution.ECS.Components
             }
         }
 
+        public bool AutoAnimation { get; set; } = true;
+
         public void NextFrame()
         {
             if (CurrentFrame != null && CurrentFrame.NextFrame != null)

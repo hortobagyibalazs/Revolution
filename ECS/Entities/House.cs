@@ -9,6 +9,7 @@ namespace Revolution.ECS.Entities
     internal class HouseSpriteFrame
     {
         public static readonly SpriteFrame UnderConstruction = new SpriteFrame() { Source = new Uri(@"\Assets\Images\spr_construction_site.png", UriKind.Relative) };
+
         public static readonly SpriteFrame Normal = new SpriteFrame() { Source = new Uri(@"\Assets\Images\spr_farm.png", UriKind.Relative) };
     }
 
