@@ -5,12 +5,6 @@
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
 	</PropertyGroup>
-	<ItemGroup>
-	  <Compile Remove="Assets\Images\spr_peasant_attacking\**" />
-	  <EmbeddedResource Remove="Assets\Images\spr_peasant_attacking\**" />
-	  <None Remove="Assets\Images\spr_peasant_attacking\**" />
-	  <Page Remove="Assets\Images\spr_peasant_attacking\**" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<None Remove="Assets\bgd_dirt.tsx" />
@@ -133,6 +127,10 @@
 		<None Remove="Assets\Images\spr_medium_vertical_bridge.png" />
 		<None Remove="Assets\Images\spr_move_button.png" />
 		<None Remove="Assets\Images\spr_parchment.png" />
+		<None Remove="Assets\Images\spr_peasant_attacking\spr_peasant_attacking_0.png" />
+		<None Remove="Assets\Images\spr_peasant_attacking\spr_peasant_attacking_1.png" />
+		<None Remove="Assets\Images\spr_peasant_attacking\spr_peasant_attacking_2.png" />
+		<None Remove="Assets\Images\spr_peasant_attacking\spr_peasant_attacking_3.png" />
 		<None Remove="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_0.png" />
 		<None Remove="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_1.png" />
 		<None Remove="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_2.png" />
@@ -558,6 +556,18 @@
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_parchment.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_attacking\spr_peasant_attacking_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_attacking\spr_peasant_attacking_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_attacking\spr_peasant_attacking_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_attacking\spr_peasant_attacking_3.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_0.png">

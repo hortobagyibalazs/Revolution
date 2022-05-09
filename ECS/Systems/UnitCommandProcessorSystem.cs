@@ -6,6 +6,7 @@ using Revolution.ECS.Entities;
 using Revolution.IO;
 using Revolution.Misc;
 using Revolution.StateMachines;
+using Revolution.StateMachines.Build;
 using Revolution.StateMachines.CollectWood;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace Revolution.ECS.Systems
                 int cellX = MapHelper.GetGameObjectPosBasedOnCursorX(_scrollViewer);
                 int cellY = MapHelper.GetGameObjectPosBasedOnCursorY(_scrollViewer);
 
-                // if target cell is entry, move
+                // if target cell is empty, move
                 if (MapHelper.CellAvailable(_map, cellX, cellY))
                 {
                     stateMachine.CurrentState = new BasicMoveState(message.Entity, new Vector2(
@@ -53,10 +54,15 @@ namespace Revolution.ECS.Systems
                 else if (_map.Tiles[cellX, cellY].Exists(tile => tile.EntityType == typeof(Tree)))
                 {
                     stateMachine.CurrentState = new MoveToWoodState(message.Entity, new Vector2(cellX, cellY));
+                } 
+                //else if target cell is a building to construct, start construction
+                else if (_map.Entities[cellX, cellY]?.GetComponent<BuildingComponent>()?.State == BuildingState.UnderConstruction)
+                {
+                    stateMachine.CurrentState = new MoveToConstructionSiteState((Villager) message.Entity, _map.Entities[cellX, cellY]);
                 }
                 else
                 {
-                    ;
+
                 }
             }
         }

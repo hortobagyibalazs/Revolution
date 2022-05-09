@@ -41,6 +41,22 @@ namespace Revolution.ECS.Components
             }
         }
 
+        private int _buildProgress = 0;
+        public int BuildProgress
+        {
+            get => _buildProgress;
+            set
+            {
+                _buildProgress = value;
+                if (_buildProgress >= BuildMaxProgress)
+                {
+                    _buildProgress = BuildMaxProgress;
+                    State = BuildingState.Built;
+                }
+            }
+        }
+        public int BuildMaxProgress { get; set; }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

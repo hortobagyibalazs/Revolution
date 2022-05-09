@@ -23,7 +23,7 @@ namespace Revolution.ECS.Entities
             var posComp = new PositionComponent();
             var sizeComp = new SizeComponent();
             var mapObjectComp = new GameMapObjectComponent();
-            var buildingComponent = new BuildingComponent() {State = BuildingState.Placing};
+            var buildingComponent = new BuildingComponent() {State = BuildingState.Placing, BuildMaxProgress = GlobalConfig.HouseBuildPoints};
             var collisionComp = new CollisionComponent(mapObjectComp);
             var selectionComp = new SelectionComponent(posComp, sizeComp);
             var teamComp = new TeamComponent() { TeamColor = Brushes.DarkBlue };

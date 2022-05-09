@@ -8,6 +8,7 @@ using Revolution.HUD.Entities;
 using Revolution.HUD.EventHandlers;
 using Revolution.IO;
 using Revolution.StateMachines;
+using Revolution.StateMachines.Build;
 using Revolution.StateMachines.CollectWood;
 using Revolution.StateMachines.Idle;
 
@@ -19,6 +20,7 @@ namespace Revolution.ECS.Entities
         public static readonly SpriteFrame Moving = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_running");
         public static readonly SpriteFrame CutWood = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_attacking_lumber");
         public static readonly SpriteFrame CarryResources = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_carrying_gold");
+        public static readonly SpriteFrame Build = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_attacking");
     }
 
     public class Villager : Entity
@@ -75,6 +77,10 @@ namespace Revolution.ECS.Entities
                 else if (state is DropResourcesState)
                 {
                     spriteComp.CurrentFrame = VillagerSpriteFrame.CarryResources;
+                }
+                else if (state is PeasantBuildingState)
+                {
+                    spriteComp.CurrentFrame = VillagerSpriteFrame.Build;
                 }
                 else if (state is IMoveState)
                 {

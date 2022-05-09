@@ -10,10 +10,11 @@ using Revolution.ECS.Entities;
 using Revolution.HUD.Events;
 using Revolution.IO;
 using Revolution.Misc;
+using Revolution.StateMachines.Build;
 
 namespace Revolution.ECS.Systems
 {
-    public class BuildingSystem : ISystem, IRecipient<BuildingPurchaseCommand>
+    public class BuildingSystem : ISystem, IRecipient<BuildingPurchaseCommand>, IRecipient<BuildWithPeasantCommand>
     {
         private IMessenger _messenger = Ioc.Default.GetService<IMessenger>();
 
@@ -26,6 +27,7 @@ namespace Revolution.ECS.Systems
             Canvas = canvas;
 
             _messenger.Register<BuildingPurchaseCommand>(this);
+            _messenger.Register<BuildWithPeasantCommand>(this);
         }
 
         public void Receive(BuildingPurchaseCommand message)
@@ -47,6 +49,12 @@ namespace Revolution.ECS.Systems
             }
         }
 
+        public void Receive(BuildWithPeasantCommand message)
+        {
+            message.Peasant.GetComponent<StateMachineComponent>().StateMachine.CurrentState
+                = new MoveToConstructionSiteState(message.Peasant, message.Building);
+        }
+
         public void Update(int deltaMs)
         {
             foreach (var entity in EntityManager.GetEntities())
@@ -65,6 +73,7 @@ namespace Revolution.ECS.Systems
                     if (Mouse.LeftButton == MouseButtonState.Pressed)
                     {
                         buildingComponent.State = BuildingState.UnderConstruction;
+                        _messenger.Send(new BuildWithPeasantCommand(entity));
                     }
 
                     return;
