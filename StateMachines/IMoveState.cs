@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Revolution.StateMachines.CollectWood
+namespace Revolution.StateMachines
 {
-    internal class MoveToDropoffPointState
+    public interface IMoveState : IState
     {
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.Toolkit.Mvvm.Messaging;
 using Revolution.Commands;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
+using Revolution.IO;
 using Revolution.Misc;
 using System;
 using System.Collections.Generic;
@@ -13,19 +14,23 @@ using System.Threading.Tasks;
 
 namespace Revolution.StateMachines.CollectWood
 {
-    public class DropResourcesState : IState
+    public class MoveToWoodState : IMoveState
     {
         private Entity _entity;
-        private Vector2? _woodPos;
-
         private IMessenger _messenger = Ioc.Default.GetService<IMessenger>();
 
-        public DropResourcesState(Entity entity)
+        public MoveToWoodState(Entity entity, Vector2? woodPos = null)
         {
-            var mapObjectComp = entity.GetComponent<GameMapObjectComponent>();
-
             _entity = entity;
-            _messenger.Send(new FindRouteToEntityTypeCommand(_entity, typeof(TownCenter)));
+
+            if (woodPos == null)
+            {
+                _messenger.Send(new FindRouteToEntityTypeCommand(_entity, typeof(Tree)));
+            }
+            else
+            {
+                _messenger.Send(new FindRouteCommand(_entity, (Vector2) woodPos));
+            }
         }
 
         IState? IState.Execute()
@@ -33,8 +38,8 @@ namespace Revolution.StateMachines.CollectWood
             var movementComp = _entity.GetComponent<MovementComponent>();
             if (movementComp != null && movementComp.CurrentTarget == null)
             {
-                return new MoveToWoodState(_entity, _woodPos);
-            }
+                return new CutWoodState(_entity);
+            } 
 
             return null;
         }

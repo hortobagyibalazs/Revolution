@@ -16,14 +16,10 @@ namespace Revolution.StateMachines
             {
                 if (_current != null)
                 {
-                    _current.StateMachine = null;
+                    _current.Exit();
                 }
                 _current = value;
                 StateChanged?.Invoke(this, value);
-                if (_current != null)
-                {
-                    _current.StateMachine = this;
-                }
             }
         }
 
@@ -31,7 +27,11 @@ namespace Revolution.StateMachines
 
         public void Execute()
         {
-            CurrentState.Execute();
+            var state = CurrentState?.Execute();
+            if (state != null)
+            {
+                CurrentState = state;
+            }
         }
     }
 }

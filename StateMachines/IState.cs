@@ -9,7 +9,7 @@ namespace Revolution.StateMachines
 {
     public interface IState
     {
-        public StateMachine StateMachine { get; set; }
-        void Execute();
+        IState? Execute();
+        void Exit();
     }
 }
