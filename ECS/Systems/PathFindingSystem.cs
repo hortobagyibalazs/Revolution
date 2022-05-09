@@ -172,7 +172,22 @@ namespace Revolution.ECS.Systems
                             {
                                 if (Math.Abs(minK) == 1 && Math.Abs(minL) == 1)
                                 {
-                                    cloneGridArray[i, j] = localMin + 3;
+                                    int notEmptyCell = 0;
+                                    for (int k = -1; k < 2; k++)
+                                    {
+                                        for (int l = -1; l < 2; l++)
+                                        {
+                                            if (grid.GridArray[i + k, j + k] != emptyCell)
+                                            {
+                                                notEmptyCell++;
+                                            }
+                                        }
+                                    }
+
+                                    if (notEmptyCell > 1)
+                                    {
+                                        cloneGridArray[i, j] = localMin + 3;
+                                    }
                                 }
                                 else
                                 {

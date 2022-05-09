@@ -36,7 +36,7 @@ namespace Revolution.ECS.Components
             {
                 for (int j = 0; j < width; j++)
                 {
-                    gridArray[i, j] = -1;
+                    gridArray[j, i] = -1;
                 }
             }
 
@@ -46,7 +46,7 @@ namespace Revolution.ECS.Components
                 {
                     if (mapData.Entities[i, j] == null && mapData.Tiles[i, j].All(tile => !tile.Colliding))
                     {
-                        gridArray[i, j] = 0;
+                        gridArray[j, i] = 0;
                     }
                 }
             }
@@ -87,7 +87,7 @@ namespace Revolution.ECS.Components
                 {
                     for (int j = 0; j < gridArray.GetLength(1); j++)
                     {
-                        sw.Write(gridArray[j, i]);
+                        sw.Write(gridArray[i, j]);
                         sw.Write(',');
                     }
                     sw.WriteLine();

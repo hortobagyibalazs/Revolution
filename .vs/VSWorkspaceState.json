@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\ECS",
-    "\\ECS\\Systems"
+    "\\ECS\\Components"
   ],
-  "SelectedNode": "\\ECS\\Systems\\PathFindingSystem.cs",
+  "SelectedNode": "\\ECS\\Components\\GridComponent.cs",
   "PreviewInSolutionExplorer": false
 }
