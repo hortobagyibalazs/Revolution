@@ -138,6 +138,10 @@
 		<None Remove="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_2.png" />
 		<None Remove="Assets\Images\spr_peasant_attacking_lumber\spr_peasant_attacking_lumber_3.png" />
 		<None Remove="Assets\Images\spr_peasant_button.png" />
+		<None Remove="Assets\Images\spr_peasant_carrying_gold\spr_peasant_carrying_gold_0.png" />
+		<None Remove="Assets\Images\spr_peasant_carrying_gold\spr_peasant_carrying_gold_1.png" />
+		<None Remove="Assets\Images\spr_peasant_carrying_gold\spr_peasant_carrying_gold_2.png" />
+		<None Remove="Assets\Images\spr_peasant_carrying_gold\spr_peasant_carrying_gold_3.png" />
 		<None Remove="Assets\Images\spr_peasant_death\spr_peasant_death_0.png" />
 		<None Remove="Assets\Images\spr_peasant_death\spr_peasant_death_1.png" />
 		<None Remove="Assets\Images\spr_peasant_death_color\spr_peasant_death_color_0.png" />
@@ -571,6 +575,18 @@
 		<Content Include="Assets\Images\spr_peasant_button.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Assets\Images\spr_peasant_carrying_gold\spr_peasant_carrying_gold_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_carrying_gold\spr_peasant_carrying_gold_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_carrying_gold\spr_peasant_carrying_gold_2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_peasant_carrying_gold\spr_peasant_carrying_gold_3.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Assets\Images\spr_peasant_death\spr_peasant_death_0.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
@@ -734,5 +750,11 @@
 		<PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
 		<PackageReference Include="System.Drawing.Common" Version="6.0.0" />
 		<PackageReference Include="TiledSharp" Version="1.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="ECS\Systems\PathFindingSystem.cs">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Compile>
 	</ItemGroup>
 </Project>

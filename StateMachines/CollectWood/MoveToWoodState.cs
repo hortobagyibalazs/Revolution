@@ -23,14 +23,7 @@ namespace Revolution.StateMachines.CollectWood
         {
             _entity = entity;
 
-            if (woodPos == null)
-            {
-                _messenger.Send(new FindRouteToEntityTypeCommand(_entity, typeof(Tree)));
-            }
-            else
-            {
-                _messenger.Send(new FindRouteCommand(_entity, (Vector2) woodPos));
-            }
+            _messenger.Send(new FindRouteToEntityTypeCommand(_entity, typeof(Tree), woodPos));
         }
 
         IState? IState.Execute()

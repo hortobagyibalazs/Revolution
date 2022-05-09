@@ -66,8 +66,12 @@ namespace Revolution.ECS.Systems
         public void Receive(FindRouteToEntityTypeCommand message)
         {
             var mapObjectComp = message.Entity.GetComponent<GameMapObjectComponent>();
-            var currentPos = new Vector2(mapObjectComp.X, mapObjectComp.Y);
-            var cell = MapHelper.GetClosestCellToEntityType(message.DestEntityType, currentPos, mapData);
+            Vector2? currentPos = message.ApproximatePosition;
+            if (currentPos == null)
+            {
+                currentPos = new Vector2(mapObjectComp.X, mapObjectComp.Y);
+            }
+            var cell = MapHelper.GetClosestCellToEntityType(message.DestEntityType, (Vector2) currentPos, mapData);
             if (cell != null)
             {
                 var command = new FindRouteCommand(message.Entity, (Vector2)cell);

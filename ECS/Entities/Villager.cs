@@ -18,6 +18,7 @@ namespace Revolution.ECS.Entities
         public static readonly SpriteFrame Idle = new SpriteFrame() { Source = new Uri(@"\Assets\Images\spr_peasant_standing.png", UriKind.Relative) };
         public static readonly SpriteFrame Moving = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_running");
         public static readonly SpriteFrame CutWood = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_attacking_lumber");
+        public static readonly SpriteFrame CarryResources = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_carrying_gold");
     }
 
     public class Villager : Entity
@@ -68,6 +69,10 @@ namespace Revolution.ECS.Entities
                 if (state is IdleState)
                 {
                     spriteComp.CurrentFrame = VillagerSpriteFrame.Idle;
+                }
+                else if (state is DropResourcesState)
+                {
+                    spriteComp.CurrentFrame = VillagerSpriteFrame.CarryResources;
                 }
                 else if (state is IMoveState)
                 {

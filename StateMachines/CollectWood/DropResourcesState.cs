@@ -25,6 +25,9 @@ namespace Revolution.StateMachines.CollectWood
             var mapObjectComp = entity.GetComponent<GameMapObjectComponent>();
 
             _entity = entity;
+
+            _woodPos = new Vector2(mapObjectComp.X, mapObjectComp.Y);
+
             _messenger.Send(new FindRouteToEntityTypeCommand(_entity, typeof(TownCenter)));
         }
 
