@@ -72,7 +72,7 @@ namespace Revolution.ECS.Systems
                 {
                     if (drawingContext != null && minimapCanvas.ActualWidth != double.NaN)
                     {
-                        minimapComp.Draw?.Invoke(this, drawingContext);
+                        minimapComp.Draw?.Invoke(this, new MinimapDrawEventArgs(drawingContext, minimapCanvas, mapData));
                     }
                 }
                 else if (cameraComp != null)

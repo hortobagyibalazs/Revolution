@@ -72,9 +72,21 @@ namespace Revolution.ECS.Entities
             rtb.Render(dv);
             return rtb;
         }
-        private void DrawToMinimap(object? sender, DrawingContext e)
+        private void DrawToMinimap(object? sender, MinimapDrawEventArgs args)
         {
+            var dc = args.DrawingContext;
+            var canvas = args.MinimapCanvas;
 
+            double pxWidth = canvas.ActualWidth / args.GameMap.Dimension.X;
+            double pxHeight = canvas.ActualHeight / args.GameMap.Dimension.Y;
+
+            foreach (var tile in Tiles)
+            {
+                var rect = new Rect(tile.CellX * pxWidth, tile.CellY * pxHeight, pxWidth, pxHeight);
+                SolidColorBrush color = tile.Color;
+                if (color == null) color = System.Windows.Media.Brushes.White;
+                dc.DrawRectangle(color, null, rect);
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Revolution.ECS.Components;
 using Revolution.IO;
@@ -17,5 +18,6 @@ namespace Revolution.ECS.Entities
         public int Height { get; set; }
         public bool Colliding { get; set; }
         public Type? EntityType { get; set; }
+        public SolidColorBrush Color { get; set; }
     }
 }

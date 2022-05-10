@@ -7,6 +7,7 @@ using Revolution.ECS.Components;
 using Revolution.HUD.Entities;
 using Revolution.HUD.EventHandlers;
 using Revolution.IO;
+using Revolution.Misc;
 using Revolution.StateMachines;
 using Revolution.StateMachines.Build;
 using Revolution.StateMachines.CollectWood;
@@ -36,6 +37,8 @@ namespace Revolution.ECS.Entities
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
             var selectionComp = new SelectionComponent(posComp, sizeComp) { MultiSelectable = true };
             var directionComp = new DirectionComponent();
+            var minimapComp = new MinimapComponent();
+            minimapComp.Draw += new MinimapHelper(this).DrawDynamicEntity;
             var priceComp = new PriceComponent()
             {
                 Gold = GlobalConfig.PeasantPriceGold,
@@ -125,6 +128,7 @@ namespace Revolution.ECS.Entities
             AddComponent(teamComp);
             AddComponent(resourceComp);
             AddComponent(priceComp);
+            AddComponent(minimapComp);
         }
     }
 }

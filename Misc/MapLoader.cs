@@ -166,7 +166,8 @@ namespace Revolution.IO
                 Width = tileset.TileWidth,
                 Height = tileset.TileHeight,
                 Colliding = colliding,
-                EntityType = entityType
+                EntityType = entityType,
+                Color = GetMinimapColorForTile(tileset)
             };
 
             mapData.Tiles[tile.X, tile.Y].Add(tileObj);
@@ -193,7 +194,7 @@ namespace Revolution.IO
             }
             else if (tileset.Name == "gold_mine")
             {
-                brush = System.Windows.Media.Brushes.Yellow;
+                brush = System.Windows.Media.Brushes.Gray;
             }
 
             return brush;
