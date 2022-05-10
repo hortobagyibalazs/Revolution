@@ -31,7 +31,11 @@ namespace Revolution.ECS.Entities
             var teamComp = new TeamComponent() { TeamColor = Brushes.DarkBlue };
             var resourceComp = new ResourceComponent() { MaxPopulation = 0 };
             var minimapComp = new MinimapComponent() { Background = teamComp.TeamColor };
-            var priceComp = new PriceComponent() { Wood = 100, Gold = 100 };
+            var priceComp = new PriceComponent() 
+            {
+                Wood = GlobalConfig.HousePriceWood,
+                Gold = GlobalConfig.HousePriceGold 
+            };
             
             sizeComp.PropertyChanged += delegate
             {

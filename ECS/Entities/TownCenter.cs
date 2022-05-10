@@ -35,8 +35,8 @@ namespace Revolution.ECS.Entities
             var teamComp = new TeamComponent();
             var priceComp = new PriceComponent()
             {
-                Wood = 1000,
-                Gold = 700
+                Wood = GlobalConfig.TownCenterPriceWood,
+                Gold = GlobalConfig.TownCenterPriceGold
             };
             var hudComp = new TownCenterHud().CreateComponent(this);
             

@@ -1,4 +1,5 @@
 ﻿using Revolution.ECS.Components;
+using Revolution.HUD.Entities;
 using Revolution.IO;
 using System;
 using System.Collections.Generic;
@@ -34,10 +35,10 @@ namespace Revolution.ECS.Entities
                 var teamComp = new TeamComponent();
                 var priceComp = new PriceComponent()
                 {
-                    Wood = 0,
-                    Gold = 0
+                    Wood = GlobalConfig.BarracksPriceWood,
+                    Gold = GlobalConfig.BarracksPriceGold
                 };
-                //var hudComp = new TownCenterHud().CreateComponent(this);
+                var hudComp = new BarracksHud().CreateComponent(this);
 
                 sizeComp.PropertyChanged += delegate
                 {
@@ -70,6 +71,8 @@ namespace Revolution.ECS.Entities
                 else
                 {
                     renderComp.CurrentFrame = BarracksSpriteFrame.Normal;
+                    if (buildingComponent.State == BuildingState.Built)
+                        AddComponent(hudComp);
                 }
             };
 
@@ -83,7 +86,7 @@ namespace Revolution.ECS.Entities
                 }
             };
 
-            mapObjectComp.X = 1;
+                mapObjectComp.X = 1;
                 mapObjectComp.Y = 1;
                 mapObjectComp.Width = 3;
                 mapObjectComp.Height = 3;
@@ -96,7 +99,6 @@ namespace Revolution.ECS.Entities
                 AddComponent(collisionComp);
                 AddComponent(selectionComp);
                 AddComponent(spawnerComp);
-                //AddComponent(hudComp);
                 AddComponent(teamComp);
                 AddComponent(priceComp);
             }

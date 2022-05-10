@@ -35,13 +35,16 @@ namespace Revolution.ECS.Systems
 
             var unitPrice = entity.GetComponent<PriceComponent>();
             var buildingSpawner = message.Building.GetComponent<SpawnerComponent>();
-            if ((unitPrice == null || unitPrice.Buy(playerResources)) && buildingSpawner != null)
+            if (playerResources.Population < playerResources.MaxPopulation)
             {
-                buildingSpawner.SpawnQueue.Enqueue(message.UnitType);
+                if ((unitPrice == null || unitPrice.Buy(playerResources)) && buildingSpawner != null)
+                    buildingSpawner.SpawnQueue.Enqueue(message.UnitType);
+                else
+                    _messenger.Send(new ShowToastEvent(GlobalStrings.NotEnoughResources));
             }
             else
             {
-                _messenger.Send(new ShowToastEvent(GlobalStrings.NotEnoughResources));
+                _messenger.Send(new ShowToastEvent(GlobalStrings.NotEnoughPopulationSpace));
             }
             entity.Destroy();
         }

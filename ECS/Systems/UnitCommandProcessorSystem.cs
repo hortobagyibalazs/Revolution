@@ -19,7 +19,8 @@ using System.Windows.Controls;
 
 namespace Revolution.ECS.Systems
 {
-    public class UnitCommandProcessorSystem : ISystem, IRecipient<MoveVillagerToCursorCommand>, IRecipient<DropResourcesCommand>
+    public class UnitCommandProcessorSystem : ISystem, IRecipient<MoveVillagerToCursorCommand>, IRecipient<DropResourcesCommand>,
+        IRecipient<MoveTrooperToCursorCommand>
     {
         private ScrollViewer _scrollViewer;
         private MapData _map;
@@ -32,6 +33,7 @@ namespace Revolution.ECS.Systems
             _map = map;
 
             _messenger.Register<MoveVillagerToCursorCommand>(this);
+            _messenger.Register<MoveTrooperToCursorCommand>(this);
             _messenger.Register<DropResourcesCommand>(this);
         }
 
@@ -96,6 +98,29 @@ namespace Revolution.ECS.Systems
 
                 resourceComp.Wood = 0;
                 resourceComp.Gold = 0;
+            }
+        }
+
+        public void Receive(MoveTrooperToCursorCommand message)
+        {
+            var stateMachine = message.Entity.GetComponent<StateMachineComponent>()?.StateMachine;
+            if (stateMachine != null)
+            {
+                int cellX = MapHelper.GetGameObjectPosBasedOnCursorX(_scrollViewer);
+                int cellY = MapHelper.GetGameObjectPosBasedOnCursorY(_scrollViewer);
+
+                // if target cell is empty, move
+                if (MapHelper.CellAvailable(_map, cellX, cellY))
+                {
+                    stateMachine.CurrentState = new BasicMoveState(message.Entity, new Vector2(
+                         cellX,
+                         cellY
+                         ));
+                }
+                else
+                {
+
+                }
             }
         }
 

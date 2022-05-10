@@ -4,6 +4,7 @@ using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.HUD.Controls;
 using Revolution.HUD.Events;
+using Revolution.IO;
 using Revolution.Misc;
 using System;
 using System.Collections.Generic;
@@ -42,9 +43,8 @@ namespace Revolution.HUD.Entities
 
         private FrameworkElement CreateBuyHouseButton()
         {
-            int wood = 0;
-            int gold = 0;
-            GetPriceForBuilding<House>(ref wood, ref gold);
+            int wood = GlobalConfig.HousePriceWood;
+            int gold = GlobalConfig.HousePriceGold;
             var tooltip = TooltipHelper.GetBasicTooltipForEntityPurchase("House", gold, wood);
 
             var button = new HudMiniActionButton(
@@ -59,9 +59,8 @@ namespace Revolution.HUD.Entities
 
         private FrameworkElement CreateBuyBarracksButton()
         {
-            int wood = 0;
-            int gold = 0;
-            GetPriceForBuilding<Barracks>(ref wood, ref gold);
+            int wood = GlobalConfig.BarracksPriceWood;
+            int gold = GlobalConfig.BarracksPriceGold;
             var tooltip = TooltipHelper.GetBasicTooltipForEntityPurchase("Barracks", gold, wood);
 
             var button = new HudMiniActionButton(
@@ -80,7 +79,7 @@ namespace Revolution.HUD.Entities
 
             var button = new HudMiniActionButton(
                     new Uri(@"\Assets\Images\spr_stable_button.png", UriKind.Relative),
-                    () => _messenger.Send(new ShowToastEvent("Hello World!"))
+                    () => { }
                 );
 
             return button;
@@ -100,9 +99,8 @@ namespace Revolution.HUD.Entities
 
         private FrameworkElement CreateBuyTownCenterButton()
         {
-            int wood = 0;
-            int gold = 0;
-            GetPriceForBuilding<TownCenter>(ref wood, ref gold);
+            int wood = GlobalConfig.TownCenterPriceWood;
+            int gold = GlobalConfig.TownCenterPriceGold;
             var tooltip = TooltipHelper.GetBasicTooltipForEntityPurchase("Town Center", gold, wood);
 
             var button = new HudMiniActionButton(

@@ -1,36 +1,30 @@
-using System;
-using System.ComponentModel;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using Revolution.ECS.Components;
-using Revolution.HUD.Entities;
+﻿using Revolution.ECS.Components;
 using Revolution.HUD.EventHandlers;
 using Revolution.IO;
 using Revolution.StateMachines;
-using Revolution.StateMachines.Build;
-using Revolution.StateMachines.CollectWood;
 using Revolution.StateMachines.Idle;
-using Revolution.StateMachines.MineGold;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Revolution.ECS.Entities
 {
-    internal class VillagerSpriteFrame
+    internal class ArcherSpriteFrame
     {
-        public static readonly SpriteFrame Idle = new SpriteFrame() { Source = new Uri(@"\Assets\Images\spr_peasant_standing.png", UriKind.Relative) };
-        public static readonly SpriteFrame Moving = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_running");
-        public static readonly SpriteFrame CutWood = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_attacking_lumber");
-        public static readonly SpriteFrame CarryResources = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_carrying_gold");
-        public static readonly SpriteFrame Build = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_attacking");
+        public static readonly SpriteFrame Idle = new SpriteFrame() { Source = new Uri(@"\Assets\Images\spr_archer_standing.png", UriKind.Relative) };
+        public static readonly SpriteFrame Moving = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_archer_running");
     }
 
-    public class Villager : Entity
+    public class Archer : Entity
     {
-        public Villager()
+        public Archer()
         {
             var sizeComp = new SizeComponent();
             var posComp = new PositionComponent();
-            var spriteComp = new AnimatedSpriteComponent() { CurrentFrame = VillagerSpriteFrame.Idle };
+            var spriteComp = new AnimatedSpriteComponent() { CurrentFrame = ArcherSpriteFrame.Idle };
             var gameMapObjectComp = new GameMapObjectComponent();
             var collisionComp = new CollisionComponent(gameMapObjectComp);
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
@@ -38,19 +32,13 @@ namespace Revolution.ECS.Entities
             var directionComp = new DirectionComponent();
             var priceComp = new PriceComponent()
             {
-                Gold = GlobalConfig.PeasantPriceGold,
-                Wood = GlobalConfig.PeasantPriceWood
+                Gold = GlobalConfig.ArcherPriceGold,
+                Wood = GlobalConfig.ArcherPriceWood
             };
             var smComp = new StateMachineComponent(new IdleState());
-            var resourceComp = new ResourceComponent()
-            { 
-                Population = 1,
-                MaxWood = GlobalConfig.PeasantWoodCapacity, 
-                MaxGold = GlobalConfig.PeasantGoldCapacity 
-            };
             var teamComp = new TeamComponent();
-            var hudComp = new VillagerHud().CreateComponent(this);
             var inputComp = new PlayerInputComponent();
+            var resourceComp = new ResourceComponent() { Population = 1 };
 
             gameMapObjectComp.PropertyChanged += delegate
             {
@@ -78,31 +66,15 @@ namespace Revolution.ECS.Entities
                 var state = smComp.StateMachine.CurrentState;
                 if (state is IdleState)
                 {
-                    spriteComp.CurrentFrame = VillagerSpriteFrame.Idle;
-                }
-                else if (state is DropResourcesState)
-                {
-                    spriteComp.CurrentFrame = VillagerSpriteFrame.CarryResources;
-                }
-                else if (state is PeasantBuildingState)
-                {
-                    spriteComp.CurrentFrame = VillagerSpriteFrame.Build;
+                    spriteComp.CurrentFrame = ArcherSpriteFrame.Idle;
                 }
                 else if (state is IMoveState)
                 {
-                    spriteComp.CurrentFrame = VillagerSpriteFrame.Moving;
-                }
-                else if (state is CutWoodState)
-                {
-                    spriteComp.CurrentFrame = VillagerSpriteFrame.CutWood;
-                }
-                else if (state is MineGoldState)
-                {
-                    spriteComp.CurrentFrame = VillagerSpriteFrame.Build;
+                    spriteComp.CurrentFrame = ArcherSpriteFrame.Moving;
                 }
             };
 
-            var vih = new VillagerInputHandler(this);
+            var vih = new TrooperInputHandler(this);
             inputComp.MouseButtonDownEventHandler += vih.RightButtonDownHandler;
 
             gameMapObjectComp.Width = 1;
@@ -120,11 +92,10 @@ namespace Revolution.ECS.Entities
             AddComponent(selectionComp);
             AddComponent(directionComp);
             AddComponent(smComp);
-            AddComponent(hudComp);
             AddComponent(inputComp);
             AddComponent(teamComp);
-            AddComponent(resourceComp);
             AddComponent(priceComp);
+            AddComponent(resourceComp);
         }
     }
 }

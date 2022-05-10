@@ -79,7 +79,7 @@ namespace Revolution.Scenes
             systemManager.RegisterSystem(new TooltipSystem(contentHolder.Tooltip));
             systemManager.RegisterSystem(new ToastMessageSystem(contentHolder.MessageLabel));
             systemManager.RegisterSystem(new SpawnerSystem(mapData));
-            systemManager.RegisterSystem(new CheatcodeSystem(canvas));
+            systemManager.RegisterSystem(new CheatcodeSystem(Root));
             systemManager.RegisterSystem(new PathFinderSystem(mapData));
             systemManager.RegisterSystem(new StateMachineSystem());
             systemManager.RegisterSystem(new PlayerInputSystem(canvas));

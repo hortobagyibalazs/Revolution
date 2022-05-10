@@ -5,6 +5,7 @@ using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.HUD.Controls;
 using Revolution.HUD.Events;
+using Revolution.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,8 +38,8 @@ namespace Revolution.HUD.Entities
 
         private FrameworkElement CreateBuyPeasantButton()
         {
-            int wood = 0;
-            int gold = 50;
+            int wood = GlobalConfig.PeasantPriceWood;
+            int gold = GlobalConfig.PeasantPriceGold;
             var tooltip = TooltipHelper.GetBasicTooltipForEntityPurchase("Villager", gold, wood);
 
             var button = new HudMiniActionButton(
