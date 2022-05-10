@@ -30,11 +30,14 @@ namespace Revolution.ECS.Entities
             var spawnerComp = new SpawnerComponent();
             var resourceComp = new ResourceComponent() 
             { 
-                MaxPopulation = 10, 
-                Gold = GlobalConfig.StarterGold, 
-                Wood = GlobalConfig.StarterWood
+                MaxPopulation = 10
             };
             var teamComp = new TeamComponent();
+            var priceComp = new PriceComponent()
+            {
+                Wood = 1000,
+                Gold = 700
+            };
             var hudComp = new TownCenterHud().CreateComponent(this);
             
             sizeComp.PropertyChanged += delegate
@@ -91,6 +94,7 @@ namespace Revolution.ECS.Entities
             AddComponent(hudComp);
             AddComponent(teamComp);
             AddComponent(resourceComp);
+            AddComponent(priceComp);
         }
     }
 }

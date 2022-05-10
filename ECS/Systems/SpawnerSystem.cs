@@ -1,5 +1,9 @@
-﻿using Revolution.ECS.Components;
+﻿using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Messaging;
+using Revolution.Commands;
+using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
+using Revolution.HUD.Events;
 using Revolution.IO;
 using Revolution.Misc;
 using System;
@@ -11,13 +15,35 @@ using System.Threading.Tasks;
 
 namespace Revolution.ECS.Systems
 {
-    public class SpawnerSystem : ISystem
+    public class SpawnerSystem : ISystem, IRecipient<UnitPurchaseCommand>
     {
         private MapData _gameMap;
+        private IMessenger _messenger = Ioc.Default.GetService<IMessenger>();
 
         public SpawnerSystem(MapData gameMap)
         {
             _gameMap = gameMap;
+
+            _messenger.Register(this);
+        }
+
+        public void Receive(UnitPurchaseCommand message)
+        {
+            var entity = EntityManager.CreateEntity(message.UnitType);
+            var player = PlayerHelper.GetGuiControlledPlayer();
+            var playerResources = player.GetComponent<ResourceComponent>();
+
+            var unitPrice = entity.GetComponent<PriceComponent>();
+            var buildingSpawner = message.Building.GetComponent<SpawnerComponent>();
+            if ((unitPrice == null || unitPrice.Buy(playerResources)) && buildingSpawner != null)
+            {
+                buildingSpawner.SpawnQueue.Enqueue(message.UnitType);
+            }
+            else
+            {
+                _messenger.Send(new ShowToastEvent(GlobalStrings.NotEnoughResources));
+            }
+            entity.Destroy();
         }
 
         public void Update(int deltaMs)

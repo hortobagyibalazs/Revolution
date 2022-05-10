@@ -34,6 +34,7 @@ namespace Revolution.ECS.Components
         {
             if (src == null)
             {
+                _src = null;
                 ((Image)Renderable).Source = null;
                 return;
             }

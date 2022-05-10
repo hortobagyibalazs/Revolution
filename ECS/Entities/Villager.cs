@@ -22,7 +22,6 @@ namespace Revolution.ECS.Entities
         public static readonly SpriteFrame CutWood = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_attacking_lumber");
         public static readonly SpriteFrame CarryResources = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_carrying_gold");
         public static readonly SpriteFrame Build = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_attacking");
-        public static readonly SpriteFrame Mine = SpriteFrameSet.GetFirstFrame(@"");
     }
 
     public class Villager : Entity
@@ -37,6 +36,10 @@ namespace Revolution.ECS.Entities
             var movementComp = new MovementComponent() { MaxVelocity = 4 };
             var selectionComp = new SelectionComponent(posComp, sizeComp) { MultiSelectable = true };
             var directionComp = new DirectionComponent();
+            var priceComp = new PriceComponent()
+            {
+                Gold = 50
+            };
             var smComp = new StateMachineComponent(new IdleState());
             var resourceComp = new ResourceComponent()
             { 
@@ -120,6 +123,7 @@ namespace Revolution.ECS.Entities
             AddComponent(inputComp);
             AddComponent(teamComp);
             AddComponent(resourceComp);
+            AddComponent(priceComp);
         }
     }
 }

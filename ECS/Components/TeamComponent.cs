@@ -10,7 +10,7 @@ namespace Revolution.ECS.Components
     public class TeamComponent : Component
     {
         public int TeamId { get; set; }
-        public SolidColorBrush TeamColor { get; set; }
+        public SolidColorBrush TeamColor { get; set; } = Brushes.Yellow;
 
         public void SetValuesFrom(TeamComponent src)
         {

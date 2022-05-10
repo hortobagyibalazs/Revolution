@@ -2,6 +2,7 @@
 using Microsoft.Toolkit.Mvvm.Messaging;
 using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
+using Revolution.HUD.Controls;
 using Revolution.HUD.Events;
 using Revolution.Misc;
 using System;
@@ -39,40 +40,12 @@ namespace Revolution.HUD.Entities
             return hudComponent;
         }
 
-        private FrameworkElement GetTooltipForBuilding(string name, int gold, int wood)
-        {
-            var buildingNameLabel = new Label();
-            buildingNameLabel.Foreground = Brushes.White;
-            buildingNameLabel.Content = name;
-
-            var goldIcon = new Image() { Source = new BitmapImage(new Uri(@"\Assets\Images\spr_gold_coin_gui.png", UriKind.Relative)), Width=20, Height=20};
-            var woodIcon = new Image() { Source = new BitmapImage(new Uri(@"\Assets\Images\spr_tree_gui.png", UriKind.Relative)), Width=20, Height=20};
-
-            var goldLabel = new Label() { Content = gold, Foreground = Brushes.White };
-            var woodLabel = new Label() { Content = wood, Foreground = Brushes.White };
-
-            var resourceListView = new WrapPanel();
-            resourceListView.Children.Add(woodIcon);
-            resourceListView.Children.Add(woodLabel);
-            resourceListView.Children.Add(goldIcon);
-            resourceListView.Children.Add(goldLabel);
-
-            var contentHolderView = new DockPanel();
-            contentHolderView.Margin = new Thickness(16);
-            contentHolderView.Children.Add(buildingNameLabel);
-            contentHolderView.Children.Add(resourceListView);
-            DockPanel.SetDock(buildingNameLabel, Dock.Top);
-            DockPanel.SetDock(resourceListView, Dock.Bottom);
-
-            return contentHolderView;
-        }
-
         private FrameworkElement CreateBuyHouseButton()
         {
             int wood = 0;
             int gold = 0;
             GetPriceForBuilding<House>(ref wood, ref gold);
-            var tooltip = GetTooltipForBuilding("House", gold, wood);
+            var tooltip = TooltipHelper.GetBasicTooltipForEntityPurchase("House", gold, wood);
 
             var button = new HudMiniActionButton(
                     new Uri(@"\Assets\Images\spr_farm_button.png", UriKind.Relative),
@@ -86,12 +59,16 @@ namespace Revolution.HUD.Entities
 
         private FrameworkElement CreateBuyBarracksButton()
         {
-            int wood, gold;
-            var tooltip = GetTooltipForBuilding("Barracks", 0, 0);
+            int wood = 0;
+            int gold = 0;
+            GetPriceForBuilding<Barracks>(ref wood, ref gold);
+            var tooltip = TooltipHelper.GetBasicTooltipForEntityPurchase("Barracks", gold, wood);
 
             var button = new HudMiniActionButton(
                     new Uri(@"\Assets\Images\spr_barracks_button.png", UriKind.Relative),
-                    () => _messenger.Send(new ShowToastEvent("Not enough gold"))
+                    () => PurchaseBuilding<Barracks>(),
+                    () => _messenger.Send(new ShowTooltipEvent(tooltip)),
+                    () => _messenger.Send(new HideTooltipEvent(tooltip))
                 );
 
             return button;
@@ -99,7 +76,7 @@ namespace Revolution.HUD.Entities
 
         private FrameworkElement CreateBuyStableButton()
         {
-            var tooltip = GetTooltipForBuilding("Stable", 0, 0);
+            var tooltip = TooltipHelper.GetBasicTooltipForEntityPurchase("Stable", 0, 0);
 
             var button = new HudMiniActionButton(
                     new Uri(@"\Assets\Images\spr_stable_button.png", UriKind.Relative),
@@ -111,7 +88,7 @@ namespace Revolution.HUD.Entities
 
         private FrameworkElement CreateBuyTowerButton()
         {
-            var tooltip = GetTooltipForBuilding("Tower", 0, 0);
+            var tooltip = TooltipHelper.GetBasicTooltipForEntityPurchase("Tower", 0, 0);
 
             var button = new HudMiniActionButton(
                     new Uri(@"\Assets\Images\spr_tower_button.png", UriKind.Relative),
@@ -126,7 +103,7 @@ namespace Revolution.HUD.Entities
             int wood = 0;
             int gold = 0;
             GetPriceForBuilding<TownCenter>(ref wood, ref gold);
-            var tooltip = GetTooltipForBuilding("Town Center", 0, 0);
+            var tooltip = TooltipHelper.GetBasicTooltipForEntityPurchase("Town Center", gold, wood);
 
             var button = new HudMiniActionButton(
                     new Uri(@"\Assets\Images\spr_town_hall_button.png", UriKind.Relative),

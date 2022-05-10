@@ -11,10 +11,7 @@
 		<None Remove="Assets\bgd_grass.tsx" />
 		<None Remove="Assets\bgd_trees.tsx" />
 		<None Remove="Assets\bgd_water.tsx" />
-		<None Remove="Assets\game_bg.jpg" />
 		<None Remove="Assets\gold_mine.tsx" />
-		<None Remove="Assets\grass.png" />
-		<None Remove="Assets\house.png" />
 		<None Remove="Assets\Images\bgd_dirt.png" />
 		<None Remove="Assets\Images\bgd_grass.png" />
 		<None Remove="Assets\Images\bgd_trees.png" />
@@ -54,6 +51,9 @@
 		<None Remove="Assets\Images\spr_barracks.png" />
 		<None Remove="Assets\Images\spr_barracks_button.png" />
 		<None Remove="Assets\Images\spr_barracks_color.png" />
+		<None Remove="Assets\Images\spr_barracks_construction\spr_barracks_construction_0.png" />
+		<None Remove="Assets\Images\spr_barracks_construction\spr_barracks_construction_1.png" />
+		<None Remove="Assets\Images\spr_barracks_construction\spr_barracks_construction_2.png" />
 		<None Remove="Assets\Images\spr_barracks_mask.png" />
 		<None Remove="Assets\Images\spr_blacksmith_white.png" />
 		<None Remove="Assets\Images\spr_black_smith.png" />
@@ -189,16 +189,13 @@
 		<None Remove="Assets\Images\TeamImages\l60Hf.png" />
 		<None Remove="Assets\map1.tmx" />
 		<None Remove="Assets\map2.tmx" />
-		<None Remove="Assets\menu_bg.png" />
 		<None Remove="Assets\Musics\rick_astley_never_gonna_give_you_up_video.mp3" />
 		<None Remove="Assets\spr_gui_bar.png" />
 		<None Remove="Assets\test.png" />
 		<None Remove="Assets\Test.tsx" />
 		<None Remove="Assets\tileset.png" />
-		<None Remove="Assets\town_center.png" />
 		<None Remove="Assets\town_center.tsx" />
 		<None Remove="Assets\vertical_bridge.tsx" />
-		<None Remove="Assets\villager.png" />
 		<None Remove="Fonts\pcsenior.ttf" />
 		<None Remove="Fonts\PlayMeGames-Demo.otf" />
 	</ItemGroup>
@@ -216,17 +213,8 @@
 		<Content Include="Assets\bgd_water.tsx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Assets\game_bg.jpg">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 		<Content Include="Assets\gold_mine.tsx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Assets\grass.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Assets\house.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\bgd_grass.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -340,6 +328,15 @@
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_barracks_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_barracks_construction\spr_barracks_construction_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_barracks_construction\spr_barracks_construction_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_barracks_construction\spr_barracks_construction_2.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_barracks_mask.png">
@@ -741,26 +738,17 @@
 		<Content Include="Assets\map2.tmx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Assets\menu_bg.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 		<Content Include="Assets\map1.tmx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Musics\rick_astley_never_gonna_give_you_up_video.mp3">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Assets\town_center.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 		<Content Include="Assets\town_center.tsx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\vertical_bridge.tsx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Assets\villager.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Resource Include="Fonts\pcsenior.ttf">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
