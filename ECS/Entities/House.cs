@@ -8,7 +8,7 @@ namespace Revolution.ECS.Entities
 {
     internal class HouseSpriteFrame
     {
-        public static readonly SpriteFrame UnderConstruction = new SpriteFrame() { Source = new Uri(@"\Assets\Images\spr_construction_site.png", UriKind.Relative) };
+        public static readonly SpriteFrame UnderConstruction = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_farm_construction");
 
         public static readonly SpriteFrame Normal = new SpriteFrame() { Source = new Uri(@"\Assets\Images\spr_farm.png", UriKind.Relative) };
     }
@@ -19,7 +19,8 @@ namespace Revolution.ECS.Entities
         {
             var renderComp = new AnimatedSpriteComponent()
             {
-                CurrentFrame = HouseSpriteFrame.Normal
+                CurrentFrame = HouseSpriteFrame.Normal,
+                AutoAnimation = false
             };
             var posComp = new PositionComponent();
             var sizeComp = new SizeComponent();
@@ -65,6 +66,16 @@ namespace Revolution.ECS.Entities
                     {
                         resourceComp.MaxPopulation = 5;
                     }
+                }
+            };
+
+            buildingComponent.BuildProgressChanged += delegate
+            {
+                if (buildingComponent.BuildProgress > 0 
+                    && buildingComponent.BuildProgress % 167 == 0 // 500 / 3 == 167 (3 different sprites, 500 build points)
+                    && buildingComponent.BuildProgress < buildingComponent.BuildMaxProgress)
+                {
+                    renderComp.NextFrame();
                 }
             };
             

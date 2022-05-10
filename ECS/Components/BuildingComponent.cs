@@ -48,6 +48,7 @@ namespace Revolution.ECS.Components
             set
             {
                 _buildProgress = value;
+                BuildProgressChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BuildProgress)));
                 if (_buildProgress >= BuildMaxProgress)
                 {
                     _buildProgress = BuildMaxProgress;
@@ -58,6 +59,7 @@ namespace Revolution.ECS.Components
         public int BuildMaxProgress { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler? BuildProgressChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {

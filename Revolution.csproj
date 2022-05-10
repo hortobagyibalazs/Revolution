@@ -68,6 +68,9 @@
 		<None Remove="Assets\Images\spr_destroyed_building.png" />
 		<None Remove="Assets\Images\spr_farm.png" />
 		<None Remove="Assets\Images\spr_farm_button.png" />
+		<None Remove="Assets\Images\spr_farm_construction\spr_farm_construction_0.png" />
+		<None Remove="Assets\Images\spr_farm_construction\spr_farm_construction_1.png" />
+		<None Remove="Assets\Images\spr_farm_construction\spr_farm_construction_2.png" />
 		<None Remove="Assets\Images\spr_farm_white.png" />
 		<None Remove="Assets\Images\spr_food_gui.png" />
 		<None Remove="Assets\Images\spr_footman_attacking\spr_footman_attacking_0.png" />
@@ -379,6 +382,15 @@
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_farm_button.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_farm_construction\spr_farm_construction_0.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_farm_construction\spr_farm_construction_1.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\Images\spr_farm_construction\spr_farm_construction_2.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Assets\Images\spr_farm_white.png">
