@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
@@ -21,10 +22,14 @@ namespace Revolution.ECS.Systems
         private ScrollViewer ScrollViewer;
         private Canvas Canvas;
 
-        public BuildingSystem(ScrollViewer scrollViewer, Canvas canvas)
+        private MapData _gameMap;
+
+        public BuildingSystem(ScrollViewer scrollViewer, Canvas canvas, MapData map)
         {
             ScrollViewer = scrollViewer;
             Canvas = canvas;
+
+            _gameMap = map;
 
             _messenger.Register<BuildingPurchaseCommand>(this);
             _messenger.Register<BuildWithPeasantCommand>(this);
@@ -70,7 +75,7 @@ namespace Revolution.ECS.Systems
                     mapObjectComponent.X = Math.Max(tileX - 1, 0);
                     mapObjectComponent.Y = Math.Max(tileY - 1, 0);
 
-                    if (Mouse.LeftButton == MouseButtonState.Pressed)
+                    if (Mouse.LeftButton == MouseButtonState.Pressed /*&& CanPlaceBuilding(entity)*/)
                     {
                         buildingComponent.State = BuildingState.UnderConstruction;
                         _messenger.Send(new BuildWithPeasantCommand(entity));
@@ -79,6 +84,53 @@ namespace Revolution.ECS.Systems
                     return;
                 }
             }
+        }
+
+        private bool CanPlaceBuilding(Entity entity)
+        {
+            var mapObjectComponent = entity.GetComponent<GameMapObjectComponent>();
+            int startX = mapObjectComponent.X;
+            int startY = mapObjectComponent.Y;
+            int endX = mapObjectComponent.X + mapObjectComponent.Width - 1;
+            int endY = mapObjectComponent.Y + mapObjectComponent.Height - 1;
+            
+            // check for colliding tiles
+            for (int x = startX; x <= endX; x++)
+            {
+                for (int y = startY; y <= endY; y++)
+                {
+                    if (!_gameMap.Tiles[x, y].TrueForAll(tile => !tile.Colliding))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            // check for entities (can't use MapData for this)
+            foreach (var _e in EntityManager.GetEntities())
+            {
+                if (_e != entity)
+                {
+                    var otherMapObjectComp = _e.GetComponent<GameMapObjectComponent>();
+                    if (otherMapObjectComp != null)
+                    {
+                        bool intersects = new Rect(
+                            mapObjectComponent.X, mapObjectComponent.Y,
+                            mapObjectComponent.Width, mapObjectComponent.Height
+                            ).IntersectsWith(new Rect(
+                                otherMapObjectComp.X, otherMapObjectComp.Y,
+                                otherMapObjectComp.Width, otherMapObjectComp.Height
+                                ));
+
+                        if (intersects)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

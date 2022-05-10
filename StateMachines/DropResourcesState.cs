@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace Revolution.StateMachines.CollectWood
 {
-    public class DropResourcesState : IMoveState
+    public abstract class DropResourcesState : IMoveState
     {
-        private Entity _entity;
-        private Vector2? _woodPos;
+        protected Entity _entity;
+        protected Vector2? _woodPos;
 
         private IMessenger _messenger = Ioc.Default.GetService<IMessenger>();
 
@@ -37,7 +37,7 @@ namespace Revolution.StateMachines.CollectWood
             if (movementComp != null && movementComp.CurrentTarget == null)
             {
                 _messenger.Send(new DropResourcesCommand(_entity));
-                return new MoveToWoodState(_entity, _woodPos);
+                return GetNextState();
             }
 
             return null;
@@ -47,5 +47,7 @@ namespace Revolution.StateMachines.CollectWood
         {
 
         }
+
+        protected abstract IState GetNextState();
     }
 }

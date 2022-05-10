@@ -1,22 +1,20 @@
 ﻿using Revolution.ECS.Components;
 using Revolution.ECS.Entities;
 using Revolution.IO;
-using Revolution.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Revolution.StateMachines.CollectWood
+namespace Revolution.StateMachines.MineGold
 {
-    public class CutWoodState : IState
+    public class MineGoldState : IState
     {
         private Entity _entity;
         private static Random _random = new Random();
 
-        public CutWoodState(Entity entity)
+        public MineGoldState(Entity entity)
         {
             _entity = entity;
         }
@@ -30,14 +28,14 @@ namespace Revolution.StateMachines.CollectWood
         {
             var resourceComp = _entity.GetComponent<ResourceComponent>();
 
-            if (resourceComp.Wood >= resourceComp.MaxWood)
+            if (resourceComp.Gold >= resourceComp.MaxGold)
             {
-                return new DropWoodState(_entity);
-            } 
+                return new DropGoldState(_entity);
+            }
             else
             {
-                if (_random.Next(1, GlobalConfig.PeasantWoodCuttingRate) == 1)
-                    resourceComp.Wood++;
+                if (_random.Next(1, GlobalConfig.PeasantGoldMiningRate) == 1)
+                    resourceComp.Gold++;
             }
 
             return null;

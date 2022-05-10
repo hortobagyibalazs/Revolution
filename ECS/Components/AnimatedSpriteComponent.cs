@@ -20,7 +20,14 @@ namespace Revolution.ECS.Components
             set
             {
                 _currentFrame = value;
-                Source = _currentFrame.Source;
+                if (_currentFrame != null)
+                {
+                    Source = _currentFrame.Source;
+                }
+                else
+                {
+                    Source = null;
+                }
             }
         }
 

@@ -11,6 +11,7 @@ using Revolution.StateMachines;
 using Revolution.StateMachines.Build;
 using Revolution.StateMachines.CollectWood;
 using Revolution.StateMachines.Idle;
+using Revolution.StateMachines.MineGold;
 
 namespace Revolution.ECS.Entities
 {
@@ -21,6 +22,7 @@ namespace Revolution.ECS.Entities
         public static readonly SpriteFrame CutWood = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_attacking_lumber");
         public static readonly SpriteFrame CarryResources = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_carrying_gold");
         public static readonly SpriteFrame Build = SpriteFrameSet.GetFirstFrame(@"\Assets\Images\spr_peasant_attacking");
+        public static readonly SpriteFrame Mine = SpriteFrameSet.GetFirstFrame(@"");
     }
 
     public class Villager : Entity
@@ -89,6 +91,10 @@ namespace Revolution.ECS.Entities
                 else if (state is CutWoodState)
                 {
                     spriteComp.CurrentFrame = VillagerSpriteFrame.CutWood;
+                }
+                else if (state is MineGoldState)
+                {
+                    spriteComp.CurrentFrame = VillagerSpriteFrame.Build;
                 }
             };
 

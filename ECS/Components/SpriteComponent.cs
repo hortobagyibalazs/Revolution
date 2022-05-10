@@ -32,6 +32,12 @@ namespace Revolution.ECS.Components
 
         private void SetSource(Uri src)
         {
+            if (src == null)
+            {
+                ((Image)Renderable).Source = null;
+                return;
+            }
+
             _src = src;
             var bitmap = new BitmapImage(src);
             ((Image)Renderable).Source = bitmap;

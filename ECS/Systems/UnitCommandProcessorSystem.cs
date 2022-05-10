@@ -8,6 +8,7 @@ using Revolution.Misc;
 using Revolution.StateMachines;
 using Revolution.StateMachines.Build;
 using Revolution.StateMachines.CollectWood;
+using Revolution.StateMachines.MineGold;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,11 @@ namespace Revolution.ECS.Systems
                 {
                     stateMachine.CurrentState = new MoveToWoodState(message.Entity, new Vector2(cellX, cellY));
                 } 
+                // else if target cell contains gold mine, start mining
+                else if (_map.Entities[cellX, cellY] is Goldmine)
+                {
+                    stateMachine.CurrentState = new MoveToMineState(message.Entity, new Vector2(cellX, cellY));
+                }
                 //else if target cell is a building to construct, start construction
                 else if (_map.Entities[cellX, cellY]?.GetComponent<BuildingComponent>()?.State == BuildingState.UnderConstruction)
                 {
